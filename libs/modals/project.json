@@ -7,17 +7,25 @@
   "targets": {
     "lint": {
       "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["libs/modals/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": [
+          "libs/modals/**/*.{ts,tsx,js,jsx}"
+        ]
       }
     },
     "build": {
       "executor": "@nx/vite:build",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/libs/modals"
+        "outputPath": "dist/libs/modals",
+        "generatePackageJson": true,
+        "includeDevDependenciesInPackageJson": true
       },
       "configurations": {
         "development": {
@@ -30,7 +38,9 @@
     },
     "test": {
       "executor": "@nx/vite:test",
-      "outputs": ["coverage/libs/modals"],
+      "outputs": [
+        "coverage/libs/modals"
+      ],
       "options": {
         "passWithNoTests": true,
         "reportsDirectory": "../../coverage/libs/modals"

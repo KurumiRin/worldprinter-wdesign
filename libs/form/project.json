@@ -7,17 +7,25 @@
   "targets": {
     "lint": {
       "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["libs/form/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": [
+          "libs/form/**/*.{ts,tsx,js,jsx}"
+        ]
       }
     },
     "build": {
       "executor": "@nx/vite:build",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/libs/form"
+        "outputPath": "dist/libs/form",
+        "generatePackageJson": true,
+        "includeDevDependenciesInPackageJson": true
       },
       "configurations": {
         "development": {
@@ -30,7 +38,9 @@
     },
     "test": {
       "executor": "@nx/vite:test",
-      "outputs": ["coverage/libs/form"],
+      "outputs": [
+        "coverage/libs/form"
+      ],
       "options": {
         "passWithNoTests": true,
         "reportsDirectory": "../../coverage/libs/form"

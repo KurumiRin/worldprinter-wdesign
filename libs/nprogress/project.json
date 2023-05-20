@@ -7,17 +7,25 @@
   "targets": {
     "lint": {
       "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["libs/nprogress/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": [
+          "libs/nprogress/**/*.{ts,tsx,js,jsx}"
+        ]
       }
     },
     "build": {
       "executor": "@nx/vite:build",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/libs/nprogress"
+        "outputPath": "dist/libs/nprogress",
+        "generatePackageJson": true,
+        "includeDevDependenciesInPackageJson": true
       },
       "configurations": {
         "development": {
@@ -30,7 +38,9 @@
     },
     "test": {
       "executor": "@nx/vite:test",
-      "outputs": ["coverage/libs/nprogress"],
+      "outputs": [
+        "coverage/libs/nprogress"
+      ],
       "options": {
         "passWithNoTests": true,
         "reportsDirectory": "../../coverage/libs/nprogress"

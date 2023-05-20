@@ -23,7 +23,9 @@
       ],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/libs/table"
+        "outputPath": "dist/libs/table",
+        "generatePackageJson": true,
+        "includeDevDependenciesInPackageJson": true
       },
       "configurations": {
         "development": {
