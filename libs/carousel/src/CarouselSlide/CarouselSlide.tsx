@@ -1,5 +1,5 @@
 import React, { forwardRef, useCallback } from 'react';
-import { Box, DefaultProps, Selectors, MantineNumberSize } from '@mantine/core';
+import { Box, DefaultProps, Selectors, MantineNumberSize } from '@worldprint/wdesign-core';
 import { useCarouselContext } from '../Carousel.context';
 import useStyles from './CarouselSlide.styles';
 
@@ -53,4 +53,4 @@ export const CarouselSlide = forwardRef<HTMLDivElement, CarouselSlideProps>(
   }
 );
 
-CarouselSlide.displayName = '@mantine/carousel/CarouselSlide';
+CarouselSlide.displayName = '@worldprint/wdesign-carousel/CarouselSlide';

@@ -1,4 +1,4 @@
-import { createStyles, rem } from '@mantine/core';
+import { createStyles, rem } from '@worldprint/wdesign-core';
 
 export default createStyles((theme) => ({
   root: {

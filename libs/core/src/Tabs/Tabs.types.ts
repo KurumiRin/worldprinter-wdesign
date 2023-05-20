@@ -1,4 +1,4 @@
-import { MantineColor, MantineNumberSize, Variants } from '@mantine/styles';
+import { MantineColor, MantineNumberSize, Variants } from '@worldprint/wdesign-styles';
 
 export type TabsValue = string | null;
 export type TabsOrientation = 'horizontal' | 'vertical';

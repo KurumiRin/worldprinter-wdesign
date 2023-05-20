@@ -8,7 +8,7 @@ import {
   useComponentDefaultProps,
   rem,
   getSize,
-} from '@mantine/styles';
+} from '@worldprint/wdesign-styles';
 import { Box } from '../Box';
 import { Bars } from './loaders/Bars';
 import { Oval } from './loaders/Oval';
@@ -71,4 +71,4 @@ export function Loader(props: LoaderProps) {
   );
 }
 
-Loader.displayName = '@mantine/core/Loader';
+Loader.displayName = '@worldprint/wdesign-core/Loader';

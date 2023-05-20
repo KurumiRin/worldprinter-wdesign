@@ -1,10 +1,19 @@
 import React from 'react';
-import { DefaultProps, useComponentDefaultProps } from '@mantine/styles';
+import { DefaultProps, useComponentDefaultProps } from '@worldprint/wdesign-styles';
 import { Box } from '../Box';
 import { AccordionProviderProps, AccordionProvider } from './AccordionProvider';
-import { AccordionItem, AccordionItemStylesNames } from './AccordionItem/AccordionItem';
-import { AccordionControl, AccordionControlStylesNames } from './AccordionControl/AccordionControl';
-import { AccordionPanel, AccordionPanelStylesNames } from './AccordionPanel/AccordionPanel';
+import {
+  AccordionItem,
+  AccordionItemStylesNames,
+} from './AccordionItem/AccordionItem';
+import {
+  AccordionControl,
+  AccordionControlStylesNames,
+} from './AccordionControl/AccordionControl';
+import {
+  AccordionPanel,
+  AccordionPanelStylesNames,
+} from './AccordionPanel/AccordionPanel';
 import { ChevronIcon } from './ChevronIcon';
 import { AccordionStylesParams } from './Accordion.types';
 
@@ -16,7 +25,10 @@ export type AccordionStylesNames =
 export interface AccordionProps<Multiple extends boolean = false>
   extends AccordionProviderProps<Multiple>,
     DefaultProps<AccordionStylesNames, AccordionStylesParams>,
-    Omit<React.ComponentPropsWithoutRef<'div'>, keyof AccordionProviderProps<Multiple>> {}
+    Omit<
+      React.ComponentPropsWithoutRef<'div'>,
+      keyof AccordionProviderProps<Multiple>
+    > {}
 
 const defaultProps: Partial<AccordionProps> = {
   multiple: false,
@@ -28,7 +40,9 @@ const defaultProps: Partial<AccordionProps> = {
   chevron: <ChevronIcon />,
 };
 
-export function Accordion<Multiple extends boolean = false>(props: AccordionProps<Multiple>) {
+export function Accordion<Multiple extends boolean = false>(
+  props: AccordionProps<Multiple>
+) {
   const {
     id,
     loop,
@@ -85,4 +99,4 @@ export function Accordion<Multiple extends boolean = false>(props: AccordionProp
 Accordion.Item = AccordionItem;
 Accordion.Control = AccordionControl;
 Accordion.Panel = AccordionPanel;
-Accordion.displayName = '@mantine/core/Accordion';
+Accordion.displayName = '@worldprint/wdesign-core/Accordion';

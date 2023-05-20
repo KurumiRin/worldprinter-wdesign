@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unused-prop-types */
 import React, { forwardRef } from 'react';
-import { DefaultProps, useComponentDefaultProps } from '@mantine/styles';
+import { DefaultProps, useComponentDefaultProps } from '@worldprint/wdesign-styles';
 import { Box } from '../../Box';
 import useStyles, { ButtonGroupStylesParams } from './ButtonGroup.styles';
 
@@ -22,14 +22,18 @@ const defaultProps: Partial<ButtonGroupProps> = {
   buttonBorderWidth: 1,
 };
 
-export const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>((props, ref) => {
-  const { className, orientation, buttonBorderWidth, unstyled, ...others } =
-    useComponentDefaultProps('ButtonGroup', defaultProps, props);
-  const { classes, cx } = useStyles(
-    { orientation, buttonBorderWidth },
-    { name: 'ButtonGroup', unstyled }
-  );
-  return <Box className={cx(classes.root, className)} ref={ref} {...others} />;
-});
+export const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>(
+  (props, ref) => {
+    const { className, orientation, buttonBorderWidth, unstyled, ...others } =
+      useComponentDefaultProps('ButtonGroup', defaultProps, props);
+    const { classes, cx } = useStyles(
+      { orientation, buttonBorderWidth },
+      { name: 'ButtonGroup', unstyled }
+    );
+    return (
+      <Box className={cx(classes.root, className)} ref={ref} {...others} />
+    );
+  }
+);
 
-ButtonGroup.displayName = '@mantine/core/ButtonGroup';
+ButtonGroup.displayName = '@worldprint/wdesign-core/ButtonGroup';

@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { DefaultProps, MantineSize } from '@mantine/styles';
+import { DefaultProps, MantineSize } from '@worldprint/wdesign-styles';
 import {
   Input,
   InputSharedProps,
@@ -34,13 +34,19 @@ const defaultProps: Partial<TextInputProps> = {
   __staticSelector: 'TextInput',
 };
 
-export const TextInput = forwardRef<HTMLInputElement, TextInputProps>((props, ref) => {
-  const { inputProps, wrapperProps, ...others } = useInputProps('TextInput', defaultProps, props);
-  return (
-    <Input.Wrapper {...wrapperProps}>
-      <Input {...inputProps} {...others} ref={ref} />
-    </Input.Wrapper>
-  );
-});
+export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
+  (props, ref) => {
+    const { inputProps, wrapperProps, ...others } = useInputProps(
+      'TextInput',
+      defaultProps,
+      props
+    );
+    return (
+      <Input.Wrapper {...wrapperProps}>
+        <Input {...inputProps} {...others} ref={ref} />
+      </Input.Wrapper>
+    );
+  }
+);
 
-TextInput.displayName = '@mantine/core/TextInput';
+TextInput.displayName = '@worldprint/wdesign-core/TextInput';

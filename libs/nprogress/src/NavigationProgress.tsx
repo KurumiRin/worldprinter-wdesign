@@ -5,8 +5,8 @@ import {
   getDefaultZIndex,
   MantineColor,
   PortalProps,
-} from '@mantine/core';
-import { useDidUpdate, useInterval, useReducedMotion } from '@mantine/hooks';
+} from '@worldprint/wdesign-core';
+import { useDidUpdate, useInterval, useReducedMotion } from '@worldprint/wdesign-hooks';
 import React, { useRef, useState } from 'react';
 import { useNavigationProgressEvents } from './events';
 
@@ -93,8 +93,10 @@ export function NavigationProgress({
   }, stepInterval);
 
   const set = (value: React.SetStateAction<number>) => setProgress(value);
-  const increment = (value: number) => setProgress((c) => Math.min(c + value, 100));
-  const decrement = (value: number) => setProgress((c) => Math.max(c - value, 0));
+  const increment = (value: number) =>
+    setProgress((c) => Math.min(c + value, 100));
+  const decrement = (value: number) =>
+    setProgress((c) => Math.max(c - value, 0));
   const start = () => {
     interval.stop();
     interval.start();
@@ -145,7 +147,15 @@ export function NavigationProgress({
     }
   }, [_progress]);
 
-  useNavigationProgressEvents({ start, stop, set, increment, decrement, reset, complete });
+  useNavigationProgressEvents({
+    start,
+    stop,
+    set,
+    increment,
+    decrement,
+    reset,
+    complete,
+  });
 
   return (
     <OptionalPortal {...portalProps} withinPortal={withinPortal}>
@@ -174,7 +184,9 @@ export function NavigationProgress({
               position: 'relative',
               transitionProperty: 'width',
               transitionTimingFunction: theme.transitionTimingFunction,
-              transitionDuration: `${reducedMotion || !mounted ? 0 : transitionDuration}ms`,
+              transitionDuration: `${
+                reducedMotion || !mounted ? 0 : transitionDuration
+              }ms`,
             },
           }}
           aria-label={progressLabel}

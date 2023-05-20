@@ -6,7 +6,7 @@ import {
   useComponentDefaultProps,
   Variants,
   rem,
-} from '@mantine/styles';
+} from '@worldprint/wdesign-styles';
 import useStyles from './Divider.styles';
 import { Text } from '../Text';
 import { Box } from '../Box';
@@ -45,62 +45,64 @@ const defaultProps: Partial<DividerProps> = {
   variant: 'solid',
 };
 
-export const Divider = forwardRef<HTMLDivElement, DividerProps>((props: DividerProps, ref) => {
-  const {
-    className,
-    color,
-    orientation,
-    size,
-    label,
-    labelPosition,
-    labelProps,
-    variant,
-    styles,
-    classNames,
-    unstyled,
-    ...others
-  } = useComponentDefaultProps('Divider', defaultProps, props);
+export const Divider = forwardRef<HTMLDivElement, DividerProps>(
+  (props: DividerProps, ref) => {
+    const {
+      className,
+      color,
+      orientation,
+      size,
+      label,
+      labelPosition,
+      labelProps,
+      variant,
+      styles,
+      classNames,
+      unstyled,
+      ...others
+    } = useComponentDefaultProps('Divider', defaultProps, props);
 
-  const { classes, cx } = useStyles(
-    { color },
-    { classNames, styles, unstyled, name: 'Divider', variant, size }
-  );
+    const { classes, cx } = useStyles(
+      { color },
+      { classNames, styles, unstyled, name: 'Divider', variant, size }
+    );
 
-  const vertical = orientation === 'vertical';
-  const horizontal = orientation === 'horizontal';
-  const withLabel = !!label && horizontal;
+    const vertical = orientation === 'vertical';
+    const horizontal = orientation === 'horizontal';
+    const withLabel = !!label && horizontal;
 
-  const useLabelDefaultStyles = !labelProps?.color;
+    const useLabelDefaultStyles = !labelProps?.color;
 
-  return (
-    <Box
-      ref={ref}
-      className={cx(
-        classes.root,
-        {
-          [classes.vertical]: vertical,
-          [classes.horizontal]: horizontal,
-          [classes.withLabel]: withLabel,
-        },
-        className
-      )}
-      role="separator"
-      {...others}
-    >
-      {withLabel && (
-        <Text
-          {...labelProps}
-          size={labelProps?.size || 'xs'}
-          mt={rem(2)}
-          className={cx(classes.label, classes[labelPosition], {
-            [classes.labelDefaultStyles]: useLabelDefaultStyles,
-          })}
-        >
-          {label}
-        </Text>
-      )}
-    </Box>
-  );
-});
+    return (
+      <Box
+        ref={ref}
+        className={cx(
+          classes.root,
+          {
+            [classes.vertical]: vertical,
+            [classes.horizontal]: horizontal,
+            [classes.withLabel]: withLabel,
+          },
+          className
+        )}
+        role="separator"
+        {...others}
+      >
+        {withLabel && (
+          <Text
+            {...labelProps}
+            size={labelProps?.size || 'xs'}
+            mt={rem(2)}
+            className={cx(classes.label, classes[labelPosition], {
+              [classes.labelDefaultStyles]: useLabelDefaultStyles,
+            })}
+          >
+            {label}
+          </Text>
+        )}
+      </Box>
+    );
+  }
+);
 
-Divider.displayName = '@mantine/core/Divider';
+Divider.displayName = '@worldprint/wdesign-core/Divider';

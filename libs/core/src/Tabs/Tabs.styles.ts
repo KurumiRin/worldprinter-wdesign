@@ -1,4 +1,4 @@
-import { createStyles } from '@mantine/styles';
+import { createStyles } from '@worldprint/wdesign-styles';
 import { TabsStylesParams } from './Tabs.types';
 
 export default createStyles((_theme, { orientation, placement }: TabsStylesParams) => ({

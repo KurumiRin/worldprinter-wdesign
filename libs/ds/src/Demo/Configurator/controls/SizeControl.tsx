@@ -1,6 +1,6 @@
 import React from 'react';
-import { Slider, Input } from '@mantine/core';
-import { upperFirst } from '@mantine/hooks';
+import { Slider, Input } from '@worldprint/wdesign-core';
+import { upperFirst } from '@worldprint/wdesign-hooks';
 
 const MARKS = [
   { value: 0, label: 'xs' },

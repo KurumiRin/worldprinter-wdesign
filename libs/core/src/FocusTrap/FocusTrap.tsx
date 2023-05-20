@@ -1,6 +1,6 @@
 import React, { cloneElement } from 'react';
-import { isElement } from '@mantine/utils';
-import { useFocusTrap, useMergedRef } from '@mantine/hooks';
+import { isElement } from '@worldprint/wdesign-utils';
+import { useFocusTrap, useMergedRef } from '@worldprint/wdesign-hooks';
 
 export interface FocusTrapProps {
   /** Element at which focus should be trapped, should support ref prop */
@@ -28,4 +28,4 @@ export function FocusTrap({
   return cloneElement(children, { [refProp]: ref });
 }
 
-FocusTrap.displayName = '@mantine/core/FocusTrap';
+FocusTrap.displayName = '@worldprint/wdesign-core/FocusTrap';

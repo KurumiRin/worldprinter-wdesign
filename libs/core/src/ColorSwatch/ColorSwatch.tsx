@@ -5,8 +5,8 @@ import {
   useComponentDefaultProps,
   Selectors,
   rem,
-} from '@mantine/styles';
-import { createPolymorphicComponent } from '@mantine/utils';
+} from '@worldprint/wdesign-styles';
+import { createPolymorphicComponent } from '@worldprint/wdesign-utils';
 import { Box } from '../Box';
 import useStyles, { ColorSwatchStylesParams } from './ColorSwatch.styles';
 
@@ -38,36 +38,42 @@ const defaultProps: Partial<ColorSwatchProps> = {
   withShadow: true,
 };
 
-export const _ColorSwatch = forwardRef<HTMLDivElement, ColorSwatchProps>((props, ref) => {
-  const {
-    color,
-    size,
-    radius,
-    className,
-    children,
-    classNames,
-    styles,
-    unstyled,
-    withShadow,
-    variant,
-    ...others
-  } = useComponentDefaultProps('ColorSwatch', defaultProps, props);
+export const _ColorSwatch = forwardRef<HTMLDivElement, ColorSwatchProps>(
+  (props, ref) => {
+    const {
+      color,
+      size,
+      radius,
+      className,
+      children,
+      classNames,
+      styles,
+      unstyled,
+      withShadow,
+      variant,
+      ...others
+    } = useComponentDefaultProps('ColorSwatch', defaultProps, props);
 
-  const { classes, cx } = useStyles(
-    { radius },
-    { classNames, styles, unstyled, name: 'ColorSwatch', size, variant }
-  );
+    const { classes, cx } = useStyles(
+      { radius },
+      { classNames, styles, unstyled, name: 'ColorSwatch', size, variant }
+    );
 
-  return (
-    <Box className={cx(classes.root, className)} ref={ref} {...others}>
-      <div className={cx(classes.alphaOverlay, classes.overlay)} />
-      {withShadow && <div className={cx(classes.shadowOverlay, classes.overlay)} />}
-      <div className={classes.overlay} style={{ backgroundColor: color }} />
-      <div className={cx(classes.children, classes.overlay)}>{children}</div>
-    </Box>
-  );
-});
+    return (
+      <Box className={cx(classes.root, className)} ref={ref} {...others}>
+        <div className={cx(classes.alphaOverlay, classes.overlay)} />
+        {withShadow && (
+          <div className={cx(classes.shadowOverlay, classes.overlay)} />
+        )}
+        <div className={classes.overlay} style={{ backgroundColor: color }} />
+        <div className={cx(classes.children, classes.overlay)}>{children}</div>
+      </Box>
+    );
+  }
+);
 
-_ColorSwatch.displayName = '@mantine/core/ColorSwatch';
+_ColorSwatch.displayName = '@worldprint/wdesign-core/ColorSwatch';
 
-export const ColorSwatch = createPolymorphicComponent<'div', ColorSwatchProps>(_ColorSwatch);
+export const ColorSwatch = createPolymorphicComponent<'div', ColorSwatchProps>(
+  _ColorSwatch
+);

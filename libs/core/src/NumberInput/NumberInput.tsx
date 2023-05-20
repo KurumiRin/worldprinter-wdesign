@@ -1,6 +1,12 @@
 import React, { useState, useEffect, useRef, forwardRef } from 'react';
-import { useMergedRef, assignRef, useOs, clamp } from '@mantine/hooks';
-import { DefaultProps, Selectors, useComponentDefaultProps, rem, getSize } from '@mantine/styles';
+import { useMergedRef, assignRef, useOs, clamp } from '@worldprint/wdesign-hooks';
+import {
+  DefaultProps,
+  Selectors,
+  useComponentDefaultProps,
+  rem,
+  getSize,
+} from '@worldprint/wdesign-styles';
 import { TextInput } from '../TextInput';
 import { InputStylesNames, InputWrapperStylesNames } from '../Input';
 import { getInputMode } from './get-input-mode/get-input-mode';
@@ -127,343 +133,387 @@ const defaultProps: Partial<NumberInputProps> = {
   type: 'text',
 };
 
-export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>((props, ref) => {
-  const {
-    readOnly,
-    disabled,
-    value,
-    onChange,
-    decimalSeparator,
-    thousandsSeparator,
-    min,
-    max,
-    startValue,
-    step,
-    stepHoldInterval,
-    stepHoldDelay,
-    onFocus,
-    onBlur,
-    onKeyDown,
-    onKeyUp,
-    hideControls,
-    radius,
-    variant,
-    precision,
-    removeTrailingZeros,
-    defaultValue,
-    noClampOnBlur,
-    handlersRef,
-    classNames,
-    styles,
-    size,
-    rightSection,
-    rightSectionWidth,
-    formatter,
-    parser,
-    inputMode,
-    unstyled,
-    type,
-    ...others
-  } = useComponentDefaultProps('NumberInput', defaultProps, props);
+export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
+  (props, ref) => {
+    const {
+      readOnly,
+      disabled,
+      value,
+      onChange,
+      decimalSeparator,
+      thousandsSeparator,
+      min,
+      max,
+      startValue,
+      step,
+      stepHoldInterval,
+      stepHoldDelay,
+      onFocus,
+      onBlur,
+      onKeyDown,
+      onKeyUp,
+      hideControls,
+      radius,
+      variant,
+      precision,
+      removeTrailingZeros,
+      defaultValue,
+      noClampOnBlur,
+      handlersRef,
+      classNames,
+      styles,
+      size,
+      rightSection,
+      rightSectionWidth,
+      formatter,
+      parser,
+      inputMode,
+      unstyled,
+      type,
+      ...others
+    } = useComponentDefaultProps('NumberInput', defaultProps, props);
 
-  const { classes, cx } = useStyles(
-    { radius },
-    { classNames, styles, unstyled, name: 'NumberInput', variant, size }
-  );
+    const { classes, cx } = useStyles(
+      { radius },
+      { classNames, styles, unstyled, name: 'NumberInput', variant, size }
+    );
 
-  const parsePrecision = (val: number | '') => {
-    if (val === '') return '';
+    const parsePrecision = (val: number | '') => {
+      if (val === '') return '';
 
-    let result = val.toFixed(precision);
+      let result = val.toFixed(precision);
 
-    if (removeTrailingZeros && precision > 0) {
-      result = result.replace(new RegExp(`[0]{0,${precision}}$`), '');
-      if (result.endsWith('.')) {
-        result = result.slice(0, -1);
+      if (removeTrailingZeros && precision > 0) {
+        result = result.replace(new RegExp(`[0]{0,${precision}}$`), '');
+        if (result.endsWith('.')) {
+          result = result.slice(0, -1);
+        }
       }
-    }
 
-    return result;
-  };
+      return result;
+    };
 
-  const formatNum = (val: string) => {
-    let parsedStr = val;
-    if (decimalSeparator) {
-      parsedStr = parsedStr.replace('.', decimalSeparator);
-    }
-
-    return formatter(parsedStr);
-  };
-
-  const parseNum = (val: string): string | '' => {
-    let num = val;
-
-    if (decimalSeparator) {
-      num = num.replaceAll(thousandsSeparator, '').replace(decimalSeparator, '.');
-    }
-
-    return parser(num);
-  };
-
-  const formatInternalValue = (val: number | '') => formatNum(parsePrecision(val));
-
-  // Parsed value that will be used for uncontrolled state and for setting the inputValue
-  const [internalValue, _setInternalValue] = useState<number | ''>(
-    typeof value === 'number' ? value : typeof defaultValue === 'number' ? defaultValue : ''
-  );
-
-  // Value of input field. Gets changed through user input and on internalValue change
-  const [inputValue, setInputValue] = useState(() => formatInternalValue(internalValue));
-
-  const inputRef = useRef<HTMLInputElement>();
-
-  const [isFocussed, setIsFocussed] = useState(false);
-
-  const setInternalValue = (val: number | '', forceInputValueUpdate?: boolean) => {
-    if (!isFocussed || forceInputValueUpdate) {
-      const newInputValue = formatInternalValue(val);
-      if (newInputValue !== inputValue) {
-        // Make sure to update/reset the input value even if the internal value stays the same
-        // E. g. this may happen if the internalValue is "10" and the user entered "10abc"
-        setInputValue(newInputValue);
+    const formatNum = (val: string) => {
+      let parsedStr = val;
+      if (decimalSeparator) {
+        parsedStr = parsedStr.replace('.', decimalSeparator);
       }
-    }
 
-    if (val !== internalValue) {
-      _setInternalValue(val);
-    }
-  };
+      return formatter(parsedStr);
+    };
 
-  const _min = typeof min === 'number' ? min : -Infinity;
-  const _max = typeof max === 'number' ? max : Infinity;
+    const parseNum = (val: string): string | '' => {
+      let num = val;
 
-  const incrementRef = useRef<() => void>();
-  incrementRef.current = () => {
-    let newInternalValue: number;
-    if (internalValue === '') {
-      newInternalValue = startValue ?? min ?? 0;
-    } else {
-      newInternalValue = parseFloat(parsePrecision(clamp(internalValue + step, _min, _max)));
-    }
+      if (decimalSeparator) {
+        num = num
+          .replaceAll(thousandsSeparator, '')
+          .replace(decimalSeparator, '.');
+      }
 
-    setInternalValue(newInternalValue, true);
-    onChange?.(newInternalValue);
-  };
+      return parser(num);
+    };
 
-  const decrementRef = useRef<() => void>();
-  decrementRef.current = () => {
-    let newInternalValue: number;
-    if (internalValue === '') {
-      newInternalValue = startValue ?? min ?? 0;
-    } else {
-      newInternalValue = parseFloat(parsePrecision(clamp(internalValue - step, _min, _max)));
-    }
+    const formatInternalValue = (val: number | '') =>
+      formatNum(parsePrecision(val));
 
-    setInternalValue(newInternalValue, true);
-    onChange?.(newInternalValue);
-  };
+    // Parsed value that will be used for uncontrolled state and for setting the inputValue
+    const [internalValue, _setInternalValue] = useState<number | ''>(
+      typeof value === 'number'
+        ? value
+        : typeof defaultValue === 'number'
+        ? defaultValue
+        : ''
+    );
 
-  assignRef(handlersRef, { increment: incrementRef.current, decrement: decrementRef.current });
+    // Value of input field. Gets changed through user input and on internalValue change
+    const [inputValue, setInputValue] = useState(() =>
+      formatInternalValue(internalValue)
+    );
 
-  useEffect(() => {
-    if (isFocussed) {
-      return;
-    }
+    const inputRef = useRef<HTMLInputElement>();
 
-    if (value === undefined) {
-      // For uncontrolled inputs reapply internalValue
-      setInternalValue(internalValue, true);
-    } else {
-      // For controlled inputs apply value
-      setInternalValue(value, true);
-    }
-  }, [value, isFocussed]);
+    const [isFocussed, setIsFocussed] = useState(false);
 
-  const shouldUseStepInterval = stepHoldDelay !== undefined && stepHoldInterval !== undefined;
-  const onStepTimeoutRef = useRef<number>(null);
-  const stepCountRef = useRef<number>(0);
+    const setInternalValue = (
+      val: number | '',
+      forceInputValueUpdate?: boolean
+    ) => {
+      if (!isFocussed || forceInputValueUpdate) {
+        const newInputValue = formatInternalValue(val);
+        if (newInputValue !== inputValue) {
+          // Make sure to update/reset the input value even if the internal value stays the same
+          // E. g. this may happen if the internalValue is "10" and the user entered "10abc"
+          setInputValue(newInputValue);
+        }
+      }
 
-  const onStepDone = () => {
-    if (onStepTimeoutRef.current) {
-      window.clearTimeout(onStepTimeoutRef.current);
-    }
-    onStepTimeoutRef.current = null;
-    stepCountRef.current = 0;
-  };
+      if (val !== internalValue) {
+        _setInternalValue(val);
+      }
+    };
 
-  const onStepHandleChange = (isIncrement: boolean) => {
-    if (isIncrement) {
-      incrementRef.current();
-    } else {
-      decrementRef.current();
-    }
-    stepCountRef.current += 1;
-  };
+    const _min = typeof min === 'number' ? min : -Infinity;
+    const _max = typeof max === 'number' ? max : Infinity;
 
-  const onStepLoop = (isIncrement: boolean) => {
-    onStepHandleChange(isIncrement);
+    const incrementRef = useRef<() => void>();
+    incrementRef.current = () => {
+      let newInternalValue: number;
+      if (internalValue === '') {
+        newInternalValue = startValue ?? min ?? 0;
+      } else {
+        newInternalValue = parseFloat(
+          parsePrecision(clamp(internalValue + step, _min, _max))
+        );
+      }
 
-    if (shouldUseStepInterval) {
-      const interval =
-        typeof stepHoldInterval === 'number'
-          ? stepHoldInterval
-          : stepHoldInterval(stepCountRef.current);
-      onStepTimeoutRef.current = window.setTimeout(() => onStepLoop(isIncrement), interval);
-    }
-  };
+      setInternalValue(newInternalValue, true);
+      onChange?.(newInternalValue);
+    };
 
-  const onStep = (
-    event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
-    isIncrement: boolean
-  ) => {
-    event.preventDefault();
-    inputRef.current.focus();
-    onStepHandleChange(isIncrement);
-    if (shouldUseStepInterval) {
-      onStepTimeoutRef.current = window.setTimeout(() => onStepLoop(isIncrement), stepHoldDelay);
-    }
-  };
+    const decrementRef = useRef<() => void>();
+    decrementRef.current = () => {
+      let newInternalValue: number;
+      if (internalValue === '') {
+        newInternalValue = startValue ?? min ?? 0;
+      } else {
+        newInternalValue = parseFloat(
+          parsePrecision(clamp(internalValue - step, _min, _max))
+        );
+      }
 
-  useEffect(() => {
-    onStepDone();
-    return onStepDone;
-  }, []);
+      setInternalValue(newInternalValue, true);
+      onChange?.(newInternalValue);
+    };
 
-  const controls = (
-    <div className={classes.rightSection}>
-      <button
-        type="button"
-        tabIndex={-1}
-        aria-hidden
-        disabled={internalValue >= max}
-        className={cx(classes.control, classes.controlUp)}
-        onPointerDown={(event) => {
-          onStep(event, true);
-        }}
-        onPointerUp={onStepDone}
-        onPointerLeave={onStepDone}
-      >
-        <Chevron size={getSize({ size, sizes: CHEVRON_SIZES })} direction="up" />
-      </button>
-      <button
-        type="button"
-        tabIndex={-1}
-        aria-hidden
-        disabled={internalValue <= min}
-        className={cx(classes.control, classes.controlDown)}
-        onPointerDown={(event) => {
-          onStep(event, false);
-        }}
-        onPointerUp={onStepDone}
-        onPointerLeave={onStepDone}
-      >
-        <Chevron size={getSize({ size, sizes: CHEVRON_SIZES })} direction="down" />
-      </button>
-    </div>
-  );
+    assignRef(handlersRef, {
+      increment: incrementRef.current,
+      decrement: decrementRef.current,
+    });
 
-  /**
-   * Parse new input value and propagate it via `onChange` to parent.
-   */
-  const processInputValue = (newInputValue: string) => {
-    let normalizedInputValue = newInputValue;
-    if (normalizedInputValue[0] === `${decimalSeparator}` || normalizedInputValue[0] === '.') {
-      normalizedInputValue = `0${normalizedInputValue}`;
-    }
+    useEffect(() => {
+      if (isFocussed) {
+        return;
+      }
 
-    const parsedValue = parseFloat(parsePrecision(parseFloat(parseNum(normalizedInputValue))));
-    const clampedValue = !noClampOnBlur ? clamp(parsedValue, _min, _max) : parsedValue;
-    const finalValue = Number.isNaN(clampedValue) ? '' : clampedValue;
+      if (value === undefined) {
+        // For uncontrolled inputs reapply internalValue
+        setInternalValue(internalValue, true);
+      } else {
+        // For controlled inputs apply value
+        setInternalValue(value, true);
+      }
+    }, [value, isFocussed]);
 
-    const internalValueChanged = internalValue !== finalValue;
+    const shouldUseStepInterval =
+      stepHoldDelay !== undefined && stepHoldInterval !== undefined;
+    const onStepTimeoutRef = useRef<number>(null);
+    const stepCountRef = useRef<number>(0);
 
-    setInputValue(newInputValue);
-    setInternalValue(finalValue);
+    const onStepDone = () => {
+      if (onStepTimeoutRef.current) {
+        window.clearTimeout(onStepTimeoutRef.current);
+      }
+      onStepTimeoutRef.current = null;
+      stepCountRef.current = 0;
+    };
 
-    if (internalValueChanged) {
-      onChange?.(finalValue);
-    }
-  };
+    const onStepHandleChange = (isIncrement: boolean) => {
+      if (isIncrement) {
+        incrementRef.current();
+      } else {
+        decrementRef.current();
+      }
+      stepCountRef.current += 1;
+    };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const evt = event.nativeEvent as InputEvent;
-    if (evt.isComposing) {
-      return;
-    }
+    const onStepLoop = (isIncrement: boolean) => {
+      onStepHandleChange(isIncrement);
 
-    processInputValue(event.target.value);
-  };
+      if (shouldUseStepInterval) {
+        const interval =
+          typeof stepHoldInterval === 'number'
+            ? stepHoldInterval
+            : stepHoldInterval(stepCountRef.current);
+        onStepTimeoutRef.current = window.setTimeout(
+          () => onStepLoop(isIncrement),
+          interval
+        );
+      }
+    };
 
-  const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
-    setIsFocussed(true);
-    onFocus?.(event);
-  };
-
-  const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    setIsFocussed(false);
-    onBlur?.(event);
-  };
-
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    typeof onKeyDown === 'function' && onKeyDown(event);
-    if (
-      event.repeat &&
-      shouldUseStepInterval &&
-      (event.key === 'ArrowUp' || event.key === 'ArrowDown')
-    ) {
+    const onStep = (
+      event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
+      isIncrement: boolean
+    ) => {
       event.preventDefault();
-      return;
-    }
-
-    if (!readOnly) {
-      if (event.key === 'ArrowUp') {
-        onStep(event, true);
-      } else if (event.key === 'ArrowDown') {
-        onStep(event, false);
+      inputRef.current.focus();
+      onStepHandleChange(isIncrement);
+      if (shouldUseStepInterval) {
+        onStepTimeoutRef.current = window.setTimeout(
+          () => onStepLoop(isIncrement),
+          stepHoldDelay
+        );
       }
-    }
-  };
+    };
 
-  const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    typeof onKeyUp === 'function' && onKeyUp(event);
-    if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+    useEffect(() => {
       onStepDone();
-    }
-  };
+      return onStepDone;
+    }, []);
 
-  return (
-    <TextInput
-      {...others}
-      type={type}
-      variant={variant}
-      value={inputValue}
-      disabled={disabled}
-      readOnly={readOnly}
-      ref={useMergedRef(inputRef, ref)}
-      onChange={handleChange}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
-      onKeyDown={handleKeyDown}
-      onKeyUp={handleKeyUp}
-      rightSection={
-        rightSection ||
-        (disabled || readOnly || hideControls || variant === 'unstyled' ? null : controls)
-      }
-      rightSectionWidth={
-        rightSectionWidth ?? `calc(${getSize({ size, sizes: CONTROL_SIZES })} + ${rem(1)})`
-      }
-      radius={radius}
-      max={max}
-      min={min}
-      step={step}
-      size={size}
-      styles={styles}
-      classNames={classNames}
-      inputMode={inputMode || getInputMode(step, precision, useOs())}
-      __staticSelector="NumberInput"
-      unstyled={unstyled}
-    />
-  );
-});
+    const controls = (
+      <div className={classes.rightSection}>
+        <button
+          type="button"
+          tabIndex={-1}
+          aria-hidden
+          disabled={internalValue >= max}
+          className={cx(classes.control, classes.controlUp)}
+          onPointerDown={(event) => {
+            onStep(event, true);
+          }}
+          onPointerUp={onStepDone}
+          onPointerLeave={onStepDone}
+        >
+          <Chevron
+            size={getSize({ size, sizes: CHEVRON_SIZES })}
+            direction="up"
+          />
+        </button>
+        <button
+          type="button"
+          tabIndex={-1}
+          aria-hidden
+          disabled={internalValue <= min}
+          className={cx(classes.control, classes.controlDown)}
+          onPointerDown={(event) => {
+            onStep(event, false);
+          }}
+          onPointerUp={onStepDone}
+          onPointerLeave={onStepDone}
+        >
+          <Chevron
+            size={getSize({ size, sizes: CHEVRON_SIZES })}
+            direction="down"
+          />
+        </button>
+      </div>
+    );
 
-NumberInput.displayName = '@mantine/core/NumberInput';
+    /**
+     * Parse new input value and propagate it via `onChange` to parent.
+     */
+    const processInputValue = (newInputValue: string) => {
+      let normalizedInputValue = newInputValue;
+      if (
+        normalizedInputValue[0] === `${decimalSeparator}` ||
+        normalizedInputValue[0] === '.'
+      ) {
+        normalizedInputValue = `0${normalizedInputValue}`;
+      }
+
+      const parsedValue = parseFloat(
+        parsePrecision(parseFloat(parseNum(normalizedInputValue)))
+      );
+      const clampedValue = !noClampOnBlur
+        ? clamp(parsedValue, _min, _max)
+        : parsedValue;
+      const finalValue = Number.isNaN(clampedValue) ? '' : clampedValue;
+
+      const internalValueChanged = internalValue !== finalValue;
+
+      setInputValue(newInputValue);
+      setInternalValue(finalValue);
+
+      if (internalValueChanged) {
+        onChange?.(finalValue);
+      }
+    };
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const evt = event.nativeEvent as InputEvent;
+      if (evt.isComposing) {
+        return;
+      }
+
+      processInputValue(event.target.value);
+    };
+
+    const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+      setIsFocussed(true);
+      onFocus?.(event);
+    };
+
+    const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+      setIsFocussed(false);
+      onBlur?.(event);
+    };
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+      typeof onKeyDown === 'function' && onKeyDown(event);
+      if (
+        event.repeat &&
+        shouldUseStepInterval &&
+        (event.key === 'ArrowUp' || event.key === 'ArrowDown')
+      ) {
+        event.preventDefault();
+        return;
+      }
+
+      if (!readOnly) {
+        if (event.key === 'ArrowUp') {
+          onStep(event, true);
+        } else if (event.key === 'ArrowDown') {
+          onStep(event, false);
+        }
+      }
+    };
+
+    const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
+      typeof onKeyUp === 'function' && onKeyUp(event);
+      if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+        onStepDone();
+      }
+    };
+
+    return (
+      <TextInput
+        {...others}
+        type={type}
+        variant={variant}
+        value={inputValue}
+        disabled={disabled}
+        readOnly={readOnly}
+        ref={useMergedRef(inputRef, ref)}
+        onChange={handleChange}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onKeyDown={handleKeyDown}
+        onKeyUp={handleKeyUp}
+        rightSection={
+          rightSection ||
+          (disabled || readOnly || hideControls || variant === 'unstyled'
+            ? null
+            : controls)
+        }
+        rightSectionWidth={
+          rightSectionWidth ??
+          `calc(${getSize({ size, sizes: CONTROL_SIZES })} + ${rem(1)})`
+        }
+        radius={radius}
+        max={max}
+        min={min}
+        step={step}
+        size={size}
+        styles={styles}
+        classNames={classNames}
+        inputMode={inputMode || getInputMode(step, precision, useOs())}
+        __staticSelector="NumberInput"
+        unstyled={unstyled}
+      />
+    );
+  }
+);
+
+NumberInput.displayName = '@worldprint/wdesign-core/NumberInput';

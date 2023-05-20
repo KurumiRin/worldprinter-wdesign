@@ -1,4 +1,4 @@
-import { MantineNumberSize } from '@mantine/styles';
+import { MantineNumberSize } from '@worldprint/wdesign-styles';
 
 export type AccordionValue<Multiple extends boolean> = Multiple extends true
   ? string[]

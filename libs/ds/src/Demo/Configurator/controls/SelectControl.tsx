@@ -1,6 +1,6 @@
 import React from 'react';
-import { NativeSelect } from '@mantine/core';
-import { upperFirst } from '@mantine/hooks';
+import { NativeSelect } from '@worldprint/wdesign-core';
+import { upperFirst } from '@worldprint/wdesign-hooks';
 
 interface SelectControlProps {
   value: string;

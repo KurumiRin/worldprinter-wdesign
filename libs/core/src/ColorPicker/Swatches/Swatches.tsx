@@ -1,5 +1,5 @@
 import React from 'react';
-import { DefaultProps, Selectors } from '@mantine/styles';
+import { DefaultProps, Selectors } from '@worldprint/wdesign-styles';
 import { ColorSwatch } from '../../ColorSwatch/ColorSwatch';
 import useStyles from './Swatches.styles';
 
@@ -62,4 +62,4 @@ export function Swatches({
   );
 }
 
-Swatches.displayName = '@mantine/core/Swatches';
+Swatches.displayName = '@worldprint/wdesign-core/Swatches';

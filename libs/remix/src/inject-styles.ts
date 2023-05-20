@@ -1,4 +1,4 @@
-import { getSSRStyles } from '@mantine/ssr';
+import { getSSRStyles } from '@worldprint/wdesign-ssr';
 import type { EmotionServer } from '@emotion/server/types/create-instance';
 
 export function injectStyles(markup: string, stylesServer: EmotionServer) {

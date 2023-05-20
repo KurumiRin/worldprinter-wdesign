@@ -1,4 +1,4 @@
-import { createStyles } from '@mantine/styles';
+import { createStyles } from '@worldprint/wdesign-styles';
 
 export default createStyles(() => ({
   root: {},

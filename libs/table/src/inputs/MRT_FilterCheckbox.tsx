@@ -1,5 +1,5 @@
 import React from 'react';
-import { Checkbox, CheckboxProps, Tooltip } from '@mantine/core';
+import { Checkbox, CheckboxProps, Tooltip } from '@worldprint/wdesign-core';
 import type { MRT_Column, MRT_TableInstance } from '..';
 
 interface Props {
@@ -38,7 +38,7 @@ export const MRT_FilterCheckbox = ({ column, table }: Props) => {
 
   const filterLabel = localization.filterByColumn?.replace(
     '{column}',
-    columnDef.header,
+    columnDef.header
   );
 
   return (
@@ -65,7 +65,7 @@ export const MRT_FilterCheckbox = ({ column, table }: Props) => {
               ? 'true'
               : column.getFilterValue() === 'true'
               ? 'false'
-              : undefined,
+              : undefined
           );
           checkboxProps?.onChange?.(e);
         }}

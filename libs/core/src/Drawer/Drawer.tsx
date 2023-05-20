@@ -1,5 +1,5 @@
 import React from 'react';
-import { useComponentDefaultProps } from '@mantine/styles';
+import { useComponentDefaultProps } from '@worldprint/wdesign-styles';
 import {
   ModalBase,
   ModalBaseDefaultProps,

@@ -1,12 +1,12 @@
 import React, { forwardRef, useRef, useState, useCallback } from 'react';
-import { useMove, useUncontrolled, clamp, useMergedRef } from '@mantine/hooks';
+import { useMove, useUncontrolled, clamp, useMergedRef } from '@worldprint/wdesign-hooks';
 import {
   DefaultProps,
   MantineColor,
   MantineNumberSize,
   useComponentDefaultProps,
   useMantineTheme,
-} from '@mantine/styles';
+} from '@worldprint/wdesign-styles';
 import { MantineTransition } from '../../Transition';
 import { getPosition } from '../utils/get-position/get-position';
 import { getChangeValue } from '../utils/get-change-value/get-change-value';
@@ -157,7 +157,10 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>((props, ref) => {
   const [hovered, setHovered] = useState(false);
   const [_value, setValue] = useUncontrolled({
     value: typeof value === 'number' ? clamp(value, min, max) : value,
-    defaultValue: typeof defaultValue === 'number' ? clamp(defaultValue, min, max) : defaultValue,
+    defaultValue:
+      typeof defaultValue === 'number'
+        ? clamp(defaultValue, min, max)
+        : defaultValue,
     finalValue: clamp(0, min, max),
     onChange,
   });
@@ -172,7 +175,13 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>((props, ref) => {
   const handleChange = useCallback(
     ({ x }: { x: number }) => {
       if (!disabled) {
-        const nextValue = getChangeValue({ value: x, min, max, step, precision });
+        const nextValue = getChangeValue({
+          value: x,
+          min,
+          max,
+          step,
+          precision,
+        });
         setValue(nextValue);
         valueRef.current = nextValue;
       }
@@ -186,7 +195,9 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>((props, ref) => {
     theme.dir
   );
 
-  const handleTrackKeydownCapture = (event: React.KeyboardEvent<HTMLDivElement>) => {
+  const handleTrackKeydownCapture = (
+    event: React.KeyboardEvent<HTMLDivElement>
+  ) => {
     if (!disabled) {
       switch (event.key) {
         case 'ArrowUp': {
@@ -324,4 +335,4 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>((props, ref) => {
   );
 });
 
-Slider.displayName = '@mantine/core/Slider';
+Slider.displayName = '@worldprint/wdesign-core/Slider';

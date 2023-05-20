@@ -13,8 +13,8 @@ import {
   PopoverProps,
   ModalProps,
   CloseButton,
-} from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+} from '@worldprint/wdesign-core';
+import { useDisclosure } from '@worldprint/wdesign-hooks';
 import { HiddenDatesInput, HiddenDatesInputValue } from '../HiddenDatesInput';
 import { CalendarStylesNames } from '../Calendar';
 import useStyles from './PickerInputBase.styles';
@@ -30,7 +30,10 @@ export interface DateInputSharedProps
   extends DefaultProps<PickerInputBaseStylesNames>,
     InputSharedProps,
     InputWrapperBaseProps,
-    Omit<React.ComponentPropsWithRef<'button'>, 'defaultValue' | 'value' | 'onChange' | 'type'> {
+    Omit<
+      React.ComponentPropsWithRef<'button'>,
+      'defaultValue' | 'value' | 'onChange' | 'type'
+    > {
   /** Determines whether dropdown should be closed when date is selected, not applicable when type="multiple", true by default */
   closeOnChange?: boolean;
 
@@ -73,7 +76,10 @@ export interface PickerInputBaseProps extends DateInputSharedProps {
 
 const defaultProps: Partial<PickerInputBaseProps> = {};
 
-export const PickerInputBase = forwardRef<HTMLButtonElement, PickerInputBaseProps>((props, ref) => {
+export const PickerInputBase = forwardRef<
+  HTMLButtonElement,
+  PickerInputBaseProps
+>((props, ref) => {
   const {
     inputProps,
     wrapperProps,
@@ -175,11 +181,16 @@ export const PickerInputBase = forwardRef<HTMLButtonElement, PickerInputBaseProp
               rightSection={_rightSection}
               {...inputProps}
               ref={ref}
-              classNames={{ ...classNames, input: cx(classes.input, (classNames as any)?.input) }}
+              classNames={{
+                ...classNames,
+                input: cx(classes.input, (classNames as any)?.input),
+              }}
               {...others}
             >
               {formattedValue || (
-                <Input.Placeholder className={classes.placeholder}>{placeholder}</Input.Placeholder>
+                <Input.Placeholder className={classes.placeholder}>
+                  {placeholder}
+                </Input.Placeholder>
               )}
             </Input>
           </Popover.Target>
@@ -192,4 +203,4 @@ export const PickerInputBase = forwardRef<HTMLButtonElement, PickerInputBaseProp
   );
 });
 
-PickerInputBase.displayName = '@mantine/dates/PickerInputBase';
+PickerInputBase.displayName = '@worldprint/wdesign-dates/PickerInputBase';

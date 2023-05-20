@@ -1,4 +1,4 @@
-import { createStyles, rem, getSize } from '@mantine/styles';
+import { createStyles, rem, getSize } from '@worldprint/wdesign-styles';
 import { INPUT_SIZES } from '../Input';
 
 export interface PasswordInputStylesParams {

@@ -1,4 +1,4 @@
-import { CSSObject } from '@mantine/core';
+import { CSSObject } from '@worldprint/wdesign-core';
 import { NotificationsPositioning } from '../../types';
 
 export default function getPositionStyles(
@@ -12,7 +12,8 @@ export default function getPositionStyles(
 
   horizontal === 'left' && (styles.left = spacing);
   horizontal === 'right' && (styles.right = spacing);
-  horizontal === 'center' && ((styles.left = '50%'), (styles.transform = 'translateX(-50%)'));
+  horizontal === 'center' &&
+    ((styles.left = '50%'), (styles.transform = 'translateX(-50%)'));
 
   return styles;
 }

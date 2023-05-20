@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { DefaultProps, useComponentDefaultProps } from '@mantine/styles';
+import { DefaultProps, useComponentDefaultProps } from '@worldprint/wdesign-styles';
 import { Text, TextProps } from '../Text';
 import useStyles, { TitleStylesParams } from './Title.styles';
 
@@ -23,30 +23,41 @@ const defaultProps: Partial<TitleProps> = {
   order: 1,
 };
 
-export const Title = forwardRef<HTMLHeadingElement, TitleProps>((props, ref) => {
-  const { className, order, children, unstyled, size, weight, inline, variant, ...others } =
-    useComponentDefaultProps('Title', defaultProps, props);
+export const Title = forwardRef<HTMLHeadingElement, TitleProps>(
+  (props, ref) => {
+    const {
+      className,
+      order,
+      children,
+      unstyled,
+      size,
+      weight,
+      inline,
+      variant,
+      ...others
+    } = useComponentDefaultProps('Title', defaultProps, props);
 
-  const { classes, cx } = useStyles(
-    { element: `h${order}`, weight, inline },
-    { name: 'Title', unstyled, variant, size }
-  );
+    const { classes, cx } = useStyles(
+      { element: `h${order}`, weight, inline },
+      { name: 'Title', unstyled, variant, size }
+    );
 
-  if (![1, 2, 3, 4, 5, 6].includes(order)) {
-    return null;
+    if (![1, 2, 3, 4, 5, 6].includes(order)) {
+      return null;
+    }
+
+    return (
+      <Text
+        variant={variant}
+        component={`h${order}`}
+        ref={ref}
+        className={cx(classes.root, className)}
+        {...others}
+      >
+        {children}
+      </Text>
+    );
   }
+);
 
-  return (
-    <Text
-      variant={variant}
-      component={`h${order}`}
-      ref={ref}
-      className={cx(classes.root, className)}
-      {...others}
-    >
-      {children}
-    </Text>
-  );
-});
-
-Title.displayName = '@mantine/core/Title';
+Title.displayName = '@worldprint/wdesign-core/Title';

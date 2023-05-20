@@ -6,7 +6,7 @@ export function useModals() {
 
   if (!ctx) {
     throw new Error(
-      '[@mantine/modals] useModals hook was called outside of context, wrap your app with ModalsProvider component'
+      '[@worldprint/wdesign-modals] useModals hook was called outside of context, wrap your app with ModalsProvider component'
     );
   }
 

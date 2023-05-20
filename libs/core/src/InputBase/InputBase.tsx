@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
-import { DefaultProps } from '@mantine/styles';
-import { createPolymorphicComponent } from '@mantine/utils';
+import { DefaultProps } from '@worldprint/wdesign-styles';
+import { createPolymorphicComponent } from '@worldprint/wdesign-utils';
 import {
   Input,
   InputSharedProps,
@@ -27,15 +27,23 @@ const defaultProps: Partial<InputBaseProps> = {
   __staticSelector: 'InputBase',
 };
 
-export const _InputBase = forwardRef<HTMLInputElement, InputBaseProps>((props, ref) => {
-  const { inputProps, wrapperProps, ...others } = useInputProps('InputBase', defaultProps, props);
-  return (
-    <Input.Wrapper {...wrapperProps}>
-      <Input {...inputProps} {...others} ref={ref} />
-    </Input.Wrapper>
-  );
-});
+export const _InputBase = forwardRef<HTMLInputElement, InputBaseProps>(
+  (props, ref) => {
+    const { inputProps, wrapperProps, ...others } = useInputProps(
+      'InputBase',
+      defaultProps,
+      props
+    );
+    return (
+      <Input.Wrapper {...wrapperProps}>
+        <Input {...inputProps} {...others} ref={ref} />
+      </Input.Wrapper>
+    );
+  }
+);
 
-_InputBase.displayName = '@mantine/core/InputBase';
+_InputBase.displayName = '@worldprint/wdesign-core/InputBase';
 
-export const InputBase = createPolymorphicComponent<'input', InputBaseProps>(_InputBase);
+export const InputBase = createPolymorphicComponent<'input', InputBaseProps>(
+  _InputBase
+);

@@ -1,4 +1,4 @@
-import { ButtonStylesNames } from '@mantine/core';
+import { ButtonStylesNames } from '@worldprint/wdesign-core';
 
 export const Button: Record<ButtonStylesNames, string> = {
   root: 'Root button element',

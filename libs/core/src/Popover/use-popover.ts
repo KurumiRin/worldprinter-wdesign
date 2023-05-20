@@ -1,4 +1,4 @@
-import { useDidUpdate, useUncontrolled } from '@mantine/hooks';
+import { useDidUpdate, useUncontrolled } from '@worldprint/wdesign-hooks';
 import {
   useFloating,
   shift,

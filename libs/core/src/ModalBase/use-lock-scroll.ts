@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useReducedMotion } from '@mantine/hooks';
+import { useReducedMotion } from '@worldprint/wdesign-hooks';
 
 interface UseScrollLock {
   opened: boolean;

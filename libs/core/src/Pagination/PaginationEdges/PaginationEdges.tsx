@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
-import { useComponentDefaultProps, DefaultProps } from '@mantine/styles';
-import { createPolymorphicComponent } from '@mantine/utils';
+import { useComponentDefaultProps, DefaultProps } from '@worldprint/wdesign-styles';
+import { createPolymorphicComponent } from '@worldprint/wdesign-utils';
 import { usePaginationContext } from '../Pagination.context';
 import {
   PaginationNextIcon,
@@ -46,7 +46,7 @@ export function createEdgeComponent({ icon, name, action, type }: CreateEdgeComp
     );
   });
 
-  Component.displayName = `@mantine/core/${name}`;
+  Component.displayName = `@worldprint/wdesign-core/${name}`;
   return createPolymorphicComponent<'button', PaginationEdgeProps>(Component);
 }
 

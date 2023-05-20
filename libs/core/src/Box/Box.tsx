@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
-import { DefaultProps } from '@mantine/styles';
-import { createPolymorphicComponent } from '@mantine/utils';
+import { DefaultProps } from '@worldprint/wdesign-styles';
+import { createPolymorphicComponent } from '@worldprint/wdesign-utils';
 import { extractSystemStyles } from './style-system-props/extract-system-styles/extract-system-styles';
 import { useSx } from './use-sx/use-sx';
 
@@ -13,11 +13,16 @@ export const _Box = forwardRef<HTMLDivElement, BoxProps & { component: any }>(
     const { systemStyles, rest } = extractSystemStyles(others);
     const Element = component || 'div';
     return (
-      <Element ref={ref} className={useSx(sx, systemStyles, className)} style={style} {...rest} />
+      <Element
+        ref={ref}
+        className={useSx(sx, systemStyles, className)}
+        style={style}
+        {...rest}
+      />
     );
   }
 );
 
-_Box.displayName = '@mantine/core/Box';
+_Box.displayName = '@worldprint/wdesign-core/Box';
 
 export const Box = createPolymorphicComponent<'div', BoxProps>(_Box);

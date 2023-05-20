@@ -1,4 +1,4 @@
-import { createStyles, MantineNumberSize, getBreakpointValue, getSize, em } from '@mantine/styles';
+import { createStyles, MantineNumberSize, getBreakpointValue, getSize, em } from '@worldprint/wdesign-styles';
 import { getSortedBreakpoints } from './get-sorted-breakpoints/get-sorted-breakpoints';
 
 export interface SimpleGridBreakpoint {

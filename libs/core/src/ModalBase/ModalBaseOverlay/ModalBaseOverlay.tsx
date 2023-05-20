@@ -1,4 +1,4 @@
-import { Selectors, useComponentDefaultProps } from '@mantine/styles';
+import { Selectors, useComponentDefaultProps } from '@worldprint/wdesign-styles';
 import React, { forwardRef } from 'react';
 import { Transition, TransitionOverride } from '../../Transition';
 import { Overlay, OverlayProps } from '../../Overlay';

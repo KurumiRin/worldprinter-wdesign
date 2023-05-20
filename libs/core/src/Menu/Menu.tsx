@@ -1,7 +1,7 @@
 import React from 'react';
-import { getContextItemIndex, useHovered } from '@mantine/utils';
-import { useDidUpdate, useUncontrolled } from '@mantine/hooks';
-import { ClassNames, Styles, useComponentDefaultProps } from '@mantine/styles';
+import { getContextItemIndex, useHovered } from '@worldprint/wdesign-utils';
+import { useDidUpdate, useUncontrolled } from '@worldprint/wdesign-hooks';
+import { ClassNames, Styles, useComponentDefaultProps } from '@worldprint/wdesign-styles';
 import { useDelayedHover } from '../Floating';
 import { Popover, PopoverBaseProps, PopoverStylesNames } from '../Popover';
 import { MenuDivider, MenuDividerStylesNames } from './MenuDivider/MenuDivider';
@@ -122,7 +122,12 @@ export function Menu(props: MenuProps) {
 
   const toggleDropdown = () => (_opened ? close() : open());
 
-  const { openDropdown, closeDropdown } = useDelayedHover({ open, close, closeDelay, openDelay });
+  const { openDropdown, closeDropdown } = useDelayedHover({
+    open,
+    close,
+    closeDelay,
+    openDelay,
+  });
 
   const getItemIndex = (node: HTMLButtonElement) =>
     getContextItemIndex('[data-menu-item]', '[data-menu-dropdown]', node);
@@ -161,7 +166,10 @@ export function Menu(props: MenuProps) {
         trapFocus={trigger === 'click'}
         closeOnEscape={closeOnEscape && trigger === 'click'}
         __staticSelector="Menu"
-        classNames={{ ...classNames, dropdown: cx(classes.dropdown, classNames?.dropdown) }}
+        classNames={{
+          ...classNames,
+          dropdown: cx(classes.dropdown, classNames?.dropdown),
+        }}
         styles={styles}
         unstyled={unstyled}
         variant={variant}
@@ -172,7 +180,7 @@ export function Menu(props: MenuProps) {
   );
 }
 
-Menu.displayName = '@mantine/core/Menu';
+Menu.displayName = '@worldprint/wdesign-core/Menu';
 Menu.Item = MenuItem;
 Menu.Label = MenuLabel;
 Menu.Dropdown = MenuDropdown;

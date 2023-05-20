@@ -1,4 +1,4 @@
-import type { ProgressStylesNames } from '@mantine/core';
+import type { ProgressStylesNames } from '@worldprint/wdesign-core';
 
 export const Progress: Record<ProgressStylesNames, string> = {
   root: 'Root element',

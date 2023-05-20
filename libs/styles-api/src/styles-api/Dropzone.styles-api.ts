@@ -1,4 +1,4 @@
-import type { DropzoneStylesNames, DropzoneFullScreenStylesName } from '@mantine/dropzone';
+import type { DropzoneStylesNames, DropzoneFullScreenStylesName } from '@worldprint/wdesign-dropzone';
 
 export const Dropzone: Record<DropzoneStylesNames, string> = {
   root: 'Root element',

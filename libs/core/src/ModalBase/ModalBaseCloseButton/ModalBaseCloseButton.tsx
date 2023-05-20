@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { Selectors, useComponentDefaultProps } from '@mantine/styles';
+import { Selectors, useComponentDefaultProps } from '@worldprint/wdesign-styles';
 import { CloseButton, CloseButtonProps } from '../../CloseButton';
 import { useModalBaseContext } from '../ModalBase.context';
 import useStyles from './ModalBaseCloseButton.styles';

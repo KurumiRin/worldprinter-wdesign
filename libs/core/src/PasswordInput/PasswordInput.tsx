@@ -1,6 +1,12 @@
 import React, { forwardRef } from 'react';
-import { useId, useUncontrolled } from '@mantine/hooks';
-import { Selectors, DefaultProps, useComponentDefaultProps, rem, getSize } from '@mantine/styles';
+import { useId, useUncontrolled } from '@worldprint/wdesign-hooks';
+import {
+  Selectors,
+  DefaultProps,
+  useComponentDefaultProps,
+  rem,
+  getSize,
+} from '@worldprint/wdesign-styles';
 import { extractSystemStyles } from '../Box';
 import { ActionIcon } from '../ActionIcon';
 import { TextInputProps, TextInputStylesNames } from '../TextInput';
@@ -8,7 +14,9 @@ import { Input } from '../Input';
 import { PasswordToggleIcon } from './PasswordToggleIcon';
 import useStyles from './PasswordInput.styles';
 
-export type PasswordInputStylesNames = Selectors<typeof useStyles> | TextInputStylesNames;
+export type PasswordInputStylesNames =
+  | Selectors<typeof useStyles>
+  | TextInputStylesNames;
 
 export interface PasswordInputProps
   extends DefaultProps<PasswordInputStylesNames>,
@@ -63,140 +71,145 @@ const defaultProps: Partial<PasswordInputProps> = {
   __staticSelector: 'PasswordInput',
 };
 
-export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>((props, ref) => {
-  const {
-    radius,
-    disabled,
-    size,
-    toggleTabIndex,
-    className,
-    id,
-    label,
-    error,
-    required,
-    style,
-    icon,
-    description,
-    wrapperProps,
-    classNames,
-    styles,
-    variant,
-    visibilityToggleIcon: VisibilityToggleIcon,
-    __staticSelector,
-    rightSection: _rightSection,
-    rightSectionWidth: _rightSectionWidth,
-    rightSectionProps: _rightSectionProps,
-    sx,
-    labelProps,
-    descriptionProps,
-    errorProps,
-    unstyled,
-    visibilityToggleLabel,
-    withAsterisk,
-    inputContainer,
-    iconWidth,
-    inputWrapperOrder,
-    visible,
-    defaultVisible,
-    onVisibilityChange,
-    ...others
-  } = useComponentDefaultProps('PasswordInput', defaultProps, props);
+export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
+  (props, ref) => {
+    const {
+      radius,
+      disabled,
+      size,
+      toggleTabIndex,
+      className,
+      id,
+      label,
+      error,
+      required,
+      style,
+      icon,
+      description,
+      wrapperProps,
+      classNames,
+      styles,
+      variant,
+      visibilityToggleIcon: VisibilityToggleIcon,
+      __staticSelector,
+      rightSection: _rightSection,
+      rightSectionWidth: _rightSectionWidth,
+      rightSectionProps: _rightSectionProps,
+      sx,
+      labelProps,
+      descriptionProps,
+      errorProps,
+      unstyled,
+      visibilityToggleLabel,
+      withAsterisk,
+      inputContainer,
+      iconWidth,
+      inputWrapperOrder,
+      visible,
+      defaultVisible,
+      onVisibilityChange,
+      ...others
+    } = useComponentDefaultProps('PasswordInput', defaultProps, props);
 
-  const rightSectionWidth = getSize({ size, sizes: rightSectionSizes });
-  const { classes } = useStyles(
-    { rightSectionWidth },
-    { name: 'PasswordInput', classNames, styles, unstyled, size, variant }
-  );
-  const uuid = useId(id);
-  const { systemStyles, rest } = extractSystemStyles(others);
-  const [_visible, setVisibility] = useUncontrolled({
-    value: visible,
-    defaultValue: defaultVisible,
-    finalValue: false,
-    onChange: onVisibilityChange,
-  });
+    const rightSectionWidth = getSize({ size, sizes: rightSectionSizes });
+    const { classes } = useStyles(
+      { rightSectionWidth },
+      { name: 'PasswordInput', classNames, styles, unstyled, size, variant }
+    );
+    const uuid = useId(id);
+    const { systemStyles, rest } = extractSystemStyles(others);
+    const [_visible, setVisibility] = useUncontrolled({
+      value: visible,
+      defaultValue: defaultVisible,
+      finalValue: false,
+      onChange: onVisibilityChange,
+    });
 
-  const toggleVisibility = () => setVisibility(!_visible);
+    const toggleVisibility = () => setVisibility(!_visible);
 
-  const rightSection = (
-    <ActionIcon<'button'>
-      className={classes.visibilityToggle}
-      tabIndex={toggleTabIndex}
-      radius={radius}
-      size={getSize({ size, sizes: buttonSizes })}
-      aria-hidden={!visibilityToggleLabel}
-      aria-label={visibilityToggleLabel}
-      unstyled={unstyled}
-      onMouseDown={(event) => {
-        event.preventDefault();
-        toggleVisibility();
-      }}
-      onKeyDown={(event) => {
-        if (event.key === ' ') {
+    const rightSection = (
+      <ActionIcon<'button'>
+        className={classes.visibilityToggle}
+        tabIndex={toggleTabIndex}
+        radius={radius}
+        size={getSize({ size, sizes: buttonSizes })}
+        aria-hidden={!visibilityToggleLabel}
+        aria-label={visibilityToggleLabel}
+        unstyled={unstyled}
+        onMouseDown={(event) => {
           event.preventDefault();
           toggleVisibility();
-        }
-      }}
-    >
-      <VisibilityToggleIcon reveal={_visible} size={getSize({ size, sizes: iconSizes })} />
-    </ActionIcon>
-  );
-
-  return (
-    <Input.Wrapper
-      required={required}
-      id={uuid}
-      label={label}
-      error={error}
-      description={description}
-      size={size}
-      className={className}
-      style={style}
-      classNames={classNames}
-      styles={styles}
-      __staticSelector={__staticSelector}
-      sx={sx}
-      errorProps={errorProps}
-      descriptionProps={descriptionProps}
-      labelProps={labelProps}
-      unstyled={unstyled}
-      withAsterisk={withAsterisk}
-      inputWrapperOrder={inputWrapperOrder}
-      inputContainer={inputContainer}
-      variant={variant}
-      {...systemStyles}
-      {...wrapperProps}
-    >
-      <Input<'div'>
-        component="div"
-        error={error}
-        icon={icon}
-        size={size}
-        classNames={{ ...classNames, input: classes.input }}
-        styles={styles}
-        radius={radius}
-        disabled={disabled}
-        __staticSelector={__staticSelector}
-        rightSectionWidth={rightSectionWidth}
-        rightSection={!disabled && rightSection}
-        variant={variant}
-        unstyled={unstyled}
-        iconWidth={iconWidth}
+        }}
+        onKeyDown={(event) => {
+          if (event.key === ' ') {
+            event.preventDefault();
+            toggleVisibility();
+          }
+        }}
       >
-        <input
-          type={_visible ? 'text' : 'password'}
-          required={required}
-          data-invalid={!!error || undefined}
-          data-with-icon={!!icon || undefined}
-          className={classes.innerInput}
-          disabled={disabled}
-          id={uuid}
-          ref={ref}
-          {...rest}
+        <VisibilityToggleIcon
+          reveal={_visible}
+          size={getSize({ size, sizes: iconSizes })}
         />
-      </Input>
-    </Input.Wrapper>
-  );
-});
+      </ActionIcon>
+    );
 
-PasswordInput.displayName = '@mantine/core/PasswordInput';
+    return (
+      <Input.Wrapper
+        required={required}
+        id={uuid}
+        label={label}
+        error={error}
+        description={description}
+        size={size}
+        className={className}
+        style={style}
+        classNames={classNames}
+        styles={styles}
+        __staticSelector={__staticSelector}
+        sx={sx}
+        errorProps={errorProps}
+        descriptionProps={descriptionProps}
+        labelProps={labelProps}
+        unstyled={unstyled}
+        withAsterisk={withAsterisk}
+        inputWrapperOrder={inputWrapperOrder}
+        inputContainer={inputContainer}
+        variant={variant}
+        {...systemStyles}
+        {...wrapperProps}
+      >
+        <Input<'div'>
+          component="div"
+          error={error}
+          icon={icon}
+          size={size}
+          classNames={{ ...classNames, input: classes.input }}
+          styles={styles}
+          radius={radius}
+          disabled={disabled}
+          __staticSelector={__staticSelector}
+          rightSectionWidth={rightSectionWidth}
+          rightSection={!disabled && rightSection}
+          variant={variant}
+          unstyled={unstyled}
+          iconWidth={iconWidth}
+        >
+          <input
+            type={_visible ? 'text' : 'password'}
+            required={required}
+            data-invalid={!!error || undefined}
+            data-with-icon={!!icon || undefined}
+            className={classes.innerInput}
+            disabled={disabled}
+            id={uuid}
+            ref={ref}
+            {...rest}
+          />
+        </Input>
+      </Input.Wrapper>
+    );
+  }
+);
+
+PasswordInput.displayName = '@worldprint/wdesign-core/PasswordInput';

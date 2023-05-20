@@ -1,6 +1,6 @@
 import React from 'react';
-import { Input, SegmentedControl as MantineSegmentedControl } from '@mantine/core';
-import { upperFirst } from '@mantine/hooks';
+import { Input, SegmentedControl as MantineSegmentedControl } from '@worldprint/wdesign-core';
+import { upperFirst } from '@worldprint/wdesign-hooks';
 
 interface SizeControlProps {
   value: string;

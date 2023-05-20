@@ -8,8 +8,8 @@ import {
   packSx,
   Select,
   TextInput,
-} from '@mantine/core';
-import { useDebouncedValue } from '@mantine/hooks';
+} from '@worldprint/wdesign-core';
+import { useDebouncedValue } from '@worldprint/wdesign-hooks';
 import type { MRT_Header, MRT_TableInstance } from '..';
 
 interface Props {
@@ -134,12 +134,12 @@ export const MRT_FilterTextInput = ({
       ? (column.getFilterValue() as [string, string])?.[
           rangeFilterIndex as number
         ] || []
-      : (column.getFilterValue() as string) ?? '',
+      : (column.getFilterValue() as string) ?? ''
   );
 
   const [debouncedFilterValue] = useDebouncedValue(
     filterValue,
-    manualFiltering ? 400 : 200,
+    manualFiltering ? 400 : 200
   );
 
   //send deboundedFilterValue to table instance
@@ -228,7 +228,7 @@ export const MRT_FilterTextInput = ({
           ? multiSelectProps.sx
           : isSelectFilter
           ? selectProps.sx
-          : textInputProps?.sx,
+          : textInputProps?.sx
       ) as any),
     }),
   } as const;

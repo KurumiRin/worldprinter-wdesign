@@ -1,4 +1,4 @@
-import { createStyles } from '@mantine/core';
+import { createStyles } from '@worldprint/wdesign-core';
 
 interface NotificationsStylesParams {
   zIndex: React.CSSProperties['zIndex'];

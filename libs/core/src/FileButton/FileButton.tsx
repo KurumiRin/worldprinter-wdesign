@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unused-prop-types */
 import React, { useRef, forwardRef } from 'react';
-import { useComponentDefaultProps } from '@mantine/styles';
-import { assignRef, useMergedRef } from '@mantine/hooks';
+import { useComponentDefaultProps } from '@worldprint/wdesign-styles';
+import { assignRef, useMergedRef } from '@worldprint/wdesign-hooks';
 
 export interface FileButtonProps<Multiple extends boolean = false> {
   /** Called when files are picked */
@@ -43,61 +43,62 @@ type FileButtonComponent = (<Multiple extends boolean = false>(
   props: FileButtonProps<Multiple>
 ) => React.ReactElement) & { displayName?: string };
 
-export const FileButton: FileButtonComponent = forwardRef<HTMLInputElement, FileButtonProps>(
-  (props, ref) => {
-    const {
-      onChange,
-      children,
-      multiple,
-      accept,
-      name,
-      form,
-      resetRef,
-      disabled,
-      capture,
-      inputProps,
-      ...others
-    } = useComponentDefaultProps('FileButton', defaultProps, props);
+export const FileButton: FileButtonComponent = forwardRef<
+  HTMLInputElement,
+  FileButtonProps
+>((props, ref) => {
+  const {
+    onChange,
+    children,
+    multiple,
+    accept,
+    name,
+    form,
+    resetRef,
+    disabled,
+    capture,
+    inputProps,
+    ...others
+  } = useComponentDefaultProps('FileButton', defaultProps, props);
 
-    const inputRef = useRef<HTMLInputElement>();
+  const inputRef = useRef<HTMLInputElement>();
 
-    const onClick = () => {
-      !disabled && inputRef.current.click();
-    };
+  const onClick = () => {
+    !disabled && inputRef.current.click();
+  };
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (multiple) {
-        onChange(Array.from(event.currentTarget.files) as any);
-      } else {
-        onChange(event.currentTarget.files[0] || null);
-      }
-    };
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (multiple) {
+      onChange(Array.from(event.currentTarget.files) as any);
+    } else {
+      onChange(event.currentTarget.files[0] || null);
+    }
+  };
 
-    const reset = () => {
-      inputRef.current.value = '';
-    };
+  const reset = () => {
+    inputRef.current.value = '';
+  };
 
-    assignRef(resetRef, reset);
+  assignRef(resetRef, reset);
 
-    return (
-      <>
-        {children({ onClick, ...others })}
+  return (
+    <>
+      {children({ onClick, ...others })}
 
-        <input
-          style={{ display: 'none' }}
-          type="file"
-          accept={accept}
-          multiple={multiple}
-          onChange={handleChange}
-          ref={useMergedRef(ref, inputRef)}
-          name={name}
-          form={form}
-          capture={capture}
-          {...inputProps}
-        />
-      </>
-    );
-  }
-) as any;
+      <input
+        style={{ display: 'none' }}
+        type="file"
+        accept={accept}
+        multiple={multiple}
+        onChange={handleChange}
+        ref={useMergedRef(ref, inputRef)}
+        name={name}
+        form={form}
+        capture={capture}
+        {...inputProps}
+      />
+    </>
+  );
+}) as any;
 
-FileButton.displayName = '@mantine/core/FileButton';
+FileButton.displayName = '@worldprint/wdesign-core/FileButton';

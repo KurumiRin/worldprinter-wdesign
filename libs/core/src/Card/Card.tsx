@@ -1,6 +1,6 @@
 import React, { Children, cloneElement, forwardRef } from 'react';
-import { MantineNumberSize, useComponentDefaultProps } from '@mantine/styles';
-import { createPolymorphicComponent } from '@mantine/utils';
+import { MantineNumberSize, useComponentDefaultProps } from '@worldprint/wdesign-styles';
+import { createPolymorphicComponent } from '@worldprint/wdesign-utils';
 import { Paper, PaperProps } from '../Paper/Paper';
 import { CardSection } from './CardSection/CardSection';
 import useStyles from './Card.styles';
@@ -27,7 +27,12 @@ export const _Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
   const _children = Children.toArray(children);
 
   const content = _children.map((child, index) => {
-    if (typeof child === 'object' && child && 'type' in child && child.type === CardSection) {
+    if (
+      typeof child === 'object' &&
+      child &&
+      'type' in child &&
+      child.type === CardSection
+    ) {
       return cloneElement(child, {
         variant,
         padding,
@@ -55,8 +60,10 @@ export const _Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
 }) as any;
 
 _Card.Section = CardSection;
-_Card.displayName = '@mantine/core/Card';
+_Card.displayName = '@worldprint/wdesign-core/Card';
 
-export const Card = createPolymorphicComponent<'div', CardProps, { Section: typeof CardSection }>(
-  _Card
-);
+export const Card = createPolymorphicComponent<
+  'div',
+  CardProps,
+  { Section: typeof CardSection }
+>(_Card);

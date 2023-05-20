@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
-import { DefaultProps, useComponentDefaultProps } from '@mantine/styles';
-import { createPolymorphicComponent } from '@mantine/utils';
+import { DefaultProps, useComponentDefaultProps } from '@worldprint/wdesign-styles';
+import { createPolymorphicComponent } from '@worldprint/wdesign-utils';
 import { Box } from '../Box';
 import useStyles from './Center.styles';
 
@@ -15,15 +15,15 @@ export interface CenterProps extends DefaultProps {
 }
 
 export const _Center = forwardRef<HTMLDivElement, CenterProps>((props, ref) => {
-  const { inline, className, unstyled, variant, ...others } = useComponentDefaultProps(
-    'Center',
-    {},
-    props
+  const { inline, className, unstyled, variant, ...others } =
+    useComponentDefaultProps('Center', {}, props);
+  const { classes, cx } = useStyles(
+    { inline },
+    { name: 'Center', unstyled, variant }
   );
-  const { classes, cx } = useStyles({ inline }, { name: 'Center', unstyled, variant });
   return <Box ref={ref} className={cx(classes.root, className)} {...others} />;
 });
 
-_Center.displayName = '@mantine/core/Center';
+_Center.displayName = '@worldprint/wdesign-core/Center';
 
 export const Center = createPolymorphicComponent<'div', CenterProps>(_Center);

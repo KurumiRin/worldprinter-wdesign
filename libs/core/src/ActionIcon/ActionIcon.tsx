@@ -7,8 +7,8 @@ import {
   useComponentDefaultProps,
   MantineGradient,
   Variants,
-} from '@mantine/styles';
-import { createPolymorphicComponent } from '@mantine/utils';
+} from '@worldprint/wdesign-styles';
+import { createPolymorphicComponent } from '@worldprint/wdesign-utils';
 import { UnstyledButton } from '../UnstyledButton';
 import useStyles, { ActionIconStylesParams } from './ActionIcon.styles';
 import { Loader, LoaderProps } from '../Loader';
@@ -24,7 +24,13 @@ export interface ActionIconProps
 
   /** Controls appearance, subtle by default */
   variant?: Variants<
-    'subtle' | 'filled' | 'outline' | 'light' | 'default' | 'transparent' | 'gradient'
+    | 'subtle'
+    | 'filled'
+    | 'outline'
+    | 'light'
+    | 'default'
+    | 'transparent'
+    | 'gradient'
   >;
 
   /** Key of theme.colors */
@@ -55,52 +61,56 @@ const defaultProps: Partial<ActionIconProps> = {
   variant: 'subtle',
 };
 
-export const _ActionIcon = forwardRef<HTMLButtonElement, ActionIconProps>((props, ref) => {
-  const {
-    className,
-    color,
-    children,
-    radius,
-    size,
-    variant,
-    gradient,
-    disabled,
-    loaderProps,
-    loading,
-    unstyled,
-    __staticSelector,
-    ...others
-  } = useComponentDefaultProps('ActionIcon', defaultProps, props);
+export const _ActionIcon = forwardRef<HTMLButtonElement, ActionIconProps>(
+  (props, ref) => {
+    const {
+      className,
+      color,
+      children,
+      radius,
+      size,
+      variant,
+      gradient,
+      disabled,
+      loaderProps,
+      loading,
+      unstyled,
+      __staticSelector,
+      ...others
+    } = useComponentDefaultProps('ActionIcon', defaultProps, props);
 
-  const { classes, cx, theme } = useStyles(
-    { radius, color, gradient },
-    { name: ['ActionIcon', __staticSelector], unstyled, size, variant }
-  );
+    const { classes, cx, theme } = useStyles(
+      { radius, color, gradient },
+      { name: ['ActionIcon', __staticSelector], unstyled, size, variant }
+    );
 
-  const loader = (
-    <Loader
-      color={theme.fn.variant({ color, variant }).color}
-      size="100%"
-      data-action-icon-loader
-      {...loaderProps}
-    />
-  );
+    const loader = (
+      <Loader
+        color={theme.fn.variant({ color, variant }).color}
+        size="100%"
+        data-action-icon-loader
+        {...loaderProps}
+      />
+    );
 
-  return (
-    <UnstyledButton
-      className={cx(classes.root, className)}
-      ref={ref}
-      disabled={disabled}
-      data-disabled={disabled || undefined}
-      data-loading={loading || undefined}
-      unstyled={unstyled}
-      {...others}
-    >
-      {loading ? loader : children}
-    </UnstyledButton>
-  );
-});
+    return (
+      <UnstyledButton
+        className={cx(classes.root, className)}
+        ref={ref}
+        disabled={disabled}
+        data-disabled={disabled || undefined}
+        data-loading={loading || undefined}
+        unstyled={unstyled}
+        {...others}
+      >
+        {loading ? loader : children}
+      </UnstyledButton>
+    );
+  }
+);
 
-_ActionIcon.displayName = '@mantine/core/ActionIcon';
+_ActionIcon.displayName = '@worldprint/wdesign-core/ActionIcon';
 
-export const ActionIcon = createPolymorphicComponent<'button', ActionIconProps>(_ActionIcon);
+export const ActionIcon = createPolymorphicComponent<'button', ActionIconProps>(
+  _ActionIcon
+);

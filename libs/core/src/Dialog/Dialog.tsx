@@ -5,7 +5,7 @@ import {
   Selectors,
   getDefaultZIndex,
   useComponentDefaultProps,
-} from '@mantine/styles';
+} from '@worldprint/wdesign-styles';
 import { Transition, MantineTransition } from '../Transition';
 import { CloseButton } from '../CloseButton';
 import { Affix } from '../Affix';
@@ -116,7 +116,9 @@ export function DialogBody(props: DialogProps) {
           unstyled={unstyled}
           {...others}
         >
-          {withCloseButton && <CloseButton onClick={onClose} className={classes.closeButton} />}
+          {withCloseButton && (
+            <CloseButton onClick={onClose} className={classes.closeButton} />
+          )}
           {children}
         </Paper>
       )}
@@ -131,7 +133,12 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     return (
       <Affix
         zIndex={zIndex}
-        position={props.position || { bottom: theme.spacing.xl, right: theme.spacing.xl }}
+        position={
+          props.position || {
+            bottom: theme.spacing.xl,
+            right: theme.spacing.xl,
+          }
+        }
         ref={ref}
       >
         <DialogBody {...props} />
@@ -140,4 +147,4 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
   }
 );
 
-Dialog.displayName = '@mantine/core/Dialog';
+Dialog.displayName = '@worldprint/wdesign-core/Dialog';

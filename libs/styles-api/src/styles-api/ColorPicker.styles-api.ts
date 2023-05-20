@@ -1,4 +1,4 @@
-import { ColorPickerStylesNames } from '@mantine/core';
+import { ColorPickerStylesNames } from '@worldprint/wdesign-core';
 
 export const ColorPicker: Record<ColorPickerStylesNames, string> = {
   wrapper: 'Root element',

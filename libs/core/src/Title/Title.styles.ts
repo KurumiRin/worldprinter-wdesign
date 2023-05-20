@@ -1,4 +1,4 @@
-import { createStyles, MantineTheme, rem } from '@mantine/styles';
+import { createStyles, MantineTheme, rem } from '@worldprint/wdesign-styles';
 import type { TitleSize } from './Title';
 
 type HeadingElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';

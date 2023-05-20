@@ -1,5 +1,5 @@
-import { createSafeContext } from '@mantine/utils';
-import { MantineNumberSize, ClassNames, Styles } from '@mantine/styles';
+import { createSafeContext } from '@worldprint/wdesign-utils';
+import { MantineNumberSize, ClassNames, Styles } from '@worldprint/wdesign-styles';
 import type { ListStylesNames } from './List';
 
 interface ListContextValue {

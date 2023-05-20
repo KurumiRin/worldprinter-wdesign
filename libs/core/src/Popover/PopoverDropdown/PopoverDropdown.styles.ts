@@ -1,4 +1,4 @@
-import { createStyles, MantineShadow, MantineNumberSize, rem } from '@mantine/styles';
+import { createStyles, MantineShadow, MantineNumberSize, rem } from '@worldprint/wdesign-styles';
 
 export interface PopoverStylesParams {
   radius?: MantineNumberSize;

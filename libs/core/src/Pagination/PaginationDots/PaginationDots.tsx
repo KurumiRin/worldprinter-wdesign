@@ -1,7 +1,15 @@
 import React, { forwardRef } from 'react';
-import { Selectors, useComponentDefaultProps, DefaultProps } from '@mantine/styles';
+import {
+  Selectors,
+  useComponentDefaultProps,
+  DefaultProps,
+} from '@worldprint/wdesign-styles';
 import { Box } from '../../Box';
-import { PaginationDotsIcon, PaginationIconProps, getIconSize } from '../Pagination.icons';
+import {
+  PaginationDotsIcon,
+  PaginationIconProps,
+  getIconSize,
+} from '../Pagination.icons';
 import useStyles from './PaginationDots.styles';
 import { usePaginationContext } from '../Pagination.context';
 
@@ -18,21 +26,23 @@ const defaultProps: Partial<PaginationDotsProps> = {
   icon: PaginationDotsIcon,
 };
 
-export const PaginationDots = forwardRef<HTMLDivElement, PaginationDotsProps>((props, ref) => {
-  const {
-    className,
-    icon: Icon,
-    ...others
-  } = useComponentDefaultProps('PaginationDots', defaultProps, props);
+export const PaginationDots = forwardRef<HTMLDivElement, PaginationDotsProps>(
+  (props, ref) => {
+    const {
+      className,
+      icon: Icon,
+      ...others
+    } = useComponentDefaultProps('PaginationDots', defaultProps, props);
 
-  const ctx = usePaginationContext();
-  const { classes, cx } = useStyles(null, ctx.stylesApi);
+    const ctx = usePaginationContext();
+    const { classes, cx } = useStyles(null, ctx.stylesApi);
 
-  return (
-    <Box ref={ref} className={cx(classes.dots, className)} {...others}>
-      <Icon size={getIconSize(ctx.stylesApi.size)} />
-    </Box>
-  );
-});
+    return (
+      <Box ref={ref} className={cx(classes.dots, className)} {...others}>
+        <Icon size={getIconSize(ctx.stylesApi.size)} />
+      </Box>
+    );
+  }
+);
 
-PaginationDots.displayName = '@mantine/core/PaginationDots';
+PaginationDots.displayName = '@worldprint/wdesign-core/PaginationDots';

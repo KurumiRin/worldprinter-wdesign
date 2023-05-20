@@ -1,4 +1,4 @@
-import type { AppShellStylesNames } from '@mantine/core';
+import type { AppShellStylesNames } from '@worldprint/wdesign-core';
 
 export const AppShell: Record<AppShellStylesNames, string> = {
   root: 'Root element, wraps Navbar, Header and content',

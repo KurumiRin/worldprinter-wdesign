@@ -6,7 +6,7 @@ import {
   Global,
   rem,
   em,
-} from '@mantine/styles';
+} from '@worldprint/wdesign-styles';
 import { Box } from '../../Box';
 import { useAppShellContext } from '../AppShell.context';
 import { getSortedBreakpoints } from './get-sorted-breakpoints/get-sorted-breakpoints';
@@ -53,7 +53,10 @@ export interface HorizontalSectionProps
   __staticSelector: string;
 }
 
-export const HorizontalSection = forwardRef<HTMLElement, HorizontalSectionProps>(
+export const HorizontalSection = forwardRef<
+  HTMLElement,
+  HorizontalSectionProps
+>(
   (
     {
       width,
@@ -117,7 +120,9 @@ export const HorizontalSection = forwardRef<HTMLElement, HorizontalSectionProps>
         <Global
           styles={() => ({
             ':root': {
-              [`--mantine-${section}-width`]: width?.base ? rem(width.base) : '0rem',
+              [`--mantine-${section}-width`]: width?.base
+                ? rem(width.base)
+                : '0rem',
               ...breakpoints,
             },
           })}
@@ -127,4 +132,4 @@ export const HorizontalSection = forwardRef<HTMLElement, HorizontalSectionProps>
   }
 );
 
-HorizontalSection.displayName = '@mantine/core/HorizontalSection';
+HorizontalSection.displayName = '@worldprint/wdesign-core/HorizontalSection';

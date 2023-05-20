@@ -1,4 +1,4 @@
-import { createStyles, MantineNumberSize, MantineTheme, rem, getSize } from '@mantine/styles';
+import { createStyles, MantineNumberSize, MantineTheme, rem, getSize } from '@worldprint/wdesign-styles';
 
 export interface InputStylesParams {
   radius: MantineNumberSize;

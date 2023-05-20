@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
-import { DefaultProps, useComponentDefaultProps } from '@mantine/styles';
-import { createPolymorphicComponent } from '@mantine/utils';
+import { DefaultProps, useComponentDefaultProps } from '@worldprint/wdesign-styles';
+import { createPolymorphicComponent } from '@worldprint/wdesign-utils';
 import { useCardPadding } from '../Card.context';
 import { Box } from '../../Box';
 import useStyles from './CardSection.styles';
@@ -20,18 +20,34 @@ const defaultProps: Partial<CardSectionProps> = {
   inheritPadding: false,
 };
 
-export const _CardSection = forwardRef<HTMLDivElement, CardSectionProps>((props, ref) => {
-  const { className, withBorder, inheritPadding, unstyled, variant, ...others } =
-    useComponentDefaultProps('CardSection', defaultProps, props);
+export const _CardSection = forwardRef<HTMLDivElement, CardSectionProps>(
+  (props, ref) => {
+    const {
+      className,
+      withBorder,
+      inheritPadding,
+      unstyled,
+      variant,
+      ...others
+    } = useComponentDefaultProps('CardSection', defaultProps, props);
 
-  const { classes, cx } = useStyles(
-    { padding: useCardPadding(), withBorder, inheritPadding },
-    { name: 'Card', unstyled, variant }
-  );
+    const { classes, cx } = useStyles(
+      { padding: useCardPadding(), withBorder, inheritPadding },
+      { name: 'Card', unstyled, variant }
+    );
 
-  return <Box className={cx(classes.cardSection, className)} ref={ref} {...others} />;
-});
+    return (
+      <Box
+        className={cx(classes.cardSection, className)}
+        ref={ref}
+        {...others}
+      />
+    );
+  }
+);
 
-_CardSection.displayName = '@mantine/core/CardSection';
+_CardSection.displayName = '@worldprint/wdesign-core/CardSection';
 
-export const CardSection = createPolymorphicComponent<'div', CardSectionProps>(_CardSection);
+export const CardSection = createPolymorphicComponent<'div', CardSectionProps>(
+  _CardSection
+);

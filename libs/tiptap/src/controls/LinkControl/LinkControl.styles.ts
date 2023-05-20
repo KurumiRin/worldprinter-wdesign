@@ -1,4 +1,4 @@
-import { createStyles, rem } from '@mantine/core';
+import { createStyles, rem } from '@worldprint/wdesign-core';
 
 export default createStyles((theme) => {
   const colors = theme.fn.variant({ variant: 'light' });
@@ -15,9 +15,13 @@ export default createStyles((theme) => {
 
     linkEditorExternalControl: {
       backgroundColor:
-        theme.colorScheme === 'dark' ? theme.fn.rgba(theme.colors.dark[7], 0.5) : theme.white,
+        theme.colorScheme === 'dark'
+          ? theme.fn.rgba(theme.colors.dark[7], 0.5)
+          : theme.white,
       border: `${rem(1)} solid ${
-        theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[4]
+        theme.colorScheme === 'dark'
+          ? theme.colors.dark[4]
+          : theme.colors.gray[4]
       }`,
       height: rem(24),
       width: rem(24),

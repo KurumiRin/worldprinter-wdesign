@@ -1,12 +1,18 @@
 import React, { forwardRef } from 'react';
-import { DefaultProps, MantineNumberSize, useComponentDefaultProps } from '@mantine/styles';
-import { ForwardRefWithStaticComponents } from '@mantine/utils';
+import {
+  DefaultProps,
+  MantineNumberSize,
+  useComponentDefaultProps,
+} from '@worldprint/wdesign-styles';
+import { ForwardRefWithStaticComponents } from '@worldprint/wdesign-utils';
 import { Box } from '../Box';
 import { Col } from './Col/Col';
 import { GridProvider } from './Grid.context';
 import useStyles from './Grid.styles';
 
-export interface GridProps extends DefaultProps, React.ComponentPropsWithRef<'div'> {
+export interface GridProps
+  extends DefaultProps,
+    React.ComponentPropsWithRef<'div'> {
   variant?: string;
 
   /** <Col /> components only */
@@ -43,7 +49,10 @@ export interface GridProps extends DefaultProps, React.ComponentPropsWithRef<'di
   columns?: number;
 }
 
-type GridComponent = ForwardRefWithStaticComponents<GridProps, { Col: typeof Col }>;
+type GridComponent = ForwardRefWithStaticComponents<
+  GridProps,
+  { Col: typeof Col }
+>;
 
 const defaultProps: Partial<GridProps> = {
   gutter: 'md',
@@ -52,40 +61,60 @@ const defaultProps: Partial<GridProps> = {
   columns: 12,
 };
 
-export const Grid: GridComponent = forwardRef<HTMLDivElement, GridProps>((props, ref) => {
-  const {
-    gutter,
-    gutterXs,
-    gutterSm,
-    gutterMd,
-    gutterLg,
-    gutterXl,
-    children,
-    grow,
-    justify,
-    align,
-    columns,
-    className,
-    id,
-    unstyled,
-    variant,
-    ...others
-  } = useComponentDefaultProps('Grid', defaultProps, props);
-  const { classes, cx } = useStyles(
-    { gutter, justify, align, gutterXs, gutterSm, gutterMd, gutterLg, gutterXl },
-    { unstyled, name: 'Grid', variant }
-  );
+export const Grid: GridComponent = forwardRef<HTMLDivElement, GridProps>(
+  (props, ref) => {
+    const {
+      gutter,
+      gutterXs,
+      gutterSm,
+      gutterMd,
+      gutterLg,
+      gutterXl,
+      children,
+      grow,
+      justify,
+      align,
+      columns,
+      className,
+      id,
+      unstyled,
+      variant,
+      ...others
+    } = useComponentDefaultProps('Grid', defaultProps, props);
+    const { classes, cx } = useStyles(
+      {
+        gutter,
+        justify,
+        align,
+        gutterXs,
+        gutterSm,
+        gutterMd,
+        gutterLg,
+        gutterXl,
+      },
+      { unstyled, name: 'Grid', variant }
+    );
 
-  return (
-    <GridProvider
-      value={{ gutter, gutterXs, gutterSm, gutterMd, gutterLg, gutterXl, grow, columns }}
-    >
-      <Box className={cx(classes.root, className)} ref={ref} {...others}>
-        {children}
-      </Box>
-    </GridProvider>
-  );
-}) as any;
+    return (
+      <GridProvider
+        value={{
+          gutter,
+          gutterXs,
+          gutterSm,
+          gutterMd,
+          gutterLg,
+          gutterXl,
+          grow,
+          columns,
+        }}
+      >
+        <Box className={cx(classes.root, className)} ref={ref} {...others}>
+          {children}
+        </Box>
+      </GridProvider>
+    );
+  }
+) as any;
 
 Grid.Col = Col;
-Grid.displayName = '@mantine/core/Grid';
+Grid.displayName = '@worldprint/wdesign-core/Grid';

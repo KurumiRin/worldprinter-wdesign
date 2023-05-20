@@ -1,4 +1,4 @@
-import { createStyles, getSize } from '@mantine/styles';
+import { createStyles, getSize } from '@worldprint/wdesign-styles';
 
 export default createStyles((theme, _params, { size }) => ({
   label: {

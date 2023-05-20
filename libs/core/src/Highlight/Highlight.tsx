@@ -1,6 +1,11 @@
 import React, { forwardRef } from 'react';
-import { MantineColor, MantineTheme, CSSObject, useComponentDefaultProps } from '@mantine/styles';
-import { createPolymorphicComponent } from '@mantine/utils';
+import {
+  MantineColor,
+  MantineTheme,
+  CSSObject,
+  useComponentDefaultProps,
+} from '@worldprint/wdesign-styles';
+import { createPolymorphicComponent } from '@worldprint/wdesign-utils';
 import { Text, TextProps } from '../Text/Text';
 import { Mark } from '../Mark/Mark';
 import { highlighter } from './highlighter/highlighter';
@@ -23,32 +28,47 @@ const defaultProps: Partial<HighlightProps> = {
   highlightColor: 'yellow',
 };
 
-export const _Highlight = forwardRef<HTMLDivElement, HighlightProps>((props, ref) => {
-  const { children, highlight, highlightColor, highlightStyles, unstyled, ...others } =
-    useComponentDefaultProps('Highlight', defaultProps, props);
-  const highlightChunks = highlighter(children, highlight);
+export const _Highlight = forwardRef<HTMLDivElement, HighlightProps>(
+  (props, ref) => {
+    const {
+      children,
+      highlight,
+      highlightColor,
+      highlightStyles,
+      unstyled,
+      ...others
+    } = useComponentDefaultProps('Highlight', defaultProps, props);
+    const highlightChunks = highlighter(children, highlight);
 
-  return (
-    <Text unstyled={unstyled} ref={ref} __staticSelector="Highlight" {...others}>
-      {highlightChunks.map(({ chunk, highlighted }, i) =>
-        highlighted ? (
-          <Mark
-            unstyled={unstyled}
-            key={i}
-            color={highlightColor}
-            sx={highlightStyles}
-            data-highlight={chunk}
-          >
-            {chunk}
-          </Mark>
-        ) : (
-          <span key={i}>{chunk}</span>
-        )
-      )}
-    </Text>
-  );
-});
+    return (
+      <Text
+        unstyled={unstyled}
+        ref={ref}
+        __staticSelector="Highlight"
+        {...others}
+      >
+        {highlightChunks.map(({ chunk, highlighted }, i) =>
+          highlighted ? (
+            <Mark
+              unstyled={unstyled}
+              key={i}
+              color={highlightColor}
+              sx={highlightStyles}
+              data-highlight={chunk}
+            >
+              {chunk}
+            </Mark>
+          ) : (
+            <span key={i}>{chunk}</span>
+          )
+        )}
+      </Text>
+    );
+  }
+);
 
-_Highlight.displayName = '@mantine/core/Highlight';
+_Highlight.displayName = '@worldprint/wdesign-core/Highlight';
 
-export const Highlight = createPolymorphicComponent<'div', HighlightProps>(_Highlight);
+export const Highlight = createPolymorphicComponent<'div', HighlightProps>(
+  _Highlight
+);

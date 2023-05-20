@@ -1,4 +1,4 @@
-import { createStyles, MantineNumberSize, getSize } from '@mantine/styles';
+import { createStyles, MantineNumberSize, getSize } from '@worldprint/wdesign-styles';
 
 export interface ListStylesParams {
   withPadding: boolean;

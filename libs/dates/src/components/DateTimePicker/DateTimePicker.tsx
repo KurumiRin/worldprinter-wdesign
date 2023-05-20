@@ -8,11 +8,15 @@ import {
   Selectors,
   DefaultProps,
   INPUT_SIZES,
-} from '@mantine/core';
-import { useDisclosure, useUncontrolled, useDidUpdate } from '@mantine/hooks';
+} from '@worldprint/wdesign-core';
+import { useDisclosure, useUncontrolled, useDidUpdate } from '@worldprint/wdesign-hooks';
 import { assignTime } from '../../utils';
 import { TimeInput, TimeInputProps } from '../TimeInput';
-import { pickCalendarProps, CalendarBaseProps, CalendarSettings } from '../Calendar';
+import {
+  pickCalendarProps,
+  CalendarBaseProps,
+  CalendarSettings,
+} from '../Calendar';
 import { DatePicker } from '../DatePicker';
 import {
   PickerInputBase,
@@ -23,7 +27,9 @@ import { DateValue } from '../../types';
 import { useDatesContext } from '../DatesProvider';
 import useStyles from './DateTimePicker.styles';
 
-export type DateTimePickerStylesNames = PickerInputBaseStylesNames | Selectors<typeof useStyles>;
+export type DateTimePickerStylesNames =
+  | PickerInputBaseStylesNames
+  | Selectors<typeof useStyles>;
 
 export interface DateTimePickerProps
   extends DefaultProps<DateTimePickerStylesNames>,
@@ -46,7 +52,8 @@ export interface DateTimePickerProps
   timeInputProps?: TimeInputProps;
 
   /** Props added to submit button */
-  submitButtonProps?: ActionIconProps & React.ComponentPropsWithoutRef<'button'>;
+  submitButtonProps?: ActionIconProps &
+    React.ComponentPropsWithoutRef<'button'>;
 
   /** Determines whether seconds input should be rendered */
   withSeconds?: boolean;
@@ -57,7 +64,10 @@ const defaultProps: Partial<DateTimePickerProps> = {
   dropdownType: 'popover',
 };
 
-export const DateTimePicker = forwardRef<HTMLButtonElement, DateTimePickerProps>((props, ref) => {
+export const DateTimePicker = forwardRef<
+  HTMLButtonElement,
+  DateTimePickerProps
+>((props, ref) => {
   const {
     value,
     defaultValue,
@@ -78,7 +88,8 @@ export const DateTimePicker = forwardRef<HTMLButtonElement, DateTimePickerProps>
     ...rest
   } = useComponentDefaultProps('DateTimePicker', defaultProps, props);
 
-  const _valueFormat = valueFormat || (withSeconds ? 'DD/MM/YYYY HH:mm:ss' : 'DD/MM/YYYY HH:mm');
+  const _valueFormat =
+    valueFormat || (withSeconds ? 'DD/MM/YYYY HH:mm:ss' : 'DD/MM/YYYY HH:mm');
 
   const { classes, cx } = useStyles(null, {
     name: 'DateTimePicker',
@@ -105,10 +116,14 @@ export const DateTimePicker = forwardRef<HTMLButtonElement, DateTimePickerProps>
   });
 
   const formatTime = (dateValue: Date) =>
-    dateValue ? dayjs(dateValue).format(withSeconds ? 'HH:mm:ss' : 'HH:mm') : '';
+    dateValue
+      ? dayjs(dateValue).format(withSeconds ? 'HH:mm:ss' : 'HH:mm')
+      : '';
 
   const [timeValue, setTimeValue] = useState(formatTime(_value));
-  const [currentLevel, setCurrentLevel] = useState(level || defaultLevel || 'month');
+  const [currentLevel, setCurrentLevel] = useState(
+    level || defaultLevel || 'month'
+  );
 
   const [dropdownOpened, dropdownHandlers] = useDisclosure(false);
   const formattedValue = _value
@@ -135,7 +150,9 @@ export const DateTimePicker = forwardRef<HTMLButtonElement, DateTimePickerProps>
     timeInputRef.current?.focus();
   };
 
-  const handleTimeInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleTimeInputKeyDown = (
+    event: React.KeyboardEvent<HTMLInputElement>
+  ) => {
     timeInputProps?.onKeyDown?.(event);
 
     if (event.key === 'Enter') {
@@ -234,4 +251,4 @@ export const DateTimePicker = forwardRef<HTMLButtonElement, DateTimePickerProps>
   );
 });
 
-DateTimePicker.displayName = '@mantine/dates/DateTimePicker';
+DateTimePicker.displayName = '@worldprint/wdesign-dates/DateTimePicker';

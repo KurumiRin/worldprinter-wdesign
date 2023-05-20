@@ -1,5 +1,5 @@
 import React, { useState, useEffect, forwardRef } from 'react';
-import { useUncontrolled, useDidUpdate, useEyeDropper } from '@mantine/hooks';
+import { useUncontrolled, useDidUpdate, useEyeDropper } from '@worldprint/wdesign-hooks';
 import {
   DefaultProps,
   getDefaultZIndex,
@@ -7,8 +7,8 @@ import {
   useMantineTheme,
   rem,
   getSize,
-} from '@mantine/styles';
-import { noop } from '@mantine/utils';
+} from '@worldprint/wdesign-styles';
+import { noop } from '@worldprint/wdesign-utils';
 import {
   InputWrapperBaseProps,
   InputWrapperStylesNames,
@@ -27,7 +27,11 @@ import {
   ColorPickerBaseProps,
   ColorPickerStylesNames,
 } from '../ColorPicker/ColorPicker';
-import { convertHsvaTo, isColorValid, parseColor } from '../ColorPicker/converters';
+import {
+  convertHsvaTo,
+  isColorValid,
+  parseColor,
+} from '../ColorPicker/converters';
 import { EyeDropperIcon } from './EyeDropperIcon';
 
 export type ColorInputStylesNames =
@@ -41,7 +45,10 @@ export interface ColorInputProps
     InputSharedProps,
     ColorPickerBaseProps,
     DefaultProps<ColorInputStylesNames>,
-    Omit<React.ComponentPropsWithoutRef<'input'>, 'size' | 'onChange' | 'defaultValue' | 'value'> {
+    Omit<
+      React.ComponentPropsWithoutRef<'input'>,
+      'size' | 'onChange' | 'defaultValue' | 'value'
+    > {
   /** Disallow free input */
   disallowInput?: boolean;
 
@@ -109,189 +116,212 @@ const defaultProps: Partial<ColorInputProps> = {
   withEyeDropper: true,
 };
 
-export const ColorInput = forwardRef<HTMLInputElement, ColorInputProps>((props, ref) => {
-  const {
-    wrapperProps,
-    inputProps,
-    format,
-    onChange,
-    onChangeEnd,
-    onFocus,
-    onBlur,
-    onClick,
-    value,
-    defaultValue,
-    disallowInput,
-    fixOnBlur,
-    withPreview,
-    swatchesPerRow,
-    withPicker,
-    icon,
-    transitionProps,
-    dropdownZIndex,
-    withinPortal,
-    portalProps,
-    swatches,
-    shadow,
-    classNames,
-    styles,
-    unstyled,
-    readOnly,
-    withEyeDropper,
-    eyeDropperIcon,
-    rightSection,
-    closeOnColorSwatchClick,
-    disabled,
-    eyeDropperLabel,
-    ...others
-  } = useInputProps('ColorInput', defaultProps, props);
+export const ColorInput = forwardRef<HTMLInputElement, ColorInputProps>(
+  (props, ref) => {
+    const {
+      wrapperProps,
+      inputProps,
+      format,
+      onChange,
+      onChangeEnd,
+      onFocus,
+      onBlur,
+      onClick,
+      value,
+      defaultValue,
+      disallowInput,
+      fixOnBlur,
+      withPreview,
+      swatchesPerRow,
+      withPicker,
+      icon,
+      transitionProps,
+      dropdownZIndex,
+      withinPortal,
+      portalProps,
+      swatches,
+      shadow,
+      classNames,
+      styles,
+      unstyled,
+      readOnly,
+      withEyeDropper,
+      eyeDropperIcon,
+      rightSection,
+      closeOnColorSwatchClick,
+      disabled,
+      eyeDropperLabel,
+      ...others
+    } = useInputProps('ColorInput', defaultProps, props);
 
-  const theme = useMantineTheme();
-  const [dropdownOpened, setDropdownOpened] = useState(false);
-  const [lastValidValue, setLastValidValue] = useState('');
-  const [_value, setValue] = useUncontrolled({
-    value,
-    defaultValue,
-    finalValue: '',
-    onChange,
-  });
+    const theme = useMantineTheme();
+    const [dropdownOpened, setDropdownOpened] = useState(false);
+    const [lastValidValue, setLastValidValue] = useState('');
+    const [_value, setValue] = useUncontrolled({
+      value,
+      defaultValue,
+      finalValue: '',
+      onChange,
+    });
 
-  const { supported: eyeDropperSupported, open: openEyeDropper } = useEyeDropper();
+    const { supported: eyeDropperSupported, open: openEyeDropper } =
+      useEyeDropper();
 
-  const eyeDropper = (
-    <ActionIcon
-      sx={{ color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black }}
-      size={inputProps.size}
-      aria-label={eyeDropperLabel}
-      onClick={() =>
-        openEyeDropper()
-          .then(({ sRGBHex }) => {
-            const color = convertHsvaTo(format, parseColor(sRGBHex));
-            setValue(color);
-            onChangeEnd?.(color);
-          })
-          .catch(noop)
-      }
-    >
-      {eyeDropperIcon || (
-        <EyeDropperIcon size={getSize({ size: inputProps.size, sizes: EYE_DROPPER_SIZES })} />
-      )}
-    </ActionIcon>
-  );
-
-  const handleInputFocus = (event: React.FocusEvent<HTMLInputElement>) => {
-    onFocus?.(event);
-    setDropdownOpened(true);
-  };
-
-  const handleInputBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    fixOnBlur && setValue(lastValidValue);
-    onBlur?.(event);
-    setDropdownOpened(false);
-  };
-
-  const handleInputClick = (event: React.MouseEvent<HTMLInputElement>) => {
-    onClick?.(event);
-    setDropdownOpened(true);
-  };
-
-  useEffect(() => {
-    if (isColorValid(_value) || _value.trim() === '') {
-      setLastValidValue(_value);
-    }
-  }, [_value]);
-
-  useDidUpdate(() => {
-    if (isColorValid(_value)) {
-      setValue(convertHsvaTo(format, parseColor(_value)));
-    }
-  }, [format]);
-
-  return (
-    <Input.Wrapper {...wrapperProps} __staticSelector="ColorInput">
-      <Popover
-        __staticSelector="ColorInput"
-        position="bottom-start"
-        offset={5}
-        zIndex={dropdownZIndex}
-        withinPortal={withinPortal}
-        portalProps={portalProps}
-        transitionProps={transitionProps}
-        opened={dropdownOpened}
-        shadow={shadow}
-        classNames={classNames}
-        styles={styles}
-        unstyled={unstyled}
-        disabled={
-          readOnly || (withPicker === false && (!Array.isArray(swatches) || swatches.length === 0))
+    const eyeDropper = (
+      <ActionIcon
+        sx={{
+          color:
+            theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
+        }}
+        size={inputProps.size}
+        aria-label={eyeDropperLabel}
+        onClick={() =>
+          openEyeDropper()
+            .then(({ sRGBHex }) => {
+              const color = convertHsvaTo(format, parseColor(sRGBHex));
+              setValue(color);
+              onChangeEnd?.(color);
+            })
+            .catch(noop)
         }
       >
-        <Popover.Target>
-          <div>
-            <Input<'input'>
-              autoComplete="off"
-              {...others}
-              {...inputProps}
-              disabled={disabled}
-              ref={ref}
-              __staticSelector="ColorInput"
-              onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
-              onClick={handleInputClick}
-              spellCheck={false}
-              value={_value}
-              onChange={(event) => {
-                const inputValue = event.currentTarget.value;
-                setValue(inputValue);
-                if (isColorValid(inputValue)) {
-                  onChangeEnd?.(convertHsvaTo(format, parseColor(inputValue)));
+        {eyeDropperIcon || (
+          <EyeDropperIcon
+            size={getSize({ size: inputProps.size, sizes: EYE_DROPPER_SIZES })}
+          />
+        )}
+      </ActionIcon>
+    );
+
+    const handleInputFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+      onFocus?.(event);
+      setDropdownOpened(true);
+    };
+
+    const handleInputBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+      fixOnBlur && setValue(lastValidValue);
+      onBlur?.(event);
+      setDropdownOpened(false);
+    };
+
+    const handleInputClick = (event: React.MouseEvent<HTMLInputElement>) => {
+      onClick?.(event);
+      setDropdownOpened(true);
+    };
+
+    useEffect(() => {
+      if (isColorValid(_value) || _value.trim() === '') {
+        setLastValidValue(_value);
+      }
+    }, [_value]);
+
+    useDidUpdate(() => {
+      if (isColorValid(_value)) {
+        setValue(convertHsvaTo(format, parseColor(_value)));
+      }
+    }, [format]);
+
+    return (
+      <Input.Wrapper {...wrapperProps} __staticSelector="ColorInput">
+        <Popover
+          __staticSelector="ColorInput"
+          position="bottom-start"
+          offset={5}
+          zIndex={dropdownZIndex}
+          withinPortal={withinPortal}
+          portalProps={portalProps}
+          transitionProps={transitionProps}
+          opened={dropdownOpened}
+          shadow={shadow}
+          classNames={classNames}
+          styles={styles}
+          unstyled={unstyled}
+          disabled={
+            readOnly ||
+            (withPicker === false &&
+              (!Array.isArray(swatches) || swatches.length === 0))
+          }
+        >
+          <Popover.Target>
+            <div>
+              <Input<'input'>
+                autoComplete="off"
+                {...others}
+                {...inputProps}
+                disabled={disabled}
+                ref={ref}
+                __staticSelector="ColorInput"
+                onFocus={handleInputFocus}
+                onBlur={handleInputBlur}
+                onClick={handleInputClick}
+                spellCheck={false}
+                value={_value}
+                onChange={(event) => {
+                  const inputValue = event.currentTarget.value;
+                  setValue(inputValue);
+                  if (isColorValid(inputValue)) {
+                    onChangeEnd?.(
+                      convertHsvaTo(format, parseColor(inputValue))
+                    );
+                  }
+                }}
+                icon={
+                  icon ||
+                  (withPreview ? (
+                    <ColorSwatch
+                      color={isColorValid(_value) ? _value : '#fff'}
+                      size={getSize({
+                        size: inputProps.size,
+                        sizes: SWATCH_SIZES,
+                      })}
+                    />
+                  ) : null)
                 }
-              }}
-              icon={
-                icon ||
-                (withPreview ? (
-                  <ColorSwatch
-                    color={isColorValid(_value) ? _value : '#fff'}
-                    size={getSize({ size: inputProps.size, sizes: SWATCH_SIZES })}
-                  />
-                ) : null)
-              }
-              readOnly={disallowInput || readOnly}
-              sx={{ cursor: disallowInput ? 'pointer' : undefined }}
+                readOnly={disallowInput || readOnly}
+                sx={{ cursor: disallowInput ? 'pointer' : undefined }}
+                unstyled={unstyled}
+                classNames={classNames}
+                styles={styles}
+                rightSection={
+                  rightSection ||
+                  (withEyeDropper &&
+                  !disabled &&
+                  !readOnly &&
+                  eyeDropperSupported
+                    ? eyeDropper
+                    : null)
+                }
+              />
+            </div>
+          </Popover.Target>
+
+          <Popover.Dropdown
+            onMouseDown={(event) => event.preventDefault()}
+            p={inputProps.size}
+          >
+            <ColorPicker
+              __staticSelector="ColorInput"
+              value={_value}
+              onChange={setValue}
+              onChangeEnd={onChangeEnd}
+              format={format}
+              swatches={swatches}
+              swatchesPerRow={swatchesPerRow}
+              withPicker={withPicker}
+              size={inputProps.size}
+              focusable={false}
               unstyled={unstyled}
-              classNames={classNames}
               styles={styles}
-              rightSection={
-                rightSection ||
-                (withEyeDropper && !disabled && !readOnly && eyeDropperSupported
-                  ? eyeDropper
-                  : null)
+              classNames={classNames}
+              onColorSwatchClick={() =>
+                closeOnColorSwatchClick && setDropdownOpened(false)
               }
             />
-          </div>
-        </Popover.Target>
+          </Popover.Dropdown>
+        </Popover>
+      </Input.Wrapper>
+    );
+  }
+);
 
-        <Popover.Dropdown onMouseDown={(event) => event.preventDefault()} p={inputProps.size}>
-          <ColorPicker
-            __staticSelector="ColorInput"
-            value={_value}
-            onChange={setValue}
-            onChangeEnd={onChangeEnd}
-            format={format}
-            swatches={swatches}
-            swatchesPerRow={swatchesPerRow}
-            withPicker={withPicker}
-            size={inputProps.size}
-            focusable={false}
-            unstyled={unstyled}
-            styles={styles}
-            classNames={classNames}
-            onColorSwatchClick={() => closeOnColorSwatchClick && setDropdownOpened(false)}
-          />
-        </Popover.Dropdown>
-      </Popover>
-    </Input.Wrapper>
-  );
-});
-
-ColorInput.displayName = '@mantine/core/ColorInput';
+ColorInput.displayName = '@worldprint/wdesign-core/ColorInput';

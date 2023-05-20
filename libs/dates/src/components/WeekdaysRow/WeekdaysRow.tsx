@@ -1,5 +1,11 @@
 import React, { forwardRef } from 'react';
-import { DefaultProps, Selectors, useComponentDefaultProps, Box, MantineSize } from '@mantine/core';
+import {
+  DefaultProps,
+  Selectors,
+  useComponentDefaultProps,
+  Box,
+  MantineSize,
+} from '@worldprint/wdesign-core';
 import type { DayOfWeek } from '../../types';
 import { useDatesContext } from '../DatesProvider';
 import { getWeekdayNames } from './get-weekdays-names/get-weekdays-names';
@@ -35,48 +41,55 @@ const defaultProps: Partial<WeekdaysRowProps> = {
   size: 'sm',
 };
 
-export const WeekdaysRow = forwardRef<HTMLTableRowElement, WeekdaysRowProps>((props, ref) => {
-  const {
-    className,
-    locale,
-    firstDayOfWeek,
-    weekdayFormat,
-    cellComponent: CellComponent,
-    __staticSelector,
-    classNames,
-    styles,
-    unstyled,
-    variant,
-    size,
-    ...others
-  } = useComponentDefaultProps('WeekdaysRow', defaultProps, props);
+export const WeekdaysRow = forwardRef<HTMLTableRowElement, WeekdaysRowProps>(
+  (props, ref) => {
+    const {
+      className,
+      locale,
+      firstDayOfWeek,
+      weekdayFormat,
+      cellComponent: CellComponent,
+      __staticSelector,
+      classNames,
+      styles,
+      unstyled,
+      variant,
+      size,
+      ...others
+    } = useComponentDefaultProps('WeekdaysRow', defaultProps, props);
 
-  const ctx = useDatesContext();
+    const ctx = useDatesContext();
 
-  const { classes, cx } = useStyles(null, {
-    name: ['WeekdaysRow', __staticSelector],
-    classNames,
-    styles,
-    unstyled,
-    variant,
-    size,
-  });
+    const { classes, cx } = useStyles(null, {
+      name: ['WeekdaysRow', __staticSelector],
+      classNames,
+      styles,
+      unstyled,
+      variant,
+      size,
+    });
 
-  const weekdays = getWeekdayNames({
-    locale: ctx.getLocale(locale),
-    format: weekdayFormat,
-    firstDayOfWeek: ctx.getFirstDayOfWeek(firstDayOfWeek),
-  }).map((weekday, index) => (
-    <CellComponent key={index} className={classes.weekday}>
-      {weekday}
-    </CellComponent>
-  ));
+    const weekdays = getWeekdayNames({
+      locale: ctx.getLocale(locale),
+      format: weekdayFormat,
+      firstDayOfWeek: ctx.getFirstDayOfWeek(firstDayOfWeek),
+    }).map((weekday, index) => (
+      <CellComponent key={index} className={classes.weekday}>
+        {weekday}
+      </CellComponent>
+    ));
 
-  return (
-    <Box component="tr" ref={ref} className={cx(classes.weekdaysRow, className)} {...others}>
-      {weekdays}
-    </Box>
-  );
-});
+    return (
+      <Box
+        component="tr"
+        ref={ref}
+        className={cx(classes.weekdaysRow, className)}
+        {...others}
+      >
+        {weekdays}
+      </Box>
+    );
+  }
+);
 
-WeekdaysRow.displayName = '@mantine/dates/WeekdaysRow';
+WeekdaysRow.displayName = '@worldprint/wdesign-dates/WeekdaysRow';

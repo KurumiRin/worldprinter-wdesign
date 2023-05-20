@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@mantine/core';
+import { Box } from '@worldprint/wdesign-core';
 import { MRT_FilterTextInput } from './MRT_FilterTextInput';
 import { MRT_Header, MRT_TableInstance } from '..';
 

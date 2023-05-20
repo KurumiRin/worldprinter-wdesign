@@ -6,8 +6,8 @@ import {
   MantineNumberSize,
   useComponentDefaultProps,
   Variants,
-} from '@mantine/styles';
-import { useId } from '@mantine/hooks';
+} from '@worldprint/wdesign-styles';
+import { useId } from '@worldprint/wdesign-hooks';
 import { CloseButton } from '../CloseButton';
 import { Box } from '../Box';
 import useStyles, { AlertStylesParams } from './Alert.styles';
@@ -49,74 +49,79 @@ const defaultProps: Partial<AlertProps> = {
   variant: 'light',
 };
 
-export const Alert = forwardRef<HTMLDivElement, AlertProps>((props: AlertProps, ref) => {
-  const {
-    id,
-    className,
-    title,
-    variant,
-    children,
-    color,
-    classNames,
-    icon,
-    styles,
-    onClose,
-    radius,
-    withCloseButton,
-    closeButtonLabel,
-    unstyled,
-    ...others
-  } = useComponentDefaultProps('Alert', defaultProps, props);
+export const Alert = forwardRef<HTMLDivElement, AlertProps>(
+  (props: AlertProps, ref) => {
+    const {
+      id,
+      className,
+      title,
+      variant,
+      children,
+      color,
+      classNames,
+      icon,
+      styles,
+      onClose,
+      radius,
+      withCloseButton,
+      closeButtonLabel,
+      unstyled,
+      ...others
+    } = useComponentDefaultProps('Alert', defaultProps, props);
 
-  const { classes, cx } = useStyles(
-    { color, radius },
-    { classNames, styles, unstyled, variant, name: 'Alert' }
-  );
+    const { classes, cx } = useStyles(
+      { color, radius },
+      { classNames, styles, unstyled, variant, name: 'Alert' }
+    );
 
-  const rootId = useId(id);
-  const titleId = title && `${rootId}-title`;
-  const bodyId = `${rootId}-body`;
+    const rootId = useId(id);
+    const titleId = title && `${rootId}-title`;
+    const bodyId = `${rootId}-body`;
 
-  return (
-    <Box
-      id={rootId}
-      role="alert"
-      aria-labelledby={titleId}
-      aria-describedby={bodyId}
-      className={cx(classes.root, classes[variant], className)}
-      ref={ref}
-      {...others}
-    >
-      <div className={classes.wrapper}>
-        {icon && <div className={classes.icon}>{icon}</div>}
+    return (
+      <Box
+        id={rootId}
+        role="alert"
+        aria-labelledby={titleId}
+        aria-describedby={bodyId}
+        className={cx(classes.root, classes[variant], className)}
+        ref={ref}
+        {...others}
+      >
+        <div className={classes.wrapper}>
+          {icon && <div className={classes.icon}>{icon}</div>}
 
-        <div className={classes.body}>
-          {title && (
-            <div className={classes.title} data-with-close-button={withCloseButton || undefined}>
-              <span id={titleId} className={classes.label}>
-                {title}
-              </span>
+          <div className={classes.body}>
+            {title && (
+              <div
+                className={classes.title}
+                data-with-close-button={withCloseButton || undefined}
+              >
+                <span id={titleId} className={classes.label}>
+                  {title}
+                </span>
+              </div>
+            )}
+
+            <div id={bodyId} className={classes.message}>
+              {children}
             </div>
-          )}
-
-          <div id={bodyId} className={classes.message}>
-            {children}
           </div>
+
+          {withCloseButton && (
+            <CloseButton
+              className={classes.closeButton}
+              onClick={onClose}
+              variant="transparent"
+              size={16}
+              iconSize={16}
+              aria-label={closeButtonLabel}
+            />
+          )}
         </div>
+      </Box>
+    );
+  }
+);
 
-        {withCloseButton && (
-          <CloseButton
-            className={classes.closeButton}
-            onClick={onClose}
-            variant="transparent"
-            size={16}
-            iconSize={16}
-            aria-label={closeButtonLabel}
-          />
-        )}
-      </div>
-    </Box>
-  );
-});
-
-Alert.displayName = '@mantine/core/Alert';
+Alert.displayName = '@worldprint/wdesign-core/Alert';

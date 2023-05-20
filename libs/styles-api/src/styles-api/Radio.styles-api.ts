@@ -1,4 +1,7 @@
-import type { RadioGroupStylesNames, RadioStylesNames } from '@mantine/core';
+import type {
+  RadioGroupStylesNames,
+  RadioStylesNames,
+} from '@worldprint/wdesign-core';
 import { InputWrapper } from './InputWrapper.styles-api';
 
 export const RadioGroup: Record<RadioGroupStylesNames, string> = InputWrapper;

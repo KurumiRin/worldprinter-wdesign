@@ -1,4 +1,4 @@
-import { RatingStylesNames } from '@mantine/core/src/Rating';
+import { RatingStylesNames } from '@worldprint/wdesign-core/src/Rating';
 
 export const Rating: Record<RatingStylesNames, string> = {
   root: 'Root element',

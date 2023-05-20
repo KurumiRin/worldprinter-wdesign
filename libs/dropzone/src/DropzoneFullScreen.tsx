@@ -7,8 +7,8 @@ import {
   Selectors,
   getDefaultZIndex,
   PortalProps,
-} from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+} from '@worldprint/wdesign-core';
+import { useDisclosure } from '@worldprint/wdesign-hooks';
 import { DropzoneStylesNames, DropzoneProps, _Dropzone } from './Dropzone';
 import useFullScreenStyles from './DropzoneFullScreen.styles';
 
@@ -62,7 +62,11 @@ export function DropzoneFullScreen(props: DropzoneFullScreenProps) {
     withinPortal,
     portalProps,
     ...others
-  } = useComponentDefaultProps('DropzoneFullScreen', fullScreenDefaultProps, props);
+  } = useComponentDefaultProps(
+    'DropzoneFullScreen',
+    fullScreenDefaultProps,
+    props
+  );
 
   const [counter, setCounter] = React.useState(0);
   const [visible, { open, close }] = useDisclosure(false);
@@ -132,6 +136,6 @@ export function DropzoneFullScreen(props: DropzoneFullScreenProps) {
   );
 }
 
-DropzoneFullScreen.displayName = '@mantine/dropzone/DropzoneFullScreen';
+DropzoneFullScreen.displayName = '@worldprint/wdesign-dropzone/DropzoneFullScreen';
 
 export type DropzoneFullScreenType = typeof DropzoneFullScreen;

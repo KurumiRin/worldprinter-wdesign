@@ -1,4 +1,4 @@
-import { createStyles, MantineColor, MantineNumberSize } from '@mantine/styles';
+import { createStyles, MantineColor, MantineNumberSize } from '@worldprint/wdesign-styles';
 
 interface MenuItemStylesParams {
   color: MantineColor;

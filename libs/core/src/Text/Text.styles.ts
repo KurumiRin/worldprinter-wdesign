@@ -5,7 +5,7 @@ import {
   MantineColor,
   MantineGradient,
   getSize,
-} from '@mantine/styles';
+} from '@worldprint/wdesign-styles';
 
 export interface TextStylesParams {
   color: 'dimmed' | MantineColor;

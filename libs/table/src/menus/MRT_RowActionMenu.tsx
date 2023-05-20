@@ -1,5 +1,5 @@
 import React, { MouseEvent } from 'react';
-import { ActionIcon, Menu, Tooltip } from '@mantine/core';
+import { ActionIcon, Menu, Tooltip } from '@worldprint/wdesign-core';
 import type { MRT_Row, MRT_TableInstance } from '..';
 
 interface Props<TData extends Record<string, any> = {}> {

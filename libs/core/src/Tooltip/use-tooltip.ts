@@ -14,7 +14,7 @@ import {
   useDelayGroup,
   inline,
 } from '@floating-ui/react';
-import { useId, useDidUpdate } from '@mantine/hooks';
+import { useId, useDidUpdate } from '@worldprint/wdesign-hooks';
 import { useTooltipGroupContext } from './TooltipGroup/TooltipGroup.context';
 import { FloatingPosition, useFloatingAutoUpdate } from '../Floating';
 

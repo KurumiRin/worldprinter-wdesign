@@ -1,4 +1,4 @@
-import { useUncontrolled } from '@mantine/hooks';
+import { useUncontrolled } from '@worldprint/wdesign-hooks';
 import { useRef } from 'react';
 import { DatePickerType, DatePickerValue } from '../../types';
 
@@ -34,7 +34,8 @@ export function useUncontrolledDates<Type extends DatePickerType = 'default'>({
     storedType.current = type;
     if (value === undefined) {
       // Reset uncontrolled value as types aren't compatible
-      _finalValue = defaultValue !== undefined ? defaultValue : getEmptyValue(type);
+      _finalValue =
+        defaultValue !== undefined ? defaultValue : getEmptyValue(type);
       _setValue(_finalValue);
     } else if (process.env.NODE_ENV === 'development') {
       // Throw errors in dev mode in case type of value isn't correct
@@ -43,7 +44,7 @@ export function useUncontrolledDates<Type extends DatePickerType = 'default'>({
           if (value !== null && typeof value !== 'string') {
             // eslint-disable-next-line no-console
             console.error(
-              '[@mantine/dates/use-uncontrolled-dates] Value must be type of `null` or `string`'
+              '[@worldprint/wdesign-dates/use-uncontrolled-dates] Value must be type of `null` or `string`'
             );
           }
           break;
@@ -51,7 +52,7 @@ export function useUncontrolledDates<Type extends DatePickerType = 'default'>({
           if (!(value instanceof Array)) {
             // eslint-disable-next-line no-console
             console.error(
-              '[@mantine/dates/use-uncontrolled-dates] Value must be type of `string[]`'
+              '[@worldprint/wdesign-dates/use-uncontrolled-dates] Value must be type of `string[]`'
             );
           }
           break;
@@ -59,7 +60,7 @@ export function useUncontrolledDates<Type extends DatePickerType = 'default'>({
           if (!(value instanceof Array) || value.length !== 2) {
             // eslint-disable-next-line no-console
             console.error(
-              '[@mantine/dates/use-uncontrolled-dates] Value must be type of `[string, string]`'
+              '[@worldprint/wdesign-dates/use-uncontrolled-dates] Value must be type of `[string, string]`'
             );
           }
           break;

@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Alert, Box, Chip, Collapse, Flex } from '@mantine/core';
+import { Alert, Box, Chip, Collapse, Flex } from '@worldprint/wdesign-core';
 import type { MRT_TableInstance } from '..';
 
 interface Props<TData extends Record<string, any> = {}> {
@@ -41,11 +41,11 @@ export const MRT_ToolbarAlertBanner = <TData extends Record<string, any> = {}>({
       ? localization.selectedCountOfRowCountRowsSelected
           ?.replace(
             '{selectedCount}',
-            getSelectedRowModel().rows.length.toString(),
+            getSelectedRowModel().rows.length.toString()
           )
           ?.replace(
             '{rowCount}',
-            (rowCount ?? getPrePaginationRowModel().rows.length).toString(),
+            (rowCount ?? getPrePaginationRowModel().rows.length).toString()
           )
       : null;
 

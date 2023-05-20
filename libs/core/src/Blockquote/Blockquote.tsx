@@ -1,5 +1,10 @@
 import React, { forwardRef } from 'react';
-import { DefaultProps, MantineColor, Selectors, useComponentDefaultProps } from '@mantine/styles';
+import {
+  DefaultProps,
+  MantineColor,
+  Selectors,
+  useComponentDefaultProps,
+} from '@worldprint/wdesign-styles';
 import { Box } from '../Box';
 import { QuoteIcon } from './QuoteIcon';
 import useStyles, { BlockquoteStylesParams } from './Blockquote.styles';
@@ -46,7 +51,12 @@ export const Blockquote = forwardRef<HTMLQuoteElement, BlockquoteProps>(
     );
 
     return (
-      <Box component="blockquote" className={cx(classes.root, className)} ref={ref} {...others}>
+      <Box
+        component="blockquote"
+        className={cx(classes.root, className)}
+        ref={ref}
+        {...others}
+      >
         <div className={classes.inner}>
           {icon && <div className={classes.icon}>{icon}</div>}
           <div className={classes.body}>
@@ -59,4 +69,4 @@ export const Blockquote = forwardRef<HTMLQuoteElement, BlockquoteProps>(
   }
 );
 
-Blockquote.displayName = '@mantine/core/Blockquote';
+Blockquote.displayName = '@worldprint/wdesign-core/Blockquote';

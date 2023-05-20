@@ -1,5 +1,5 @@
 import React, { DragEventHandler } from 'react';
-import { ActionIcon, ActionIconProps, Tooltip } from '@mantine/core';
+import { ActionIcon, ActionIconProps, Tooltip } from '@worldprint/wdesign-core';
 import type { HTMLPropsRef, MRT_TableInstance } from '..';
 
 interface Props<TData extends Record<string, any> = {}> {

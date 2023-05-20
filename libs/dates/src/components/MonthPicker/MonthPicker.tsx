@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { useComponentDefaultProps } from '@mantine/core';
+import { useComponentDefaultProps } from '@worldprint/wdesign-core';
 import { useDatesState } from '../../hooks';
 import { DecadeLevelBaseSettings } from '../DecadeLevel';
 import { YearLevelBaseSettings } from '../YearLevel';
@@ -57,17 +57,21 @@ export const MonthPicker: MonthPickerComponent = forwardRef(
       ...others
     } = useComponentDefaultProps('MonthPicker', defaultProps, props as any);
 
-    const { onDateChange, onRootMouseLeave, onHoveredDateChange, getControlProps } =
-      useDatesState<Type>({
-        type,
-        level: 'month',
-        allowDeselect,
-        allowSingleDateInRange,
-        value,
-        defaultValue,
-        onChange,
-        onMouseLeave,
-      });
+    const {
+      onDateChange,
+      onRootMouseLeave,
+      onHoveredDateChange,
+      getControlProps,
+    } = useDatesState<Type>({
+      type,
+      level: 'month',
+      allowDeselect,
+      allowSingleDateInRange,
+      value,
+      defaultValue,
+      onChange,
+      onMouseLeave,
+    });
 
     return (
       <Calendar
@@ -91,4 +95,4 @@ export const MonthPicker: MonthPickerComponent = forwardRef(
   }
 );
 
-MonthPicker.displayName = '@mantine/dates/MonthPicker';
+MonthPicker.displayName = '@worldprint/wdesign-dates/MonthPicker';

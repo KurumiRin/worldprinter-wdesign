@@ -1,9 +1,15 @@
 import React, { forwardRef } from 'react';
-import { DefaultProps, MantineColor, useComponentDefaultProps } from '@mantine/styles';
+import {
+  DefaultProps,
+  MantineColor,
+  useComponentDefaultProps,
+} from '@worldprint/wdesign-styles';
 import { Box } from '../Box';
 import useStyles from './Mark.styles';
 
-export interface MarkProps extends DefaultProps, React.ComponentPropsWithoutRef<'mark'> {
+export interface MarkProps
+  extends DefaultProps,
+    React.ComponentPropsWithoutRef<'mark'> {
   variant?: string;
 
   /** Background color from theme.colors */
@@ -15,14 +21,21 @@ const defaultProps: Partial<MarkProps> = {
 };
 
 export const Mark = forwardRef<HTMLElement, MarkProps>((props, ref) => {
-  const { color, className, unstyled, variant, ...others } = useComponentDefaultProps(
-    'Mark',
-    defaultProps,
-    props
-  );
+  const { color, className, unstyled, variant, ...others } =
+    useComponentDefaultProps('Mark', defaultProps, props);
 
-  const { classes, cx } = useStyles({ color }, { unstyled, name: 'Mark', variant });
-  return <Box component="mark" ref={ref} className={cx(classes.root, className)} {...others} />;
+  const { classes, cx } = useStyles(
+    { color },
+    { unstyled, name: 'Mark', variant }
+  );
+  return (
+    <Box
+      component="mark"
+      ref={ref}
+      className={cx(classes.root, className)}
+      {...others}
+    />
+  );
 });
 
-Mark.displayName = '@mantine/core/Mark';
+Mark.displayName = '@worldprint/wdesign-core/Mark';

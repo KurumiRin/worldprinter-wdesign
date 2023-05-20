@@ -1,4 +1,4 @@
-import type { SegmentedControlStylesNames } from '@mantine/core';
+import type { SegmentedControlStylesNames } from '@worldprint/wdesign-core';
 
 export const SegmentedControl: Record<SegmentedControlStylesNames, string> = {
   root: 'Root element',
@@ -7,6 +7,7 @@ export const SegmentedControl: Record<SegmentedControlStylesNames, string> = {
   input: 'Radio input (visually hidden)',
   control: 'Control wrapper, contains input and label',
   controlActive: 'Active control wrapper',
-  indicator: 'Element which indicates current active item, positioned below controls',
+  indicator:
+    'Element which indicates current active item, positioned below controls',
   // disabled: 'Disabled item modifier',
 };

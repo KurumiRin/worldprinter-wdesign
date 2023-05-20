@@ -1,6 +1,6 @@
 import React, { forwardRef, useState } from 'react';
-import { useUncontrolled } from '@mantine/hooks';
-import { DefaultProps, useComponentDefaultProps } from '@mantine/styles';
+import { useUncontrolled } from '@worldprint/wdesign-hooks';
+import { DefaultProps, useComponentDefaultProps } from '@worldprint/wdesign-styles';
 import { validateJson } from './validate-json/validate-json';
 import { Textarea, TextareaProps } from '../Textarea';
 import { TextInputStylesNames } from '../TextInput';
@@ -106,4 +106,4 @@ export const JsonInput = forwardRef<HTMLTextAreaElement, JsonInputProps>((props,
   );
 });
 
-JsonInput.displayName = '@mantine/core/JsonInput';
+JsonInput.displayName = '@worldprint/wdesign-core/JsonInput';

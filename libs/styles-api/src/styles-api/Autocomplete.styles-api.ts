@@ -1,4 +1,4 @@
-import { AutocompleteStylesNames } from '@mantine/core';
+import { AutocompleteStylesNames } from '@worldprint/wdesign-core';
 import { Input } from './Input.styles-api';
 import { InputWrapper } from './InputWrapper.styles-api';
 

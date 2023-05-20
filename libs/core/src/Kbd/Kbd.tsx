@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { DefaultProps, MantineSize, useComponentDefaultProps } from '@mantine/styles';
+import { DefaultProps, MantineSize, useComponentDefaultProps } from '@worldprint/wdesign-styles';
 import { Box } from '../Box';
 import useStyles from './Kbd.styles';
 
@@ -33,4 +33,4 @@ export const Kbd = forwardRef<HTMLElement, KbdProps>((props: KbdProps, ref) => {
   );
 });
 
-Kbd.displayName = '@mantine/core/Kbd';
+Kbd.displayName = '@worldprint/wdesign-core/Kbd';

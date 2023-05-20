@@ -1,5 +1,10 @@
 import React, { forwardRef } from 'react';
-import { UnstyledButton, DefaultProps, Selectors, useComponentDefaultProps } from '@mantine/core';
+import {
+  UnstyledButton,
+  DefaultProps,
+  Selectors,
+  useComponentDefaultProps,
+} from '@worldprint/wdesign-core';
 import { useRichTextEditorContext } from '../../RichTextEditor.context';
 import useStyles from './Control.styles';
 
@@ -24,12 +29,12 @@ const defaultProps: Partial<RichTextEditorControlProps> = {
   interactive: true,
 };
 
-export const Control = forwardRef<HTMLButtonElement, RichTextEditorControlProps>((props, ref) => {
-  const { className, active, children, interactive, ...others } = useComponentDefaultProps(
-    'RichTextEditorControl',
-    defaultProps,
-    props
-  );
+export const Control = forwardRef<
+  HTMLButtonElement,
+  RichTextEditorControlProps
+>((props, ref) => {
+  const { className, active, children, interactive, ...others } =
+    useComponentDefaultProps('RichTextEditorControl', defaultProps, props);
 
   const { classNames, styles, unstyled, variant } = useRichTextEditorContext();
   const { classes, cx } = useStyles(null, {
@@ -58,4 +63,4 @@ export const Control = forwardRef<HTMLButtonElement, RichTextEditorControlProps>
   );
 });
 
-Control.displayName = '@mantine/tiptap/Control';
+Control.displayName = '@worldprint/wdesign-tiptap/Control';

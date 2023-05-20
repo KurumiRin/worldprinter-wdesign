@@ -5,7 +5,7 @@ import {
   MantineNumberSize,
   keyframes,
   rem,
-} from '@mantine/styles';
+} from '@worldprint/wdesign-styles';
 import { IndicatorPosition } from './Indicator.types';
 
 export interface IndicatorStylesParams {

@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
-import { useComponentDefaultProps } from '@mantine/styles';
-import { ForwardRefWithStaticComponents } from '@mantine/utils';
+import { useComponentDefaultProps } from '@worldprint/wdesign-styles';
+import { ForwardRefWithStaticComponents } from '@worldprint/wdesign-utils';
 import {
   HorizontalSection,
   HorizontalSectionSharedProps,
@@ -14,7 +14,10 @@ export interface AsideProps
   children: React.ReactNode;
 }
 
-type AsideComponent = ForwardRefWithStaticComponents<AsideProps, { Section: typeof Section }>;
+type AsideComponent = ForwardRefWithStaticComponents<
+  AsideProps,
+  { Section: typeof Section }
+>;
 
 const defaultProps: Partial<AsideProps> = {
   fixed: false,
@@ -26,9 +29,16 @@ const defaultProps: Partial<AsideProps> = {
 export const Aside: AsideComponent = forwardRef<HTMLElement, AsideProps>(
   (props: AsideProps, ref) => {
     const _props = useComponentDefaultProps('Aside', defaultProps, props);
-    return <HorizontalSection section="aside" __staticSelector="Aside" ref={ref} {..._props} />;
+    return (
+      <HorizontalSection
+        section="aside"
+        __staticSelector="Aside"
+        ref={ref}
+        {..._props}
+      />
+    );
   }
 ) as any;
 
 Aside.Section = Section;
-Aside.displayName = '@mantine/core/Aside';
+Aside.displayName = '@worldprint/wdesign-core/Aside';

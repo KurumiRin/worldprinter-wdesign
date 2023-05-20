@@ -5,7 +5,7 @@ import {
   MantineTheme,
   rem,
   getSize,
-} from '@mantine/styles';
+} from '@worldprint/wdesign-styles';
 
 export interface NavLinkStylesParams {
   color: MantineColor;

@@ -5,7 +5,7 @@ import {
   Selectors,
   MantineNumberSize,
   useComponentDefaultProps,
-} from '@mantine/styles';
+} from '@worldprint/wdesign-styles';
 import { Text } from '../Text';
 import { Loader } from '../Loader';
 import { CloseButton } from '../CloseButton';
@@ -54,66 +54,70 @@ const defaultProps: Partial<NotificationProps> = {
   withCloseButton: true,
 };
 
-export const Notification = forwardRef<HTMLDivElement, NotificationProps>((props, ref) => {
-  const {
-    className,
-    color,
-    radius,
-    loading,
-    withCloseButton,
-    withBorder,
-    title,
-    icon,
-    children,
-    onClose,
-    closeButtonProps,
-    classNames,
-    styles,
-    unstyled,
-    variant,
-    ...others
-  } = useComponentDefaultProps('Notification', defaultProps, props);
+export const Notification = forwardRef<HTMLDivElement, NotificationProps>(
+  (props, ref) => {
+    const {
+      className,
+      color,
+      radius,
+      loading,
+      withCloseButton,
+      withBorder,
+      title,
+      icon,
+      children,
+      onClose,
+      closeButtonProps,
+      classNames,
+      styles,
+      unstyled,
+      variant,
+      ...others
+    } = useComponentDefaultProps('Notification', defaultProps, props);
 
-  const { classes, cx } = useStyles(
-    { color, radius, withTitle: !!title },
-    { name: 'Notification', classNames, styles, unstyled, variant }
-  );
+    const { classes, cx } = useStyles(
+      { color, radius, withTitle: !!title },
+      { name: 'Notification', classNames, styles, unstyled, variant }
+    );
 
-  return (
-    <Box
-      className={cx(classes.root, className)}
-      data-with-icon={!!icon || loading || undefined}
-      data-with-border={withBorder || undefined}
-      role="alert"
-      ref={ref}
-      {...others}
-    >
-      {icon && !loading && <div className={classes.icon}>{icon}</div>}
-      {loading && <Loader size={28} color={color} className={classes.loader} />}
-
-      <div className={classes.body}>
-        {title && (
-          <Text className={classes.title} size="sm" weight={500}>
-            {title}
-          </Text>
+    return (
+      <Box
+        className={cx(classes.root, className)}
+        data-with-icon={!!icon || loading || undefined}
+        data-with-border={withBorder || undefined}
+        role="alert"
+        ref={ref}
+        {...others}
+      >
+        {icon && !loading && <div className={classes.icon}>{icon}</div>}
+        {loading && (
+          <Loader size={28} color={color} className={classes.loader} />
         )}
 
-        <Text color="dimmed" className={classes.description} size="sm">
-          {children}
-        </Text>
-      </div>
+        <div className={classes.body}>
+          {title && (
+            <Text className={classes.title} size="sm" weight={500}>
+              {title}
+            </Text>
+          )}
 
-      {withCloseButton && (
-        <CloseButton
-          iconSize={16}
-          color="gray"
-          {...closeButtonProps}
-          onClick={onClose}
-          className={classes.closeButton}
-        />
-      )}
-    </Box>
-  );
-});
+          <Text color="dimmed" className={classes.description} size="sm">
+            {children}
+          </Text>
+        </div>
 
-Notification.displayName = '@mantine/core/Notification';
+        {withCloseButton && (
+          <CloseButton
+            iconSize={16}
+            color="gray"
+            {...closeButtonProps}
+            onClick={onClose}
+            className={classes.closeButton}
+          />
+        )}
+      </Box>
+    );
+  }
+);
+
+Notification.displayName = '@worldprint/wdesign-core/Notification';

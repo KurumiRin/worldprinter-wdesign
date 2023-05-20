@@ -4,7 +4,7 @@ import {
   DefaultProps,
   Selectors,
   useComponentDefaultProps,
-} from '@mantine/styles';
+} from '@worldprint/wdesign-styles';
 import { Box } from '../Box';
 import { AppShellProvider } from './AppShell.context';
 import useStyles from './AppShell.styles';
@@ -56,52 +56,54 @@ const defaultProps: Partial<AppShellProps> = {
   padding: 'md',
 };
 
-export const AppShell = forwardRef<HTMLDivElement, AppShellProps>((props: AppShellProps, ref) => {
-  const {
-    children,
-    navbar,
-    header,
-    footer,
-    aside,
-    fixed,
-    zIndex,
-    padding,
-    navbarOffsetBreakpoint,
-    asideOffsetBreakpoint,
-    className,
-    styles,
-    classNames,
-    unstyled,
-    hidden,
-    layout,
-    variant,
-    ...others
-  } = useComponentDefaultProps('AppShell', defaultProps, props);
+export const AppShell = forwardRef<HTMLDivElement, AppShellProps>(
+  (props: AppShellProps, ref) => {
+    const {
+      children,
+      navbar,
+      header,
+      footer,
+      aside,
+      fixed,
+      zIndex,
+      padding,
+      navbarOffsetBreakpoint,
+      asideOffsetBreakpoint,
+      className,
+      styles,
+      classNames,
+      unstyled,
+      hidden,
+      layout,
+      variant,
+      ...others
+    } = useComponentDefaultProps('AppShell', defaultProps, props);
 
-  const { classes, cx } = useStyles(
-    { padding, fixed, navbarOffsetBreakpoint, asideOffsetBreakpoint },
-    { styles, classNames, unstyled, name: 'AppShell', variant }
-  );
+    const { classes, cx } = useStyles(
+      { padding, fixed, navbarOffsetBreakpoint, asideOffsetBreakpoint },
+      { styles, classNames, unstyled, name: 'AppShell', variant }
+    );
 
-  if (hidden) {
-    return <>{children}</>;
+    if (hidden) {
+      return <>{children}</>;
+    }
+
+    return (
+      <AppShellProvider value={{ fixed, zIndex, layout }}>
+        <Box className={cx(classes.root, className)} ref={ref} {...others}>
+          {header}
+
+          <div className={classes.body}>
+            {navbar}
+            <main className={classes.main}>{children}</main>
+            {aside}
+          </div>
+
+          {footer}
+        </Box>
+      </AppShellProvider>
+    );
   }
+);
 
-  return (
-    <AppShellProvider value={{ fixed, zIndex, layout }}>
-      <Box className={cx(classes.root, className)} ref={ref} {...others}>
-        {header}
-
-        <div className={classes.body}>
-          {navbar}
-          <main className={classes.main}>{children}</main>
-          {aside}
-        </div>
-
-        {footer}
-      </Box>
-    </AppShellProvider>
-  );
-});
-
-AppShell.displayName = '@mantine/core/AppShell';
+AppShell.displayName = '@worldprint/wdesign-core/AppShell';

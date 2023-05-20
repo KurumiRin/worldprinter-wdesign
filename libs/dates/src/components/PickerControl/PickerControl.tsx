@@ -6,7 +6,7 @@ import {
   Selectors,
   useComponentDefaultProps,
   MantineSize,
-} from '@mantine/core';
+} from '@worldprint/wdesign-core';
 import useStyles from './PickerControl.styles';
 
 export type PickerControlStylesNames = Selectors<typeof useStyles>;
@@ -43,50 +43,52 @@ const defaultProps: Partial<PickerControlProps> = {
   size: 'sm',
 };
 
-export const PickerControl = forwardRef<HTMLButtonElement, PickerControlProps>((props, ref) => {
-  const {
-    className,
-    children,
-    disabled,
-    selected,
-    classNames,
-    styles,
-    unstyled,
-    firstInRange,
-    lastInRange,
-    inRange,
-    __staticSelector,
-    size,
-    variant,
-    ...others
-  } = useComponentDefaultProps('PickerControl', defaultProps, props);
+export const PickerControl = forwardRef<HTMLButtonElement, PickerControlProps>(
+  (props, ref) => {
+    const {
+      className,
+      children,
+      disabled,
+      selected,
+      classNames,
+      styles,
+      unstyled,
+      firstInRange,
+      lastInRange,
+      inRange,
+      __staticSelector,
+      size,
+      variant,
+      ...others
+    } = useComponentDefaultProps('PickerControl', defaultProps, props);
 
-  const { classes, cx } = useStyles(null, {
-    name: ['PickerControl', __staticSelector],
-    classNames,
-    styles,
-    unstyled,
-    variant,
-    size,
-  });
+    const { classes, cx } = useStyles(null, {
+      name: ['PickerControl', __staticSelector],
+      classNames,
+      styles,
+      unstyled,
+      variant,
+      size,
+    });
 
-  return (
-    <UnstyledButton
-      className={cx(classes.pickerControl, className)}
-      ref={ref}
-      unstyled={unstyled}
-      data-picker-control
-      data-selected={(selected && !disabled) || undefined}
-      data-disabled={disabled || undefined}
-      data-in-range={(inRange && !disabled && !selected) || undefined}
-      data-first-in-range={(firstInRange && !disabled) || undefined}
-      data-last-in-range={(lastInRange && !disabled) || undefined}
-      disabled={disabled}
-      {...others}
-    >
-      {children}
-    </UnstyledButton>
-  );
-});
+    return (
+      <UnstyledButton
+        className={cx(classes.pickerControl, className)}
+        ref={ref}
+        unstyled={unstyled}
+        data-picker-control
+        data-selected={(selected && !disabled) || undefined}
+        data-disabled={disabled || undefined}
+        data-in-range={(inRange && !disabled && !selected) || undefined}
+        data-first-in-range={(firstInRange && !disabled) || undefined}
+        data-last-in-range={(lastInRange && !disabled) || undefined}
+        disabled={disabled}
+        {...others}
+      >
+        {children}
+      </UnstyledButton>
+    );
+  }
+);
 
-PickerControl.displayName = '@mantine/dates/PickerControl';
+PickerControl.displayName = '@worldprint/wdesign-dates/PickerControl';

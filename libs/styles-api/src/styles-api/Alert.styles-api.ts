@@ -1,4 +1,4 @@
-import type { AlertStylesNames } from '@mantine/core';
+import type { AlertStylesNames } from '@worldprint/wdesign-core';
 
 export const Alert: Record<AlertStylesNames, string> = {
   root: 'Root element',

@@ -1,4 +1,4 @@
-import { InputStylesNames } from '@mantine/core';
+import { InputStylesNames } from '@worldprint/wdesign-core';
 
 export const Input: Record<InputStylesNames, string> = {
   wrapper: 'Root Input element',

@@ -7,7 +7,7 @@ import {
   MantineNumberSize,
   useComponentDefaultProps,
   getSize,
-} from '@mantine/styles';
+} from '@worldprint/wdesign-styles';
 import { Text } from '../../Text';
 import { Loader } from '../../Loader';
 import { CheckboxIcon } from '../../Checkbox';
@@ -96,7 +96,10 @@ const defaultProps: Partial<StepProps> = {
   __staticSelector: 'Step',
 };
 
-const getStepFragment = (Fragment: StepFragmentComponent | React.ReactNode, step: number) => {
+const getStepFragment = (
+  Fragment: StepFragmentComponent | React.ReactNode,
+  step: number
+) => {
   if (typeof Fragment === 'function') {
     return <Fragment step={step} />;
   }
@@ -104,101 +107,127 @@ const getStepFragment = (Fragment: StepFragmentComponent | React.ReactNode, step
   return Fragment;
 };
 
-export const Step = forwardRef<HTMLButtonElement, StepProps>((props: StepProps, ref) => {
-  const {
-    className,
-    step,
-    state,
-    color,
-    icon,
-    completedIcon,
-    progressIcon,
-    label,
-    description,
-    withIcon,
-    iconSize,
-    size,
-    radius,
-    loading,
-    allowStepClick,
-    allowStepSelect,
-    iconPosition,
-    __staticSelector,
-    classNames,
-    styles,
-    unstyled,
-    orientation,
-    variant,
-    ...others
-  } = useComponentDefaultProps('StepperStep', defaultProps, props);
+export const Step = forwardRef<HTMLButtonElement, StepProps>(
+  (props: StepProps, ref) => {
+    const {
+      className,
+      step,
+      state,
+      color,
+      icon,
+      completedIcon,
+      progressIcon,
+      label,
+      description,
+      withIcon,
+      iconSize,
+      size,
+      radius,
+      loading,
+      allowStepClick,
+      allowStepSelect,
+      iconPosition,
+      __staticSelector,
+      classNames,
+      styles,
+      unstyled,
+      orientation,
+      variant,
+      ...others
+    } = useComponentDefaultProps('StepperStep', defaultProps, props);
 
-  const { classes, cx } = useStyles(
-    { color, iconSize, radius, allowStepClick, iconPosition, orientation },
-    { name: __staticSelector, classNames, styles, unstyled, variant, size }
-  );
+    const { classes, cx } = useStyles(
+      { color, iconSize, radius, allowStepClick, iconPosition, orientation },
+      { name: __staticSelector, classNames, styles, unstyled, variant, size }
+    );
 
-  const _iconSize = getSize({ size, sizes: defaultIconSizes });
-  const _icon = state === 'stepCompleted' ? null : state === 'stepProgress' ? progressIcon : icon;
-  const dataAttributes = {
-    'data-progress': state === 'stepProgress' || undefined,
-    'data-completed': state === 'stepCompleted' || undefined,
-  };
+    const _iconSize = getSize({ size, sizes: defaultIconSizes });
+    const _icon =
+      state === 'stepCompleted'
+        ? null
+        : state === 'stepProgress'
+        ? progressIcon
+        : icon;
+    const dataAttributes = {
+      'data-progress': state === 'stepProgress' || undefined,
+      'data-completed': state === 'stepCompleted' || undefined,
+    };
 
-  return (
-    <UnstyledButton
-      className={cx(classes.step, className)}
-      tabIndex={allowStepClick ? 0 : -1}
-      ref={ref}
-      {...dataAttributes}
-      {...others}
-    >
-      {withIcon && (
-        <div className={classes.stepWrapper}>
-          <div className={classes.stepIcon} {...dataAttributes}>
-            <Transition mounted={state === 'stepCompleted'} transition="pop" duration={200}>
-              {(transitionStyles) => (
-                <div className={classes.stepCompletedIcon} style={transitionStyles}>
-                  {loading ? (
-                    <Loader color="#fff" size={_iconSize} className={classes.stepLoader} />
-                  ) : (
-                    getStepFragment(completedIcon, step) || (
-                      <CheckboxIcon indeterminate={false} width={_iconSize} height={_iconSize} />
-                    )
-                  )}
-                </div>
-              )}
-            </Transition>
+    return (
+      <UnstyledButton
+        className={cx(classes.step, className)}
+        tabIndex={allowStepClick ? 0 : -1}
+        ref={ref}
+        {...dataAttributes}
+        {...others}
+      >
+        {withIcon && (
+          <div className={classes.stepWrapper}>
+            <div className={classes.stepIcon} {...dataAttributes}>
+              <Transition
+                mounted={state === 'stepCompleted'}
+                transition="pop"
+                duration={200}
+              >
+                {(transitionStyles) => (
+                  <div
+                    className={classes.stepCompletedIcon}
+                    style={transitionStyles}
+                  >
+                    {loading ? (
+                      <Loader
+                        color="#fff"
+                        size={_iconSize}
+                        className={classes.stepLoader}
+                      />
+                    ) : (
+                      getStepFragment(completedIcon, step) || (
+                        <CheckboxIcon
+                          indeterminate={false}
+                          width={_iconSize}
+                          height={_iconSize}
+                        />
+                      )
+                    )}
+                  </div>
+                )}
+              </Transition>
 
-            {state !== 'stepCompleted' ? (
-              loading ? (
-                <Loader size={_iconSize} color={color} />
-              ) : (
-                getStepFragment(_icon || icon, step)
-              )
-            ) : null}
+              {state !== 'stepCompleted' ? (
+                loading ? (
+                  <Loader size={_iconSize} color={color} />
+                ) : (
+                  getStepFragment(_icon || icon, step)
+                )
+              ) : null}
+            </div>
+            {orientation === 'vertical' && (
+              <div
+                className={cx(classes.verticalSeparator, {
+                  [classes.verticalSeparatorActive]: state === 'stepCompleted',
+                })}
+              />
+            )}
           </div>
-          {orientation === 'vertical' && (
-            <div
-              className={cx(classes.verticalSeparator, {
-                [classes.verticalSeparatorActive]: state === 'stepCompleted',
-              })}
-            />
-          )}
-        </div>
-      )}
+        )}
 
-      {(label || description) && (
-        <div className={classes.stepBody}>
-          {label && <Text className={classes.stepLabel}>{getStepFragment(label, step)}</Text>}
-          {description && (
-            <Text className={classes.stepDescription} color="dimmed">
-              {getStepFragment(description, step)}
-            </Text>
-          )}
-        </div>
-      )}
-    </UnstyledButton>
-  );
-});
+        {(label || description) && (
+          <div className={classes.stepBody}>
+            {label && (
+              <Text className={classes.stepLabel}>
+                {getStepFragment(label, step)}
+              </Text>
+            )}
+            {description && (
+              <Text className={classes.stepDescription} color="dimmed">
+                {getStepFragment(description, step)}
+              </Text>
+            )}
+          </div>
+        )}
+      </UnstyledButton>
+    );
+  }
+);
 
-Step.displayName = '@mantine/core/Step';
+Step.displayName = '@worldprint/wdesign-core/Step';

@@ -1,4 +1,4 @@
-import { CheckboxStylesNames } from '@mantine/core';
+import { CheckboxStylesNames } from '@worldprint/wdesign-core';
 
 export const Checkbox: Record<CheckboxStylesNames, string> = {
   root: 'Root button element',

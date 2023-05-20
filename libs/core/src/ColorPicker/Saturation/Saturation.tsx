@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useMove, clampUseMovePosition, UseMovePosition } from '@mantine/hooks';
-import { DefaultProps, MantineSize, Selectors } from '@mantine/styles';
+import { useMove, clampUseMovePosition, UseMovePosition } from '@worldprint/wdesign-hooks';
+import { DefaultProps, MantineSize, Selectors } from '@worldprint/wdesign-styles';
 import { HsvaColor } from '../types';
 import { Thumb, ThumbStylesNames } from '../Thumb/Thumb';
 import useStyles from './Saturation.styles';
 import { convertHsvaTo } from '../converters';
 
 export type SaturationStylesNames =
-  | Exclude<Selectors<typeof useStyles>, 'saturationOverlay' | 'saturationThumb'>
+  | Exclude<
+      Selectors<typeof useStyles>,
+      'saturationOverlay' | 'saturationThumb'
+    >
   | ThumbStylesNames;
 
 interface SaturationProps extends DefaultProps<SaturationStylesNames> {
@@ -45,7 +48,10 @@ export function Saturation({
     size,
   });
 
-  const [position, setPosition] = useState({ x: value.s / 100, y: 1 - value.v / 100 });
+  const [position, setPosition] = useState({
+    x: value.s / 100,
+    y: 1 - value.v / 100,
+  });
   const positionRef = useRef(position);
 
   const { ref } = useMove(
@@ -65,11 +71,20 @@ export function Saturation({
     setPosition({ x: value.s / 100, y: 1 - value.v / 100 });
   }, [value.s, value.v]);
 
-  const handleArrow = (event: React.KeyboardEvent<HTMLDivElement>, pos: UseMovePosition) => {
+  const handleArrow = (
+    event: React.KeyboardEvent<HTMLDivElement>,
+    pos: UseMovePosition
+  ) => {
     event.preventDefault();
     const _position = clampUseMovePosition(pos);
-    onChange({ s: Math.round(_position.x * 100), v: Math.round((1 - _position.y) * 100) });
-    onChangeEnd({ s: Math.round(_position.x * 100), v: Math.round((1 - _position.y) * 100) });
+    onChange({
+      s: Math.round(_position.x * 100),
+      v: Math.round((1 - _position.y) * 100),
+    });
+    onChangeEnd({
+      s: Math.round(_position.x * 100),
+      v: Math.round((1 - _position.y) * 100),
+    });
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -135,4 +150,4 @@ export function Saturation({
   );
 }
 
-Saturation.displayName = '@mantine/core/Saturation';
+Saturation.displayName = '@worldprint/wdesign-core/Saturation';

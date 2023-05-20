@@ -1,4 +1,4 @@
-import { createStyles, getSize, rem } from '@mantine/styles';
+import { createStyles, getSize, rem } from '@worldprint/wdesign-styles';
 
 const sizes = {
   xs: rem(28),

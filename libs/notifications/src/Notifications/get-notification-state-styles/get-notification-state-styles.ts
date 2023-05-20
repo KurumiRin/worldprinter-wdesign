@@ -1,5 +1,5 @@
 import { TransitionStatus } from 'react-transition-group';
-import { CSSObject } from '@mantine/core';
+import { CSSObject } from '@worldprint/wdesign-core';
 import { NotificationsPositioning } from '../../types';
 
 interface NotificationStateStylesProps {
@@ -37,7 +37,8 @@ export default function getNotificationStateStyles({
     maxHeight,
     transform: transforms[property],
     transitionDuration: `${transitionDuration}ms, ${transitionDuration}ms, ${transitionDuration}ms`,
-    transitionTimingFunction: 'cubic-bezier(.51,.3,0,1.21), cubic-bezier(.51,.3,0,1.21), linear',
+    transitionTimingFunction:
+      'cubic-bezier(.51,.3,0,1.21), cubic-bezier(.51,.3,0,1.21), linear',
     transitionProperty: 'opacity, transform, max-height',
   };
 

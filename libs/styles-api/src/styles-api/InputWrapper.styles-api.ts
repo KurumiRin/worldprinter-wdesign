@@ -1,4 +1,4 @@
-import type { InputWrapperStylesNames } from '@mantine/core';
+import type { InputWrapperStylesNames } from '@worldprint/wdesign-core';
 
 export const InputWrapper: Record<InputWrapperStylesNames, string> = {
   root: 'Root element',

@@ -1,6 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ActionIcon, Collapse, Menu, TextInput, Tooltip } from '@mantine/core';
-import { useDebouncedValue } from '@mantine/hooks';
+import {
+  ActionIcon,
+  Collapse,
+  Menu,
+  TextInput,
+  Tooltip,
+} from '@worldprint/wdesign-core';
+import { useDebouncedValue } from '@worldprint/wdesign-hooks';
 import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
 import type { MRT_TableInstance } from '..';
 
@@ -9,7 +15,7 @@ interface Props<TData extends Record<string, any> = {}> {
 }
 
 export const MRT_GlobalFilterTextInput = <
-  TData extends Record<string, any> = {},
+  TData extends Record<string, any> = {}
 >({
   table,
 }: Props<TData>) => {
@@ -37,7 +43,7 @@ export const MRT_GlobalFilterTextInput = <
 
   const [debouncedSearchValue] = useDebouncedValue(
     searchValue,
-    manualFiltering ? 500 : 250,
+    manualFiltering ? 500 : 250
   );
 
   useEffect(() => {

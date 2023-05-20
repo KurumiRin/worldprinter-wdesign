@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
-import { DefaultProps, useComponentDefaultProps } from '@mantine/styles';
-import { createPolymorphicComponent } from '@mantine/utils';
+import { DefaultProps, useComponentDefaultProps } from '@worldprint/wdesign-styles';
+import { createPolymorphicComponent } from '@worldprint/wdesign-utils';
 import { Box } from '../Box';
 import useStyles from './UnstyledButton.styles';
 
@@ -21,7 +21,11 @@ export const _UnstyledButton = forwardRef<
     ...others
   } = useComponentDefaultProps('UnstyledButton', {}, props);
 
-  const { classes, cx } = useStyles(null, { name: 'UnstyledButton', unstyled, variant });
+  const { classes, cx } = useStyles(null, {
+    name: 'UnstyledButton',
+    unstyled,
+    variant,
+  });
 
   return (
     <Box
@@ -34,8 +38,9 @@ export const _UnstyledButton = forwardRef<
   );
 });
 
-_UnstyledButton.displayName = '@mantine/core/UnstyledButton';
+_UnstyledButton.displayName = '@worldprint/wdesign-core/UnstyledButton';
 
-export const UnstyledButton = createPolymorphicComponent<'button', UnstyledButtonProps>(
-  _UnstyledButton
-);
+export const UnstyledButton = createPolymorphicComponent<
+  'button',
+  UnstyledButtonProps
+>(_UnstyledButton);

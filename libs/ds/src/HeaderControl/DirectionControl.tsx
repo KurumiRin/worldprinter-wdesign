@@ -1,6 +1,9 @@
 import React from 'react';
-import { rem } from '@mantine/core';
-import { IconTextDirectionLtr, IconTextDirectionRtl } from '@tabler/icons-react';
+import { rem } from '@worldprint/wdesign-core';
+import {
+  IconTextDirectionLtr,
+  IconTextDirectionRtl,
+} from '@tabler/icons-react';
 import { HeaderControl } from './HeaderControl';
 
 interface DirectionControlProps {
@@ -8,7 +11,10 @@ interface DirectionControlProps {
   toggleDirection(): void;
 }
 
-export function DirectionControl({ direction, toggleDirection }: DirectionControlProps) {
+export function DirectionControl({
+  direction,
+  toggleDirection,
+}: DirectionControlProps) {
   return (
     <HeaderControl
       onClick={() => toggleDirection()}

@@ -1,7 +1,15 @@
 import React, { forwardRef } from 'react';
-import { useUncontrolled } from '@mantine/hooks';
-import { DefaultProps, MantineSize, useComponentDefaultProps } from '@mantine/styles';
-import { Input, InputWrapperBaseProps, InputWrapperStylesNames } from '../../Input';
+import { useUncontrolled } from '@worldprint/wdesign-hooks';
+import {
+  DefaultProps,
+  MantineSize,
+  useComponentDefaultProps,
+} from '@worldprint/wdesign-styles';
+import {
+  Input,
+  InputWrapperBaseProps,
+  InputWrapperStylesNames,
+} from '../../Input';
 import { SwitchGroupProvider } from '../SwitchGroup.context';
 
 export type SwitchGroupStylesNames = InputWrapperStylesNames;
@@ -35,8 +43,15 @@ const defaultProps: Partial<SwitchGroupProps> = {
 
 export const SwitchGroup = forwardRef<HTMLDivElement, SwitchGroupProps>(
   (props: SwitchGroupProps, ref) => {
-    const { children, value, defaultValue, onChange, size, wrapperProps, ...others } =
-      useComponentDefaultProps('SwitchGroup', defaultProps, props);
+    const {
+      children,
+      value,
+      defaultValue,
+      onChange,
+      size,
+      wrapperProps,
+      ...others
+    } = useComponentDefaultProps('SwitchGroup', defaultProps, props);
 
     const [_value, setValue] = useUncontrolled({
       value,
@@ -55,7 +70,9 @@ export const SwitchGroup = forwardRef<HTMLDivElement, SwitchGroupProps>(
     };
 
     return (
-      <SwitchGroupProvider value={{ value: _value, onChange: handleChange, size }}>
+      <SwitchGroupProvider
+        value={{ value: _value, onChange: handleChange, size }}
+      >
         <Input.Wrapper
           labelElement="div"
           size={size}
@@ -71,4 +88,4 @@ export const SwitchGroup = forwardRef<HTMLDivElement, SwitchGroupProps>(
   }
 );
 
-SwitchGroup.displayName = '@mantine/core/SwitchGroup';
+SwitchGroup.displayName = '@worldprint/wdesign-core/SwitchGroup';

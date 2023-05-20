@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { useReducedMotion, useDidUpdate } from '@mantine/hooks';
-import { useMantineTheme } from '@mantine/styles';
+import { useReducedMotion, useDidUpdate } from '@worldprint/wdesign-hooks';
+import { useMantineTheme } from '@worldprint/wdesign-styles';
 
 export type TransitionStatus =
   | 'entered'

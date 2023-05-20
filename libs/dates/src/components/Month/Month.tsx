@@ -1,7 +1,13 @@
 /* eslint-disable react/no-unused-prop-types */
 import dayjs from 'dayjs';
 import React, { forwardRef } from 'react';
-import { DefaultProps, Selectors, Box, useComponentDefaultProps, MantineSize } from '@mantine/core';
+import {
+  DefaultProps,
+  Selectors,
+  Box,
+  useComponentDefaultProps,
+  MantineSize,
+} from '@worldprint/wdesign-core';
 import { useDatesContext } from '../DatesProvider';
 import { WeekdaysRow, WeekdaysRowStylesNames } from '../WeekdaysRow';
 import { Day, DayStylesNames, DayProps } from '../Day';
@@ -29,7 +35,10 @@ export interface MonthSettings {
   __onDayClick?(event: React.MouseEvent<HTMLButtonElement>, date: Date): void;
 
   /** Called when mouse enters day */
-  __onDayMouseEnter?(event: React.MouseEvent<HTMLButtonElement>, date: Date): void;
+  __onDayMouseEnter?(
+    event: React.MouseEvent<HTMLButtonElement>,
+    date: Date
+  ): void;
 
   /** Called when any keydown event is registered on day, used for arrows navigation */
   __onDayKeyDown?(
@@ -38,7 +47,11 @@ export interface MonthSettings {
   ): void;
 
   /** Assigns ref of every day based on its position in the table, used for arrows navigation */
-  __getDayRef?(rowIndex: number, cellIndex: number, node: HTMLButtonElement): void;
+  __getDayRef?(
+    rowIndex: number,
+    cellIndex: number,
+    node: HTMLButtonElement
+  ): void;
 
   /** dayjs locale, defaults to value defined in DatesProvider */
   locale?: string;
@@ -189,7 +202,9 @@ export const Month = forwardRef<HTMLTableElement, MonthProps>((props, ref) => {
             data-mantine-stop-propagation={__stopPropagation || undefined}
             renderDay={renderDay}
             date={date}
-            weekend={ctx.getWeekendDays(weekendDays).includes(date.getDay() as DayOfWeek)}
+            weekend={ctx
+              .getWeekendDays(weekendDays)
+              .includes(date.getDay() as DayOfWeek)}
             outside={outside}
             hidden={hideOutsideDates ? outside : false}
             aria-label={ariaLabel}
@@ -231,7 +246,12 @@ export const Month = forwardRef<HTMLTableElement, MonthProps>((props, ref) => {
   });
 
   return (
-    <Box component="table" className={cx(classes.month, className)} ref={ref} {...others}>
+    <Box
+      component="table"
+      className={cx(classes.month, className)}
+      ref={ref}
+      {...others}
+    >
       {!hideWeekdays && (
         <thead className={classes.monthThead}>
           <WeekdaysRow
@@ -247,4 +267,4 @@ export const Month = forwardRef<HTMLTableElement, MonthProps>((props, ref) => {
   );
 });
 
-Month.displayName = '@mantine/dates/Month';
+Month.displayName = '@worldprint/wdesign-dates/Month';

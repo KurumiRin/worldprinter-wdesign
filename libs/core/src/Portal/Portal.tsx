@@ -1,8 +1,8 @@
 /* eslint-disable react/no-unused-prop-types */
 import React, { ReactPortal, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { useIsomorphicEffect } from '@mantine/hooks';
-import { useMantineTheme, useComponentDefaultProps } from '@mantine/styles';
+import { useIsomorphicEffect } from '@worldprint/wdesign-hooks';
+import { useMantineTheme, useComponentDefaultProps } from '@worldprint/wdesign-styles';
 
 export interface PortalProps extends React.ComponentPropsWithoutRef<'div'> {
   /** Portal children, for example, modal or popover */
@@ -19,11 +19,8 @@ export interface PortalProps extends React.ComponentPropsWithoutRef<'div'> {
 }
 
 export function Portal(props: PortalProps): ReactPortal {
-  const { children, target, className, innerRef, ...others } = useComponentDefaultProps(
-    'Portal',
-    {},
-    props
-  );
+  const { children, target, className, innerRef, ...others } =
+    useComponentDefaultProps('Portal', {}, props);
 
   const theme = useMantineTheme();
   const [mounted, setMounted] = useState(false);
@@ -58,4 +55,4 @@ export function Portal(props: PortalProps): ReactPortal {
   );
 }
 
-Portal.displayName = '@mantine/core/Portal';
+Portal.displayName = '@worldprint/wdesign-core/Portal';

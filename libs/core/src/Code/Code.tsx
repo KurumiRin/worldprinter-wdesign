@@ -1,5 +1,9 @@
 import React, { forwardRef } from 'react';
-import { DefaultProps, MantineColor, useComponentDefaultProps } from '@mantine/styles';
+import {
+  DefaultProps,
+  MantineColor,
+  useComponentDefaultProps,
+} from '@worldprint/wdesign-styles';
 import { Box } from '../Box';
 import useStyles, { CodeStylesParams } from './Code.styles';
 
@@ -20,31 +24,42 @@ export interface CodeProps
 
 const defaultProps: Partial<CodeProps> = {};
 
-export const Code = forwardRef<HTMLElement, CodeProps>((props: CodeProps, ref) => {
-  const { className, children, block, color, unstyled, variant, ...others } =
-    useComponentDefaultProps('Code', defaultProps, props);
+export const Code = forwardRef<HTMLElement, CodeProps>(
+  (props: CodeProps, ref) => {
+    const { className, children, block, color, unstyled, variant, ...others } =
+      useComponentDefaultProps('Code', defaultProps, props);
 
-  const { classes, cx } = useStyles({ color }, { name: 'Code', unstyled, variant });
+    const { classes, cx } = useStyles(
+      { color },
+      { name: 'Code', unstyled, variant }
+    );
 
-  if (block) {
+    if (block) {
+      return (
+        <Box
+          component="pre"
+          dir="ltr"
+          className={cx(classes.root, classes.block, className)}
+          ref={ref as any}
+          {...others}
+        >
+          {children}
+        </Box>
+      );
+    }
+
     return (
       <Box
-        component="pre"
+        component="code"
+        className={cx(classes.root, className)}
+        ref={ref}
         dir="ltr"
-        className={cx(classes.root, classes.block, className)}
-        ref={ref as any}
         {...others}
       >
         {children}
       </Box>
     );
   }
+);
 
-  return (
-    <Box component="code" className={cx(classes.root, className)} ref={ref} dir="ltr" {...others}>
-      {children}
-    </Box>
-  );
-});
-
-Code.displayName = '@mantine/core/Code';
+Code.displayName = '@worldprint/wdesign-core/Code';

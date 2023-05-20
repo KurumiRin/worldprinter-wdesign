@@ -5,8 +5,8 @@ import {
   Selectors,
   useComponentDefaultProps,
   rem,
-} from '@mantine/styles';
-import { useDidUpdate } from '@mantine/hooks';
+} from '@worldprint/wdesign-styles';
+import { useDidUpdate } from '@worldprint/wdesign-hooks';
 import { Text } from '../Text';
 import { Box } from '../Box';
 import { ImageIcon } from './ImageIcon';
@@ -60,81 +60,94 @@ const defaultProps: Partial<ImageProps> = {
   radius: 0,
 };
 
-export const Image = forwardRef<HTMLDivElement, ImageProps>((props: ImageProps, ref) => {
-  const {
-    className,
-    alt,
-    src,
-    fit,
-    width,
-    height,
-    radius,
-    imageProps,
-    withPlaceholder,
-    placeholder,
-    imageRef,
-    classNames,
-    styles,
-    caption,
-    unstyled,
-    style,
-    variant,
-    ...others
-  } = useComponentDefaultProps('Image', defaultProps, props);
+export const Image = forwardRef<HTMLDivElement, ImageProps>(
+  (props: ImageProps, ref) => {
+    const {
+      className,
+      alt,
+      src,
+      fit,
+      width,
+      height,
+      radius,
+      imageProps,
+      withPlaceholder,
+      placeholder,
+      imageRef,
+      classNames,
+      styles,
+      caption,
+      unstyled,
+      style,
+      variant,
+      ...others
+    } = useComponentDefaultProps('Image', defaultProps, props);
 
-  const { classes, cx } = useStyles(
-    { radius },
-    { classNames, styles, unstyled, name: 'Image', variant }
-  );
+    const { classes, cx } = useStyles(
+      { radius },
+      { classNames, styles, unstyled, name: 'Image', variant }
+    );
 
-  const [error, setError] = useState(!src);
-  const isPlaceholder = withPlaceholder && error;
+    const [error, setError] = useState(!src);
+    const isPlaceholder = withPlaceholder && error;
 
-  useDidUpdate(() => {
-    setError(!src);
-  }, [src]);
+    useDidUpdate(() => {
+      setError(!src);
+    }, [src]);
 
-  return (
-    <Box
-      className={cx(classes.root, className)}
-      style={{ width: rem(width), ...style }}
-      ref={ref}
-      {...others}
-    >
-      <figure className={classes.figure}>
-        <div className={classes.imageWrapper}>
-          <img
-            src={src}
-            alt={alt}
-            ref={imageRef}
-            {...imageProps}
-            className={cx(classes.image, imageProps?.className)}
-            onError={(event) => {
-              setError(true);
-              typeof imageProps?.onError === 'function' && imageProps.onError(event);
-            }}
-            style={{ objectFit: fit, width: rem(width), height: rem(height), ...imageProps?.style }}
-          />
+    return (
+      <Box
+        className={cx(classes.root, className)}
+        style={{ width: rem(width), ...style }}
+        ref={ref}
+        {...others}
+      >
+        <figure className={classes.figure}>
+          <div className={classes.imageWrapper}>
+            <img
+              src={src}
+              alt={alt}
+              ref={imageRef}
+              {...imageProps}
+              className={cx(classes.image, imageProps?.className)}
+              onError={(event) => {
+                setError(true);
+                typeof imageProps?.onError === 'function' &&
+                  imageProps.onError(event);
+              }}
+              style={{
+                objectFit: fit,
+                width: rem(width),
+                height: rem(height),
+                ...imageProps?.style,
+              }}
+            />
 
-          {isPlaceholder && (
-            <div className={classes.placeholder} title={alt}>
-              {placeholder || (
-                <div>
-                  <ImageIcon width={rem(40)} height={rem(40)} />
-                </div>
-              )}
-            </div>
+            {isPlaceholder && (
+              <div className={classes.placeholder} title={alt}>
+                {placeholder || (
+                  <div>
+                    <ImageIcon width={rem(40)} height={rem(40)} />
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {!!caption && (
+            <Text
+              component="figcaption"
+              size="sm"
+              align="center"
+              className={classes.caption}
+            >
+              {caption}
+            </Text>
           )}
-        </div>
+        </figure>
+      </Box>
+    );
+  }
+);
 
-        {!!caption && (
-          <Text component="figcaption" size="sm" align="center" className={classes.caption}>
-            {caption}
-          </Text>
-        )}
-      </figure>
-    </Box>
-  );
-});
-
-Image.displayName = '@mantine/core/Image';
+Image.displayName = '@worldprint/wdesign-core/Image';

@@ -1,4 +1,4 @@
-import type { TabsStylesNames } from '@mantine/core';
+import type { TabsStylesNames } from '@worldprint/wdesign-core';
 
 export const Tabs: Record<TabsStylesNames, string> = {
   root: 'Root element',

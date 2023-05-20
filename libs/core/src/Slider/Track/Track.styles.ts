@@ -1,4 +1,4 @@
-import { createStyles, MantineNumberSize, MantineColor, getSize, rem } from '@mantine/styles';
+import { createStyles, MantineNumberSize, MantineColor, getSize, rem } from '@worldprint/wdesign-styles';
 import { sizes } from '../SliderRoot/SliderRoot.styles';
 
 interface TrackStyles {

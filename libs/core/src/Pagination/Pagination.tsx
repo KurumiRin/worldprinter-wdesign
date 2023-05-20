@@ -1,7 +1,14 @@
 import React from 'react';
-import { getSize, useComponentDefaultProps, useMantineTheme } from '@mantine/styles';
+import {
+  getSize,
+  useComponentDefaultProps,
+  useMantineTheme,
+} from '@worldprint/wdesign-styles';
 import { Group, GroupProps } from '../Group';
-import { PaginationRoot, PaginationRootSettings } from './PaginationRoot/PaginationRoot';
+import {
+  PaginationRoot,
+  PaginationRootSettings,
+} from './PaginationRoot/PaginationRoot';
 import { PaginationItems } from './PaginationItems/PaginationItems';
 import { PaginationControl } from './PaginationControl/PaginationControl';
 import { PaginationDots } from './PaginationDots/PaginationDots';
@@ -23,7 +30,9 @@ export interface PaginationProps
   withControls?: boolean;
 
   /** Adds props to next/previous/first/last controls */
-  getControlProps?(control: 'first' | 'previous' | 'last' | 'next'): Record<string, any>;
+  getControlProps?(
+    control: 'first' | 'previous' | 'last' | 'next'
+  ): Record<string, any>;
 
   /** Next control icon component */
   nextIcon?: PaginationIcon;
@@ -108,22 +117,33 @@ export function Pagination(props: PaginationProps) {
       getItemProps={getItemProps}
     >
       <Group
-        spacing={spacing ?? `calc(${getSize({ size, sizes: theme.spacing })} / 2)`}
+        spacing={
+          spacing ?? `calc(${getSize({ size, sizes: theme.spacing })} / 2)`
+        }
         {...others}
       >
-        {withEdges && <PaginationFirst icon={firstIcon} {...getControlProps?.('first')} />}
+        {withEdges && (
+          <PaginationFirst icon={firstIcon} {...getControlProps?.('first')} />
+        )}
         {withControls && (
-          <PaginationPrevious icon={previousIcon} {...getControlProps?.('previous')} />
+          <PaginationPrevious
+            icon={previousIcon}
+            {...getControlProps?.('previous')}
+          />
         )}
         <PaginationItems dotsIcon={dotsIcon} />
-        {withControls && <PaginationNext icon={nextIcon} {...getControlProps?.('next')} />}
-        {withEdges && <PaginationLast icon={lastIcon} {...getControlProps?.('last')} />}
+        {withControls && (
+          <PaginationNext icon={nextIcon} {...getControlProps?.('next')} />
+        )}
+        {withEdges && (
+          <PaginationLast icon={lastIcon} {...getControlProps?.('last')} />
+        )}
       </Group>
     </PaginationRoot>
   );
 }
 
-Pagination.displayName = '@mantine/core/Pagination';
+Pagination.displayName = '@worldprint/wdesign-core/Pagination';
 Pagination.Root = PaginationRoot;
 Pagination.Items = PaginationItems;
 Pagination.Control = PaginationControl;

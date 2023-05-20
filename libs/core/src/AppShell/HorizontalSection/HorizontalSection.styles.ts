@@ -5,7 +5,7 @@ import {
   rem,
   getBreakpointValue,
   em,
-} from '@mantine/styles';
+} from '@worldprint/wdesign-styles';
 import { getSortedBreakpoints } from './get-sorted-breakpoints/get-sorted-breakpoints';
 
 export type HorizontalSectionWidth = Partial<Record<string, string | number>>;

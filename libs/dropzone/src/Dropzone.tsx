@@ -14,9 +14,9 @@ import {
   LoadingOverlay,
   Box,
   useComponentDefaultProps,
-} from '@mantine/core';
-import { assignRef } from '@mantine/hooks';
-import { ForwardRefWithStaticComponents } from '@mantine/utils';
+} from '@worldprint/wdesign-core';
+import { assignRef } from '@worldprint/wdesign-hooks';
+import { ForwardRefWithStaticComponents } from '@worldprint/wdesign-utils';
 import { DropzoneProvider } from './Dropzone.context';
 import { DropzoneAccept, DropzoneIdle, DropzoneReject } from './DropzoneStatus';
 import type { DropzoneFullScreenType } from './DropzoneFullScreen';
@@ -108,7 +108,9 @@ export interface DropzoneProps
   useFsAccessApi?: boolean;
 
   /** Use this to provide a custom file aggregator */
-  getFilesFromEvent?: (event: DropEvent) => Promise<Array<File | DataTransferItem>>;
+  getFilesFromEvent?: (
+    event: DropEvent
+  ) => Promise<Array<File | DataTransferItem>>;
 
   /** Custom validation function. It must return null if there's no errors. */
   validator?: <T extends File>(file: T) => FileError | FileError[] | null;
@@ -170,37 +172,42 @@ export function _Dropzone(props: DropzoneProps) {
     { name: 'Dropzone', classNames, styles, unstyled, variant }
   );
 
-  const { getRootProps, getInputProps, isDragAccept, isDragReject, open } = useDropzone({
-    onDrop: onDropAny,
-    onDropAccepted: onDrop,
-    onDropRejected: onReject,
-    disabled: disabled || loading,
-    accept: Array.isArray(accept) ? accept.reduce((r, key) => ({ ...r, [key]: [] }), {}) : accept,
-    multiple,
-    maxSize,
-    maxFiles,
-    autoFocus,
-    noClick: !activateOnClick,
-    noDrag: !activateOnDrag,
-    noDragEventsBubbling: !dragEventsBubbling,
-    noKeyboard: !activateOnKeyboard,
-    onDragEnter,
-    onDragLeave,
-    onDragOver,
-    onFileDialogCancel,
-    onFileDialogOpen,
-    preventDropOnDocument,
-    useFsAccessApi,
-    validator,
-    ...(getFilesFromEvent ? { getFilesFromEvent } : null),
-  });
+  const { getRootProps, getInputProps, isDragAccept, isDragReject, open } =
+    useDropzone({
+      onDrop: onDropAny,
+      onDropAccepted: onDrop,
+      onDropRejected: onReject,
+      disabled: disabled || loading,
+      accept: Array.isArray(accept)
+        ? accept.reduce((r, key) => ({ ...r, [key]: [] }), {})
+        : accept,
+      multiple,
+      maxSize,
+      maxFiles,
+      autoFocus,
+      noClick: !activateOnClick,
+      noDrag: !activateOnDrag,
+      noDragEventsBubbling: !dragEventsBubbling,
+      noKeyboard: !activateOnKeyboard,
+      onDragEnter,
+      onDragLeave,
+      onDragOver,
+      onFileDialogCancel,
+      onFileDialogOpen,
+      preventDropOnDocument,
+      useFsAccessApi,
+      validator,
+      ...(getFilesFromEvent ? { getFilesFromEvent } : null),
+    });
 
   assignRef(openRef, open);
 
   const isIdle = !isDragAccept && !isDragReject;
 
   return (
-    <DropzoneProvider value={{ accept: isDragAccept, reject: isDragReject, idle: isIdle }}>
+    <DropzoneProvider
+      value={{ accept: isDragAccept, reject: isDragReject, idle: isIdle }}
+    >
       <Box
         {...others}
         {...getRootProps()}
@@ -218,7 +225,7 @@ export function _Dropzone(props: DropzoneProps) {
   );
 }
 
-_Dropzone.displayName = '@mantine/dropzone/Dropzone';
+_Dropzone.displayName = '@worldprint/wdesign-dropzone/Dropzone';
 _Dropzone.Accept = DropzoneAccept;
 _Dropzone.Reject = DropzoneReject;
 _Dropzone.Idle = DropzoneIdle;

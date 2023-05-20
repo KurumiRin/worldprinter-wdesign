@@ -1,4 +1,4 @@
-import { createStyles, MantineColor } from '@mantine/styles';
+import { createStyles, MantineColor } from '@worldprint/wdesign-styles';
 
 export interface MarkStylesParams {
   color: MantineColor;

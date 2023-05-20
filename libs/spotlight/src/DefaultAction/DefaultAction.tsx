@@ -9,7 +9,7 @@ import {
   Text,
   MantineNumberSize,
   MantineColor,
-} from '@mantine/core';
+} from '@worldprint/wdesign-core';
 import type { SpotlightAction } from '../types';
 import useStyles from './DefaultAction.styles';
 
@@ -39,7 +39,10 @@ export function DefaultAction({
   radius,
   ...others
 }: DefaultActionProps) {
-  const { classes } = useStyles({ radius }, { styles, classNames, name: 'Spotlight' });
+  const { classes } = useStyles(
+    { radius },
+    { styles, classNames, name: 'Spotlight' }
+  );
 
   return (
     <UnstyledButton
@@ -52,7 +55,10 @@ export function DefaultAction({
     >
       <Group noWrap>
         {action.icon && (
-          <Center className={classes.actionIcon} data-hovered={hovered || undefined}>
+          <Center
+            className={classes.actionIcon}
+            data-hovered={hovered || undefined}
+          >
             {action.icon}
           </Center>
         )}
@@ -81,4 +87,4 @@ export function DefaultAction({
   );
 }
 
-DefaultAction.displayName = '@mantine/spotlight/DefaultAction';
+DefaultAction.displayName = '@worldprint/wdesign-spotlight/DefaultAction';

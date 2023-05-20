@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActionIcon, Menu, Tooltip } from '@mantine/core';
+import { ActionIcon, Menu, Tooltip } from '@worldprint/wdesign-core';
 import type { MRT_Header, MRT_TableInstance } from '..';
 
 export const commonListItemStyles = {
@@ -166,7 +166,7 @@ export const MRT_ColumnActionMenu = ({ header, table }: Props) => {
                   >
                     {localization.sortByColumnAsc?.replace(
                       '{column}',
-                      String(columnDef.header),
+                      String(columnDef.header)
                     )}
                   </Menu.Item>
                   <Menu.Item
@@ -176,7 +176,7 @@ export const MRT_ColumnActionMenu = ({ header, table }: Props) => {
                   >
                     {localization.sortByColumnDesc?.replace(
                       '{column}',
-                      String(columnDef.header),
+                      String(columnDef.header)
                     )}
                   </Menu.Item>
                   {(enableColumnFilters || enableGrouping || enableHiding) && (
@@ -199,7 +199,7 @@ export const MRT_ColumnActionMenu = ({ header, table }: Props) => {
                   >
                     {localization.filterByColumn?.replace(
                       '{column}',
-                      String(columnDef.header),
+                      String(columnDef.header)
                     )}
                   </Menu.Item>
                   {(enableGrouping || enableHiding) && <Menu.Divider key={2} />}
@@ -272,13 +272,13 @@ export const MRT_ColumnActionMenu = ({ header, table }: Props) => {
                   >
                     {localization.hideColumn?.replace(
                       '{column}',
-                      String(columnDef.header),
+                      String(columnDef.header)
                     )}
                   </Menu.Item>
                   <Menu.Item
                     disabled={
                       !Object.values(columnVisibility).filter(
-                        (visible) => !visible,
+                        (visible) => !visible
                       ).length
                     }
                     icon={<IconColumns />}
@@ -287,7 +287,7 @@ export const MRT_ColumnActionMenu = ({ header, table }: Props) => {
                   >
                     {localization.showAllColumns?.replace(
                       '{column}',
-                      String(columnDef.header),
+                      String(columnDef.header)
                     )}
                   </Menu.Item>
                 </>

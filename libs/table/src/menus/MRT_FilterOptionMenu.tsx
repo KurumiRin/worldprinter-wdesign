@@ -1,5 +1,5 @@
 import React, { Fragment, useMemo } from 'react';
-import { Flex, Menu } from '@mantine/core';
+import { Flex, Menu } from '@worldprint/wdesign-core';
 import type {
   MRT_FilterOption,
   MRT_Header,
@@ -9,7 +9,7 @@ import type {
 } from '..';
 
 export const mrtFilterOptions = (
-  localization: MRT_Localization,
+  localization: MRT_Localization
 ): MRT_InternalFilterOption[] => [
   {
     option: 'fuzzy',
@@ -140,9 +140,9 @@ export const MRT_FilterOptionMenu = <TData extends Record<string, any> = {}>({
             allowedColumnFilterOptions?.includes(filterOption.option)
           : (!globalFilterModeOptions ||
               globalFilterModeOptions.includes(filterOption.option)) &&
-            ['fuzzy', 'contains', 'startsWith'].includes(filterOption.option),
+            ['fuzzy', 'contains', 'startsWith'].includes(filterOption.option)
       ),
-    [],
+    []
   );
 
   const handleSelectFilterMode = (option: MRT_FilterOption) => {
@@ -260,7 +260,7 @@ export const MRT_FilterOptionMenu = <TData extends Record<string, any> = {}>({
               </Menu.Item>
               {divider && <Menu.Divider />}
             </Fragment>
-          ),
+          )
         )}
     </Menu.Dropdown>
   );

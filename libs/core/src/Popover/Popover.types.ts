@@ -1,4 +1,4 @@
-import { Selectors } from '@mantine/styles';
+import { Selectors } from '@worldprint/wdesign-styles';
 import useStyles from './PopoverDropdown/PopoverDropdown.styles';
 
 export type { PopoverStylesParams } from './PopoverDropdown/PopoverDropdown.styles';

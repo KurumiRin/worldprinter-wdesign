@@ -1,7 +1,7 @@
 import React, { cloneElement, forwardRef, useRef } from 'react';
-import { isElement, ForwardRefWithStaticComponents } from '@mantine/utils';
-import { useMergedRef } from '@mantine/hooks';
-import { getDefaultZIndex, useComponentDefaultProps } from '@mantine/styles';
+import { isElement, ForwardRefWithStaticComponents } from '@worldprint/wdesign-utils';
+import { useMergedRef } from '@worldprint/wdesign-hooks';
+import { getDefaultZIndex, useComponentDefaultProps } from '@worldprint/wdesign-styles';
 import { TooltipGroup } from './TooltipGroup/TooltipGroup';
 import { TooltipFloating } from './TooltipFloating/TooltipFloating';
 import { useTooltip } from './use-tooltip';
@@ -211,7 +211,7 @@ const _Tooltip = forwardRef<HTMLElement, TooltipProps>((props, ref) => {
 _Tooltip.Group = TooltipGroup;
 _Tooltip.Floating = TooltipFloating;
 
-_Tooltip.displayName = '@mantine/core/Tooltip';
+_Tooltip.displayName = '@worldprint/wdesign-core/Tooltip';
 
 export const Tooltip: ForwardRefWithStaticComponents<
   TooltipProps,

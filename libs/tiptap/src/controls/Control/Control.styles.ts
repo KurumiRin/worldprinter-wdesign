@@ -1,17 +1,20 @@
-import { createStyles, rem } from '@mantine/core';
+import { createStyles, rem } from '@worldprint/wdesign-core';
 
 export default createStyles((theme) => {
   const colors = theme.fn.variant({ variant: 'light' });
   return {
     control: {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.white,
+      backgroundColor:
+        theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.white,
       minWidth: rem(26),
       height: rem(26),
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
       border: `${rem(1)} solid ${
-        theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[4]
+        theme.colorScheme === 'dark'
+          ? theme.colors.dark[4]
+          : theme.colors.gray[4]
       }`,
       borderRadius: theme.fn.radius(),
       cursor: 'default',
@@ -20,7 +23,9 @@ export default createStyles((theme) => {
         cursor: 'pointer',
         ...theme.fn.hover({
           backgroundColor:
-            theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[0],
+            theme.colorScheme === 'dark'
+              ? theme.colors.dark[5]
+              : theme.colors.gray[0],
         }),
       },
 

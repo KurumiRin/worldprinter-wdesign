@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
-import { useComponentDefaultProps, rem } from '@mantine/styles';
-import { createPolymorphicComponent } from '@mantine/utils';
+import { useComponentDefaultProps, rem } from '@worldprint/wdesign-styles';
+import { createPolymorphicComponent } from '@worldprint/wdesign-utils';
 import { ActionIcon, ActionIconProps } from '../ActionIcon/ActionIcon';
 import { CloseIcon } from './CloseIcon';
 
@@ -23,20 +23,30 @@ const defaultProps: Partial<CloseButtonProps> = {
   size: 'sm',
 };
 
-export const _CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>((props, ref) => {
-  const { iconSize, size, children, ...others } = useComponentDefaultProps(
-    'CloseButton',
-    defaultProps,
-    props
-  );
-  const _iconSize = rem(iconSize || iconSizes[size]);
-  return (
-    <ActionIcon ref={ref} __staticSelector="CloseButton" size={size} {...others}>
-      {children || <CloseIcon width={_iconSize} height={_iconSize} />}
-    </ActionIcon>
-  );
-});
+export const _CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>(
+  (props, ref) => {
+    const { iconSize, size, children, ...others } = useComponentDefaultProps(
+      'CloseButton',
+      defaultProps,
+      props
+    );
+    const _iconSize = rem(iconSize || iconSizes[size]);
+    return (
+      <ActionIcon
+        ref={ref}
+        __staticSelector="CloseButton"
+        size={size}
+        {...others}
+      >
+        {children || <CloseIcon width={_iconSize} height={_iconSize} />}
+      </ActionIcon>
+    );
+  }
+);
 
-_CloseButton.displayName = '@mantine/core/CloseButton';
+_CloseButton.displayName = '@worldprint/wdesign-core/CloseButton';
 
-export const CloseButton = createPolymorphicComponent<'button', CloseButtonProps>(_CloseButton);
+export const CloseButton = createPolymorphicComponent<
+  'button',
+  CloseButtonProps
+>(_CloseButton);

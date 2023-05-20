@@ -1,6 +1,6 @@
 import React, { memo, useMemo } from 'react';
 import { useVirtualizer } from '@tanstack/react-virtual';
-import { Box, Text } from '@mantine/core';
+import { Box, Text } from '@worldprint/wdesign-core';
 import { Memo_MRT_TableBodyRow, MRT_TableBodyRow } from './MRT_TableBodyRow';
 import { rankGlobalFuzzy } from '../sortingFns';
 import type {
@@ -93,13 +93,13 @@ export const MRT_TableBody = ({
       manualGrouping,
       manualSorting,
       sorting,
-    ],
+    ]
   );
 
   const rows = useMemo(() => {
     if (!shouldRankResults) return getRowModel().rows;
     const rankedRows = getPrePaginationRowModel().rows.sort((a, b) =>
-      rankGlobalFuzzy(a, b),
+      rankGlobalFuzzy(a, b)
     );
     if (enablePagination && !manualPagination) {
       const start = pagination.pageIndex * pagination.pageSize;
@@ -222,5 +222,5 @@ export const MRT_TableBody = ({
 
 export const Memo_MRT_TableBody = memo(
   MRT_TableBody,
-  (prev, next) => prev.table.options.data === next.table.options.data,
+  (prev, next) => prev.table.options.data === next.table.options.data
 );

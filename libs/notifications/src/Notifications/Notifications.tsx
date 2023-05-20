@@ -1,7 +1,14 @@
 import React, { useRef } from 'react';
 import { Transition, TransitionGroup } from 'react-transition-group';
-import { DefaultProps, Portal, getDefaultZIndex, Box, PortalProps, rem } from '@mantine/core';
-import { useReducedMotion, useForceUpdate, useDidUpdate } from '@mantine/hooks';
+import {
+  DefaultProps,
+  Portal,
+  getDefaultZIndex,
+  Box,
+  PortalProps,
+  rem,
+} from '@worldprint/wdesign-core';
+import { useReducedMotion, useForceUpdate, useDidUpdate } from '@worldprint/wdesign-hooks';
 import { NotificationsPositioning } from '../types';
 import {
   notifications as GlobalNotifications,
@@ -59,7 +66,8 @@ export interface NotificationsProps
   target?: PortalProps['target'];
 }
 
-export const Notifications: React.FC<NotificationsProps> & NotificationsStaticMethods = ({
+export const Notifications: React.FC<NotificationsProps> &
+  NotificationsStaticMethods = ({
   className,
   position = 'bottom-right',
   autoClose = 4000,
@@ -89,9 +97,9 @@ export const Notifications: React.FC<NotificationsProps> & NotificationsStaticMe
   const shouldReduceMotion = useReducedMotion();
   const reduceMotion = theme.respectReducedMotion ? shouldReduceMotion : false;
   const duration = reduceMotion ? 1 : transitionDuration;
-  const positioning = (POSITIONS.includes(position) ? position : 'bottom-right').split(
-    '-'
-  ) as NotificationsPositioning;
+  const positioning = (
+    POSITIONS.includes(position) ? position : 'bottom-right'
+  ).split('-') as NotificationsPositioning;
 
   useDidUpdate(() => {
     if (notifications.length > previousLength.current) {
@@ -133,7 +141,9 @@ export const Notifications: React.FC<NotificationsProps> & NotificationsStaticMe
                 maxHeight: notificationMaxHeight,
               }),
             },
-            ...(Array.isArray(notification.sx) ? notification.sx : [notification.sx]),
+            ...(Array.isArray(notification.sx)
+              ? notification.sx
+              : [notification.sx]),
           ]}
         />
       )}
@@ -157,7 +167,7 @@ export const Notifications: React.FC<NotificationsProps> & NotificationsStaticMe
   );
 };
 
-Notifications.displayName = '@mantine/notifications/Notifications';
+Notifications.displayName = '@worldprint/wdesign-notifications/Notifications';
 Notifications.show = GlobalNotifications.show;
 Notifications.hide = GlobalNotifications.hide;
 Notifications.update = GlobalNotifications.update;

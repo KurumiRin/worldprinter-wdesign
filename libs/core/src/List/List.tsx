@@ -4,8 +4,8 @@ import {
   MantineNumberSize,
   Selectors,
   useComponentDefaultProps,
-} from '@mantine/styles';
-import { ForwardRefWithStaticComponents } from '@mantine/utils';
+} from '@worldprint/wdesign-styles';
+import { ForwardRefWithStaticComponents } from '@worldprint/wdesign-utils';
 import { Box } from '../Box';
 import { ListItem, ListItemStylesNames } from './ListItem/ListItem';
 import { ListProvider } from './List.context';
@@ -43,7 +43,10 @@ export interface ListProps
   listStyleType?: React.CSSProperties['listStyleType'];
 }
 
-type ListComponent = ForwardRefWithStaticComponents<ListProps, { Item: typeof ListItem }>;
+type ListComponent = ForwardRefWithStaticComponents<
+  ListProps,
+  { Item: typeof ListItem }
+>;
 
 const defaultProps: Partial<ListProps> = {
   type: 'unordered',
@@ -104,4 +107,4 @@ export const List: ListComponent = forwardRef<HTMLUListElement, ListProps>(
 ) as any;
 
 List.Item = ListItem;
-List.displayName = '@mantine/core/List';
+List.displayName = '@worldprint/wdesign-core/List';

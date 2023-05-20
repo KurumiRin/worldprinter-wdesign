@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { useId, useUncontrolled } from '@mantine/hooks';
+import { useId, useUncontrolled } from '@worldprint/wdesign-hooks';
 import {
   DefaultProps,
   MantineNumberSize,
@@ -7,15 +7,17 @@ import {
   MantineColor,
   Selectors,
   useComponentDefaultProps,
-} from '@mantine/styles';
-import { ForwardRefWithStaticComponents } from '@mantine/utils';
+} from '@worldprint/wdesign-styles';
+import { ForwardRefWithStaticComponents } from '@worldprint/wdesign-utils';
 import { extractSystemStyles } from '../Box';
 import { SwitchGroup } from './SwitchGroup/SwitchGroup';
 import { useSwitchGroupContext } from './SwitchGroup.context';
 import { InlineInput, InlineInputStylesNames } from '../InlineInput';
 import useStyles, { SwitchStylesParams } from './Switch.styles';
 
-export type SwitchStylesNames = Selectors<typeof useStyles> | InlineInputStylesNames;
+export type SwitchStylesNames =
+  | Selectors<typeof useStyles>
+  | InlineInputStylesNames;
 
 export interface SwitchProps
   extends DefaultProps<SwitchStylesNames, SwitchStylesParams>,
@@ -67,9 +69,15 @@ const defaultProps: Partial<SwitchProps> = {
   error: false,
 };
 
-type SwitchComponent = ForwardRefWithStaticComponents<SwitchProps, { Group: typeof SwitchGroup }>;
+type SwitchComponent = ForwardRefWithStaticComponents<
+  SwitchProps,
+  { Group: typeof SwitchGroup }
+>;
 
-export const Switch: SwitchComponent = forwardRef<HTMLInputElement, SwitchProps>((props, ref) => {
+export const Switch: SwitchComponent = forwardRef<
+  HTMLInputElement,
+  SwitchProps
+>((props, ref) => {
   const {
     className,
     color,
@@ -159,11 +167,13 @@ export const Switch: SwitchComponent = forwardRef<HTMLInputElement, SwitchProps>
 
       <label htmlFor={uuid} className={classes.track}>
         <div className={classes.thumb}>{thumbIcon}</div>
-        <div className={classes.trackLabel}>{_checked ? onLabel : offLabel}</div>
+        <div className={classes.trackLabel}>
+          {_checked ? onLabel : offLabel}
+        </div>
       </label>
     </InlineInput>
   );
 }) as any;
 
-Switch.displayName = '@mantine/core/Switch';
+Switch.displayName = '@worldprint/wdesign-core/Switch';
 Switch.Group = SwitchGroup;

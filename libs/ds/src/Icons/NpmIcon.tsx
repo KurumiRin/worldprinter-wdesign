@@ -1,5 +1,5 @@
 import React from 'react';
-import { rem } from '@mantine/core';
+import { rem } from '@worldprint/wdesign-core';
 
 interface NpmIconProps extends React.ComponentPropsWithoutRef<'svg'> {
   size?: number | string;

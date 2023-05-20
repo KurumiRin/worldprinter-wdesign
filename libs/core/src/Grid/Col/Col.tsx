@@ -1,10 +1,12 @@
 import React, { forwardRef } from 'react';
-import { DefaultProps, useComponentDefaultProps } from '@mantine/styles';
+import { DefaultProps, useComponentDefaultProps } from '@worldprint/wdesign-styles';
 import { Box } from '../../Box';
 import { useGridContext } from '../Grid.context';
 import useStyles, { ColSpan } from './Col.styles';
 
-export interface ColProps extends DefaultProps, React.ComponentPropsWithoutRef<'div'> {
+export interface ColProps
+  extends DefaultProps,
+    React.ComponentPropsWithoutRef<'div'> {
   variant?: string;
 
   /** Default col span */
@@ -71,45 +73,11 @@ function isValidSpan(span: ColSpan) {
   return typeof span === 'number' && span > 0 && span % 1 === 0;
 }
 
-export const Col = forwardRef<HTMLDivElement, ColProps>((props: ColProps, ref) => {
-  const {
-    children,
-    span,
-    offset,
-    offsetXs,
-    offsetSm,
-    offsetMd,
-    offsetLg,
-    offsetXl,
-    xs,
-    sm,
-    md,
-    lg,
-    xl,
-    order,
-    orderXs,
-    orderSm,
-    orderMd,
-    orderLg,
-    orderXl,
-    className,
-    id,
-    unstyled,
-    variant,
-    ...others
-  } = useComponentDefaultProps('GridCol', defaultProps, props);
-
-  const ctx = useGridContext();
-
-  const colSpan = span || ctx.columns;
-  const { classes, cx } = useStyles(
-    {
-      gutter: ctx.gutter,
-      gutterXs: ctx.gutterXs,
-      gutterSm: ctx.gutterSm,
-      gutterMd: ctx.gutterMd,
-      gutterLg: ctx.gutterLg,
-      gutterXl: ctx.gutterXl,
+export const Col = forwardRef<HTMLDivElement, ColProps>(
+  (props: ColProps, ref) => {
+    const {
+      children,
+      span,
       offset,
       offsetXs,
       offsetSm,
@@ -127,22 +95,58 @@ export const Col = forwardRef<HTMLDivElement, ColProps>((props: ColProps, ref) =
       orderMd,
       orderLg,
       orderXl,
-      grow: ctx.grow,
-      columns: ctx.columns,
-      span: colSpan,
-    },
-    { unstyled, name: 'Grid', variant }
-  );
+      className,
+      id,
+      unstyled,
+      variant,
+      ...others
+    } = useComponentDefaultProps('GridCol', defaultProps, props);
 
-  if (!isValidSpan(colSpan) || colSpan > ctx.columns) {
-    return null;
+    const ctx = useGridContext();
+
+    const colSpan = span || ctx.columns;
+    const { classes, cx } = useStyles(
+      {
+        gutter: ctx.gutter,
+        gutterXs: ctx.gutterXs,
+        gutterSm: ctx.gutterSm,
+        gutterMd: ctx.gutterMd,
+        gutterLg: ctx.gutterLg,
+        gutterXl: ctx.gutterXl,
+        offset,
+        offsetXs,
+        offsetSm,
+        offsetMd,
+        offsetLg,
+        offsetXl,
+        xs,
+        sm,
+        md,
+        lg,
+        xl,
+        order,
+        orderXs,
+        orderSm,
+        orderMd,
+        orderLg,
+        orderXl,
+        grow: ctx.grow,
+        columns: ctx.columns,
+        span: colSpan,
+      },
+      { unstyled, name: 'Grid', variant }
+    );
+
+    if (!isValidSpan(colSpan) || colSpan > ctx.columns) {
+      return null;
+    }
+
+    return (
+      <Box className={cx(classes.col, className)} ref={ref} {...others}>
+        {children}
+      </Box>
+    );
   }
+);
 
-  return (
-    <Box className={cx(classes.col, className)} ref={ref} {...others}>
-      {children}
-    </Box>
-  );
-});
-
-Col.displayName = '@mantine/core/Col';
+Col.displayName = '@worldprint/wdesign-core/Col';

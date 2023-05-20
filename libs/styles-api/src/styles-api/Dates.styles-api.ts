@@ -5,14 +5,15 @@ import type {
   CalendarHeaderStylesNames,
   MonthLevelGroupStylesNames,
   DateTimePickerStylesNames,
-} from '@mantine/dates';
+} from '@worldprint/wdesign-dates';
 import { TextInput } from './TextInput.styles-api';
 
 const CalendarHeader: Record<CalendarHeaderStylesNames, string> = {
   calendarHeader: 'Calendar header root element',
   calendarHeaderControl: 'Previous/next calendar header controls',
   calendarHeaderControlIcon: 'Icon of previous/next calendar header controls',
-  calendarHeaderLevel: 'Level control (changes levels when clicked, month -> year -> decade)',
+  calendarHeaderLevel:
+    'Level control (changes levels when clicked, month -> year -> decade)',
 };
 
 const DecadeLevelGroup: Record<DecadeLevelGroupStylesNames, string> = {

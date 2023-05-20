@@ -1,5 +1,10 @@
 import React from 'react';
-import { DefaultProps, MantineNumberSize, MantineColor, Selectors } from '@mantine/styles';
+import {
+  DefaultProps,
+  MantineNumberSize,
+  MantineColor,
+  Selectors,
+} from '@worldprint/wdesign-styles';
 import { Box } from '../../Box';
 import { getPosition } from '../utils/get-position/get-position';
 import { isMarkFilled } from './is-mark-filled';
@@ -77,4 +82,4 @@ export function Marks({
   return <div className={classes.marksContainer}>{items}</div>;
 }
 
-Marks.displayName = '@mantine/core/SliderMarks';
+Marks.displayName = '@worldprint/wdesign-core/SliderMarks';

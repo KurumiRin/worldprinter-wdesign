@@ -1,4 +1,4 @@
-import { createStyles, rem } from '@mantine/styles';
+import { createStyles, rem } from '@worldprint/wdesign-styles';
 
 export interface ButtonGroupStylesParams {
   orientation: 'vertical' | 'horizontal';

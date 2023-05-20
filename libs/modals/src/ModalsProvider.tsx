@@ -1,6 +1,6 @@
 import React, { useCallback, useReducer, useRef } from 'react';
-import { Modal, getDefaultZIndex } from '@mantine/core';
-import { randomId } from '@mantine/hooks';
+import { Modal, getDefaultZIndex } from '@worldprint/wdesign-core';
+import { randomId } from '@worldprint/wdesign-hooks';
 import {
   ModalsContext,
   ModalSettings,
@@ -67,8 +67,16 @@ function separateConfirmModalProps(props: OpenConfirmModal) {
   };
 }
 
-export function ModalsProvider({ children, modalProps, labels, modals }: ModalsProviderProps) {
-  const [state, dispatch] = useReducer(modalsReducer, { modals: [], current: null });
+export function ModalsProvider({
+  children,
+  modalProps,
+  labels,
+  modals,
+}: ModalsProviderProps) {
+  const [state, dispatch] = useReducer(modalsReducer, {
+    modals: [],
+    current: null,
+  });
   const stateRef = useRef(state);
   stateRef.current = state;
 
@@ -139,7 +147,8 @@ export function ModalsProvider({ children, modalProps, labels, modals }: ModalsP
   useModalsEvents({
     openModal,
     openConfirmModal,
-    openContextModal: ({ modal, ...payload }) => openContextModal(modal, payload),
+    openContextModal: ({ modal, ...payload }) =>
+      openContextModal(modal, payload),
     closeModal,
     closeContextModal: closeModal,
     closeAllModals: closeAll,
@@ -164,12 +173,20 @@ export function ModalsProvider({ children, modalProps, labels, modals }: ModalsP
 
         return {
           modalProps: rest,
-          content: <ContextModal innerProps={innerProps} context={ctx} id={currentModal.id} />,
+          content: (
+            <ContextModal
+              innerProps={innerProps}
+              context={ctx}
+              id={currentModal.id}
+            />
+          ),
         };
       }
       case 'confirm': {
-        const { modalProps: separatedModalProps, confirmProps: separatedConfirmProps } =
-          separateConfirmModalProps(currentModal.props);
+        const {
+          modalProps: separatedModalProps,
+          confirmProps: separatedConfirmProps,
+        } = separateConfirmModalProps(currentModal.props);
 
         return {
           modalProps: separatedModalProps,

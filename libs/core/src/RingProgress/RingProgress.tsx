@@ -1,5 +1,10 @@
 import React, { forwardRef } from 'react';
-import { DefaultProps, MantineColor, Selectors, useComponentDefaultProps } from '@mantine/styles';
+import {
+  DefaultProps,
+  MantineColor,
+  Selectors,
+  useComponentDefaultProps,
+} from '@worldprint/wdesign-styles';
 import { Box } from '../Box';
 import { Curve } from './Curve/Curve';
 import { getCurves } from './get-curves/get-curves';
@@ -42,69 +47,74 @@ const defaultProps: Partial<RingProgressProps> = {
   thickness: 12,
 };
 
-export const RingProgress = forwardRef<HTMLDivElement, RingProgressProps>((props, ref) => {
-  const {
-    className,
-    style,
-    label,
-    sections,
-    size,
-    thickness,
-    classNames,
-    styles,
-    roundCaps,
-    rootColor,
-    unstyled,
-    variant,
-    ...others
-  } = useComponentDefaultProps('RingProgress', defaultProps, props);
+export const RingProgress = forwardRef<HTMLDivElement, RingProgressProps>(
+  (props, ref) => {
+    const {
+      className,
+      style,
+      label,
+      sections,
+      size,
+      thickness,
+      classNames,
+      styles,
+      roundCaps,
+      rootColor,
+      unstyled,
+      variant,
+      ...others
+    } = useComponentDefaultProps('RingProgress', defaultProps, props);
 
-  const { classes, cx } = useStyles(null, {
-    name: 'RingProgress',
-    classNames,
-    styles,
-    unstyled,
-    variant,
-  });
+    const { classes, cx } = useStyles(null, {
+      name: 'RingProgress',
+      classNames,
+      styles,
+      unstyled,
+      variant,
+    });
 
-  const curves = getCurves({
-    size,
-    thickness,
-    sections,
-    renderRoundedLineCaps: roundCaps,
-    rootColor,
-  }).map(({ data, sum, root, lineRoundCaps, offset }, index) => (
-    <Curve
-      {...data}
-      key={index}
-      size={size}
-      thickness={thickness}
-      sum={sum}
-      offset={offset}
-      color={data?.color}
-      root={root}
-      lineRoundCaps={lineRoundCaps}
-    />
-  ));
+    const curves = getCurves({
+      size,
+      thickness,
+      sections,
+      renderRoundedLineCaps: roundCaps,
+      rootColor,
+    }).map(({ data, sum, root, lineRoundCaps, offset }, index) => (
+      <Curve
+        {...data}
+        key={index}
+        size={size}
+        thickness={thickness}
+        sum={sum}
+        offset={offset}
+        color={data?.color}
+        root={root}
+        lineRoundCaps={lineRoundCaps}
+      />
+    ));
 
-  return (
-    <Box
-      style={{ width: size, height: size, ...style }}
-      className={cx(classes.root, className)}
-      ref={ref}
-      {...others}
-    >
-      <svg width={size} height={size} style={{ transform: 'rotate(-90deg)' }}>
-        {curves}
-      </svg>
+    return (
+      <Box
+        style={{ width: size, height: size, ...style }}
+        className={cx(classes.root, className)}
+        ref={ref}
+        {...others}
+      >
+        <svg width={size} height={size} style={{ transform: 'rotate(-90deg)' }}>
+          {curves}
+        </svg>
 
-      {label && (
-        <div className={classes.label} style={{ right: thickness * 2, left: thickness * 2 }}>
-          {label}
-        </div>
-      )}
-    </Box>
-  );
-});
+        {label && (
+          <div
+            className={classes.label}
+            style={{ right: thickness * 2, left: thickness * 2 }}
+          >
+            {label}
+          </div>
+        )}
+      </Box>
+    );
+  }
+);
 
-RingProgress.displayName = '@mantine/core/RingProgress';
+RingProgress.displayName = '@worldprint/wdesign-core/RingProgress';

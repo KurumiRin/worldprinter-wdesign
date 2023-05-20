@@ -6,7 +6,7 @@ import {
   MantineColor,
   useComponentDefaultProps,
   Variants,
-} from '@mantine/styles';
+} from '@worldprint/wdesign-styles';
 import { Box } from '../Box';
 import useStyles, { ThemeIconStylesParams } from './ThemeIcon.styles';
 
@@ -55,4 +55,4 @@ export const ThemeIcon = forwardRef<HTMLDivElement, ThemeIconProps>((props, ref)
   );
 });
 
-ThemeIcon.displayName = '@mantine/core/ThemeIcon';
+ThemeIcon.displayName = '@worldprint/wdesign-core/ThemeIcon';

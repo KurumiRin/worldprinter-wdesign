@@ -1,6 +1,10 @@
 import React, { forwardRef } from 'react';
-import { DefaultProps, Selectors, useComponentDefaultProps } from '@mantine/styles';
-import { isElement } from '@mantine/utils';
+import {
+  DefaultProps,
+  Selectors,
+  useComponentDefaultProps,
+} from '@worldprint/wdesign-styles';
+import { isElement } from '@worldprint/wdesign-utils';
 import { Text } from '../Text';
 import { Box } from '../Box';
 import useStyles from './Breadcrumbs.styles';
@@ -25,8 +29,16 @@ const defaultProps: Partial<BreadcrumbsProps> = {
 
 export const Breadcrumbs = forwardRef<HTMLDivElement, BreadcrumbsProps>(
   (props: BreadcrumbsProps, ref) => {
-    const { className, children, separator, classNames, styles, unstyled, variant, ...others } =
-      useComponentDefaultProps('Breadcrumbs', defaultProps, props);
+    const {
+      className,
+      children,
+      separator,
+      classNames,
+      styles,
+      unstyled,
+      variant,
+      ...others
+    } = useComponentDefaultProps('Breadcrumbs', defaultProps, props);
 
     const { classes, cx } = useStyles(null, {
       classNames,
@@ -53,7 +65,11 @@ export const Breadcrumbs = forwardRef<HTMLDivElement, BreadcrumbsProps>(
 
         if (index !== array.length - 1) {
           acc.push(
-            <Text size="sm" className={classes.separator} key={`separator-${index}`}>
+            <Text
+              size="sm"
+              className={classes.separator}
+              key={`separator-${index}`}
+            >
               {separator}
             </Text>
           );
@@ -72,4 +88,4 @@ export const Breadcrumbs = forwardRef<HTMLDivElement, BreadcrumbsProps>(
   }
 );
 
-Breadcrumbs.displayName = '@mantine/core/Breadcrumbs';
+Breadcrumbs.displayName = '@worldprint/wdesign-core/Breadcrumbs';

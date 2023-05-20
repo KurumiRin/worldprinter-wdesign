@@ -1,6 +1,6 @@
 import React from 'react';
-import { NumberInput } from '@mantine/core';
-import { upperFirst } from '@mantine/hooks';
+import { NumberInput } from '@worldprint/wdesign-core';
+import { upperFirst } from '@worldprint/wdesign-hooks';
 
 interface NumberControlProps {
   value: number;

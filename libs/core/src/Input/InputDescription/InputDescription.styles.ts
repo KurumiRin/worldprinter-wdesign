@@ -1,4 +1,4 @@
-import { createStyles, rem, getSize } from '@mantine/styles';
+import { createStyles, rem, getSize } from '@worldprint/wdesign-styles';
 
 export default createStyles((theme, _params, { size }) => ({
   description: {

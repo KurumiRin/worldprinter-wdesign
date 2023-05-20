@@ -1,7 +1,7 @@
 import React from 'react';
-import { DefaultProps, useComponentDefaultProps, rem } from '@mantine/styles';
-import { closeOnEscape } from '@mantine/utils';
-import { useFocusReturn } from '@mantine/hooks';
+import { DefaultProps, useComponentDefaultProps, rem } from '@worldprint/wdesign-styles';
+import { closeOnEscape } from '@worldprint/wdesign-utils';
+import { useFocusReturn } from '@worldprint/wdesign-hooks';
 import { FloatingArrow } from '../../Floating';
 import { Box } from '../../Box';
 import { Transition } from '../../Transition';
@@ -10,7 +10,9 @@ import { OptionalPortal } from '../../Portal';
 import { usePopoverContext } from '../Popover.context';
 import useStyles from './PopoverDropdown.styles';
 
-export interface PopoverDropdownProps extends DefaultProps, React.ComponentPropsWithoutRef<'div'> {
+export interface PopoverDropdownProps
+  extends DefaultProps,
+    React.ComponentPropsWithoutRef<'div'> {
   /** Dropdown content */
   children?: React.ReactNode;
 }
@@ -18,11 +20,8 @@ export interface PopoverDropdownProps extends DefaultProps, React.ComponentProps
 const defaultProps: Partial<PopoverDropdownProps> = {};
 
 export function PopoverDropdown(props: PopoverDropdownProps) {
-  const { style, className, children, onKeyDownCapture, ...others } = useComponentDefaultProps(
-    'PopoverDropdown',
-    defaultProps,
-    props
-  );
+  const { style, className, children, onKeyDownCapture, ...others } =
+    useComponentDefaultProps('PopoverDropdown', defaultProps, props);
 
   const ctx = usePopoverContext();
   const { classes, cx } = useStyles(
@@ -112,4 +111,4 @@ export function PopoverDropdown(props: PopoverDropdownProps) {
   );
 }
 
-PopoverDropdown.displayName = '@mantine/core/PopoverDropdown';
+PopoverDropdown.displayName = '@worldprint/wdesign-core/PopoverDropdown';

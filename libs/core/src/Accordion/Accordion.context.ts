@@ -1,5 +1,5 @@
-import { MantineNumberSize, ClassNames, Styles } from '@mantine/styles';
-import { createSafeContext } from '@mantine/utils';
+import { MantineNumberSize, ClassNames, Styles } from '@worldprint/wdesign-styles';
+import { createSafeContext } from '@worldprint/wdesign-utils';
 import { ACCORDION_ERRORS } from './Accordion.errors';
 import {
   AccordionChevronPosition,

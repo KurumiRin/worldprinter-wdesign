@@ -5,7 +5,7 @@ import {
   getStylesRef,
   rem,
   getSize,
-} from '@mantine/styles';
+} from '@worldprint/wdesign-styles';
 
 export interface StepStylesParams {
   color: MantineColor;

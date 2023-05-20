@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unused-prop-types */
 
 import React, { useRef, useState, useCallback } from 'react';
-import { useId, useClickOutside } from '@mantine/hooks';
+import { useId, useClickOutside } from '@worldprint/wdesign-hooks';
 import {
   useMantineTheme,
   ClassNames,
@@ -10,7 +10,7 @@ import {
   MantineShadow,
   getDefaultZIndex,
   useComponentDefaultProps,
-} from '@mantine/styles';
+} from '@worldprint/wdesign-styles';
 import { TransitionOverride } from '../Transition';
 import {
   getFloatingPosition,
@@ -210,7 +210,10 @@ export function Popover(props: PopoverProps) {
     middlewares,
     width,
     position: getFloatingPosition(theme.dir, position),
-    offset: typeof offset === 'number' ? offset + (withArrow ? arrowSize / 2 : 0) : offset,
+    offset:
+      typeof offset === 'number'
+        ? offset + (withArrow ? arrowSize / 2 : 0)
+        : offset,
     arrowRef,
     arrowOffset,
     onPositionChange,
@@ -294,4 +297,4 @@ export function Popover(props: PopoverProps) {
 
 Popover.Target = PopoverTarget;
 Popover.Dropdown = PopoverDropdown;
-Popover.displayName = '@mantine/core/Popover';
+Popover.displayName = '@worldprint/wdesign-core/Popover';

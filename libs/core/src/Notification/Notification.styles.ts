@@ -1,4 +1,4 @@
-import { createStyles, MantineColor, MantineNumberSize, rem } from '@mantine/styles';
+import { createStyles, MantineColor, MantineNumberSize, rem } from '@worldprint/wdesign-styles';
 
 export interface NotificationStylesParams {
   color: MantineColor;

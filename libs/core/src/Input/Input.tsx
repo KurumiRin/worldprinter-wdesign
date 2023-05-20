@@ -7,8 +7,8 @@ import {
   Selectors,
   useComponentDefaultProps,
   Variants,
-} from '@mantine/styles';
-import { createPolymorphicComponent } from '@mantine/utils';
+} from '@worldprint/wdesign-styles';
+import { createPolymorphicComponent } from '@worldprint/wdesign-utils';
 import { Box, extractSystemStyles } from '../Box';
 import { InputWrapper } from './InputWrapper/InputWrapper';
 import { InputDescription } from './InputDescription/InputDescription';
@@ -55,7 +55,9 @@ export interface InputSharedProps {
   size?: MantineSize;
 }
 
-export interface InputProps extends InputSharedProps, DefaultProps<InputStylesNames> {
+export interface InputProps
+  extends InputSharedProps,
+    DefaultProps<InputStylesNames> {
   /** Static css selector base */
   __staticSelector?: string;
 
@@ -113,7 +115,14 @@ export const _Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
       offsetTop,
       pointer,
     },
-    { classNames, styles, name: ['Input', __staticSelector], unstyled, variant, size }
+    {
+      classNames,
+      styles,
+      name: ['Input', __staticSelector],
+      unstyled,
+      variant,
+      size,
+    }
   );
 
   const { systemStyles, rest } = extractSystemStyles(others);
@@ -151,7 +160,7 @@ export const _Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   );
 }) as any;
 
-_Input.displayName = '@mantine/core/Input';
+_Input.displayName = '@worldprint/wdesign-core/Input';
 _Input.Wrapper = InputWrapper;
 _Input.Label = InputLabel;
 _Input.Description = InputDescription;

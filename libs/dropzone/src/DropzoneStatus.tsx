@@ -1,7 +1,7 @@
 import React, { cloneElement } from 'react';
-import { upperFirst } from '@mantine/hooks';
-import { isElement } from '@mantine/utils';
-import { useComponentDefaultProps } from '@mantine/core';
+import { upperFirst } from '@worldprint/wdesign-hooks';
+import { isElement } from '@worldprint/wdesign-utils';
+import { useComponentDefaultProps } from '@worldprint/wdesign-core';
 import { DropzoneContextValue, useDropzoneContext } from './Dropzone.context';
 
 export interface DropzoneStatusProps {
@@ -27,7 +27,7 @@ function createDropzoneStatus(status: keyof DropzoneContextValue) {
     return null;
   };
 
-  Component.displayName = `@mantine/dropzone/${upperFirst(status)}`;
+  Component.displayName = `@worldprint/wdesign-dropzone/${upperFirst(status)}`;
 
   return Component;
 }

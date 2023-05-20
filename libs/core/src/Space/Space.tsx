@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { DefaultProps, useComponentDefaultProps } from '@mantine/styles';
+import { DefaultProps, useComponentDefaultProps } from '@worldprint/wdesign-styles';
 import { Box } from '../Box';
 
 export interface SpaceProps extends DefaultProps {}
@@ -14,4 +14,4 @@ export const Space = forwardRef<HTMLDivElement, SpaceProps>((props: SpaceProps, 
   return <Box ref={ref} w={w} miw={w} h={h} mih={h} {...others} />;
 });
 
-Space.displayName = '@mantine/core/Space';
+Space.displayName = '@worldprint/wdesign-core/Space';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { DefaultProps, MantineSize, Selectors } from '@mantine/styles';
+import { DefaultProps, MantineSize, Selectors } from '@worldprint/wdesign-styles';
 import useStyles, { THUMB_SIZES } from './Thumb.styles';
 
 export type ThumbStylesNames = Selectors<typeof useStyles>;
@@ -48,4 +48,4 @@ export function Thumb({
   );
 }
 
-Thumb.displayName = '@mantine/core/Thumb';
+Thumb.displayName = '@worldprint/wdesign-core/Thumb';

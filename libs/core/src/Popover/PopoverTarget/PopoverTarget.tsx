@@ -1,8 +1,8 @@
 /* eslint-disable react/no-unused-prop-types */
 import React, { cloneElement, forwardRef } from 'react';
-import { useMergedRef } from '@mantine/hooks';
-import { isElement } from '@mantine/utils';
-import { clsx, useComponentDefaultProps } from '@mantine/styles';
+import { useMergedRef } from '@worldprint/wdesign-hooks';
+import { isElement } from '@worldprint/wdesign-utils';
+import { clsx, useComponentDefaultProps } from '@worldprint/wdesign-styles';
 import { usePopoverContext } from '../Popover.context';
 import { POPOVER_ERRORS } from '../Popover.errors';
 
@@ -22,38 +22,41 @@ const defaultProps: Partial<PopoverTargetProps> = {
   popupType: 'dialog',
 };
 
-export const PopoverTarget = forwardRef<HTMLElement, PopoverTargetProps>((props, ref) => {
-  const { children, refProp, popupType, ...others } = useComponentDefaultProps(
-    'PopoverTarget',
-    defaultProps,
-    props
-  );
+export const PopoverTarget = forwardRef<HTMLElement, PopoverTargetProps>(
+  (props, ref) => {
+    const { children, refProp, popupType, ...others } =
+      useComponentDefaultProps('PopoverTarget', defaultProps, props);
 
-  if (!isElement(children)) {
-    throw new Error(POPOVER_ERRORS.children);
+    if (!isElement(children)) {
+      throw new Error(POPOVER_ERRORS.children);
+    }
+
+    const forwardedProps = others as any;
+    const ctx = usePopoverContext();
+    const targetRef = useMergedRef(ctx.reference, (children as any).ref, ref);
+
+    const accessibleProps = ctx.withRoles
+      ? {
+          'aria-haspopup': popupType,
+          'aria-expanded': ctx.opened,
+          'aria-controls': ctx.getDropdownId(),
+          id: ctx.getTargetId(),
+        }
+      : {};
+
+    return cloneElement(children, {
+      ...forwardedProps,
+      ...accessibleProps,
+      ...ctx.targetProps,
+      className: clsx(
+        ctx.targetProps.className,
+        forwardedProps.className,
+        children.props.className
+      ),
+      [refProp]: targetRef,
+      ...(!ctx.controlled ? { onClick: ctx.onToggle } : null),
+    });
   }
+);
 
-  const forwardedProps = others as any;
-  const ctx = usePopoverContext();
-  const targetRef = useMergedRef(ctx.reference, (children as any).ref, ref);
-
-  const accessibleProps = ctx.withRoles
-    ? {
-        'aria-haspopup': popupType,
-        'aria-expanded': ctx.opened,
-        'aria-controls': ctx.getDropdownId(),
-        id: ctx.getTargetId(),
-      }
-    : {};
-
-  return cloneElement(children, {
-    ...forwardedProps,
-    ...accessibleProps,
-    ...ctx.targetProps,
-    className: clsx(ctx.targetProps.className, forwardedProps.className, children.props.className),
-    [refProp]: targetRef,
-    ...(!ctx.controlled ? { onClick: ctx.onToggle } : null),
-  });
-});
-
-PopoverTarget.displayName = '@mantine/core/PopoverTarget';
+PopoverTarget.displayName = '@worldprint/wdesign-core/PopoverTarget';

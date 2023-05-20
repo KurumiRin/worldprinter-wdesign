@@ -22,7 +22,7 @@ import type {
   SelectProps,
   MultiSelectProps,
   FlexProps,
-} from '@mantine/core';
+} from '@worldprint/wdesign-core';
 import type {
   AggregationFn,
   Cell,
@@ -612,7 +612,7 @@ export type MRT_DisplayColumnIds =
 
 export type MRT_CreateTableFeature<
   TData extends Record<string, any> = {},
-  TFeature = any,
+  TFeature = any
 > = (table: MRT_TableInstance<TData>) => TFeature;
 
 /**
@@ -715,7 +715,7 @@ export type MantineReactTableProps<TData extends Record<string, any> = {}> =
     getRowId?: (
       originalRow: TData,
       index: number,
-      parentRow: MRT_Row<TData>,
+      parentRow: MRT_Row<TData>
     ) => string;
     globalFilterFn?: MRT_FilterOption;
     globalFilterModeOptions?: MRT_FilterOption[] | null;
@@ -1105,24 +1105,24 @@ export const MantineReactTable = <TData extends Record<string, any> = {}>({
       ...MRT_Localization_EN,
       ...localization,
     }),
-    [localization],
+    [localization]
   );
   const _aggregationFns = useMemo(
     () => ({ ...MRT_AggregationFns, ...aggregationFns }),
-    [],
+    []
   );
   const _filterFns = useMemo(() => ({ ...MRT_FilterFns, ...filterFns }), []);
   const _sortingFns = useMemo(() => ({ ...MRT_SortingFns, ...sortingFns }), []);
   const _defaultColumn = useMemo(
     () => ({ ...MRT_DefaultColumn, ...defaultColumn }),
-    [defaultColumn],
+    [defaultColumn]
   );
   const _defaultDisplayColumn = useMemo(
     () => ({
       ...MRT_DefaultDisplayColumn,
       ...defaultDisplayColumn,
     }),
-    [defaultDisplayColumn],
+    [defaultDisplayColumn]
   );
 
   if (rest.enableRowVirtualization || rest.enableColumnVirtualization) {

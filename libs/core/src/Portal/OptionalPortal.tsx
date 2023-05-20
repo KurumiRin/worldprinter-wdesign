@@ -6,7 +6,11 @@ export interface OptionalPortalProps extends PortalProps {
   withinPortal?: boolean;
 }
 
-export function OptionalPortal({ withinPortal = true, children, ...others }: OptionalPortalProps) {
+export function OptionalPortal({
+  withinPortal = true,
+  children,
+  ...others
+}: OptionalPortalProps) {
   if (withinPortal) {
     return <Portal {...others}>{children}</Portal>;
   }
@@ -14,4 +18,4 @@ export function OptionalPortal({ withinPortal = true, children, ...others }: Opt
   return <>{children}</>;
 }
 
-OptionalPortal.displayName = '@mantine/core/OptionalPortal';
+OptionalPortal.displayName = '@worldprint/wdesign-core/OptionalPortal';

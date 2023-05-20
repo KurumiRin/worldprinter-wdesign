@@ -1,8 +1,9 @@
-import type { DrawerStylesNames } from '@mantine/core';
+import type { DrawerStylesNames } from '@worldprint/wdesign-core';
 
 export const Drawer: Record<DrawerStylesNames, string> = {
   root: 'Root element',
-  inner: 'Element used to position drawer, has fixed position, takes entire screen',
+  inner:
+    'Element used to position drawer, has fixed position, takes entire screen',
   content: 'Drawer.Content root element',
   header: 'Contains title and close button',
   overlay: 'Overlay displayed under the Drawer.Content',

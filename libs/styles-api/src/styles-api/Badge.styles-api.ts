@@ -1,4 +1,4 @@
-import { BadgeStylesNames } from '@mantine/core';
+import { BadgeStylesNames } from '@worldprint/wdesign-core';
 
 export const Badge: Record<BadgeStylesNames, string> = {
   root: 'Root element',

@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { useComponentDefaultProps } from '@mantine/core';
+import { useComponentDefaultProps } from '@worldprint/wdesign-core';
 import { useDatesInput } from '../../hooks';
 import { pickCalendarProps } from '../Calendar';
 import { MonthPicker, MonthPickerBaseProps } from '../MonthPicker';
@@ -32,92 +32,94 @@ const defaultProps: Partial<MonthPickerInputProps> = {
   dropdownType: 'popover',
 };
 
-export const MonthPickerInput: MonthPickerInputComponent = forwardRef((props, ref) => {
-  const {
-    type,
-    value,
-    defaultValue,
-    onChange,
-    valueFormat,
-    labelSeparator,
-    locale,
-    classNames,
-    styles,
-    unstyled,
-    closeOnChange,
-    variant,
-    size,
-    dropdownType,
-    sortDates,
-    minDate,
-    maxDate,
-    ...rest
-  } = useComponentDefaultProps('MonthPickerInput', defaultProps, props);
+export const MonthPickerInput: MonthPickerInputComponent = forwardRef(
+  (props, ref) => {
+    const {
+      type,
+      value,
+      defaultValue,
+      onChange,
+      valueFormat,
+      labelSeparator,
+      locale,
+      classNames,
+      styles,
+      unstyled,
+      closeOnChange,
+      variant,
+      size,
+      dropdownType,
+      sortDates,
+      minDate,
+      maxDate,
+      ...rest
+    } = useComponentDefaultProps('MonthPickerInput', defaultProps, props);
 
-  const { calendarProps, others } = pickCalendarProps(rest);
+    const { calendarProps, others } = pickCalendarProps(rest);
 
-  const {
-    _value,
-    setValue,
-    formattedValue,
-    dropdownHandlers,
-    dropdownOpened,
-    onClear,
-    shouldClear,
-  } = useDatesInput({
-    type,
-    value,
-    defaultValue,
-    onChange,
-    locale,
-    format: valueFormat,
-    labelSeparator,
-    closeOnChange,
-    sortDates,
-  });
+    const {
+      _value,
+      setValue,
+      formattedValue,
+      dropdownHandlers,
+      dropdownOpened,
+      onClear,
+      shouldClear,
+    } = useDatesInput({
+      type,
+      value,
+      defaultValue,
+      onChange,
+      locale,
+      format: valueFormat,
+      labelSeparator,
+      closeOnChange,
+      sortDates,
+    });
 
-  return (
-    <PickerInputBase
-      formattedValue={formattedValue}
-      dropdownOpened={dropdownOpened}
-      dropdownHandlers={dropdownHandlers}
-      classNames={classNames}
-      styles={styles}
-      unstyled={unstyled}
-      __staticSelector="MonthPickerInput"
-      ref={ref}
-      onClear={onClear}
-      shouldClear={shouldClear}
-      value={_value}
-      type={type}
-      variant={variant}
-      size={size}
-      dropdownType={dropdownType}
-      {...others}
-    >
-      <MonthPicker
-        {...calendarProps}
-        type={type}
-        value={_value}
-        defaultDate={
-          Array.isArray(_value)
-            ? _value[0] || getDefaultClampedDate({ maxDate, minDate })
-            : _value || getDefaultClampedDate({ maxDate, minDate })
-        }
-        onChange={setValue}
-        locale={locale}
+    return (
+      <PickerInputBase
+        formattedValue={formattedValue}
+        dropdownOpened={dropdownOpened}
+        dropdownHandlers={dropdownHandlers}
         classNames={classNames}
         styles={styles}
         unstyled={unstyled}
         __staticSelector="MonthPickerInput"
-        __stopPropagation={dropdownType === 'popover'}
+        ref={ref}
+        onClear={onClear}
+        shouldClear={shouldClear}
+        value={_value}
+        type={type}
         variant={variant}
         size={size}
-        minDate={minDate}
-        maxDate={maxDate}
-      />
-    </PickerInputBase>
-  );
-});
+        dropdownType={dropdownType}
+        {...others}
+      >
+        <MonthPicker
+          {...calendarProps}
+          type={type}
+          value={_value}
+          defaultDate={
+            Array.isArray(_value)
+              ? _value[0] || getDefaultClampedDate({ maxDate, minDate })
+              : _value || getDefaultClampedDate({ maxDate, minDate })
+          }
+          onChange={setValue}
+          locale={locale}
+          classNames={classNames}
+          styles={styles}
+          unstyled={unstyled}
+          __staticSelector="MonthPickerInput"
+          __stopPropagation={dropdownType === 'popover'}
+          variant={variant}
+          size={size}
+          minDate={minDate}
+          maxDate={maxDate}
+        />
+      </PickerInputBase>
+    );
+  }
+);
 
-MonthPickerInput.displayName = '@mantine/dates/MonthPickerInput';
+MonthPickerInput.displayName = '@worldprint/wdesign-dates/MonthPickerInput';

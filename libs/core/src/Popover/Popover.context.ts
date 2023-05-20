@@ -1,6 +1,6 @@
 import { ReferenceType } from '@floating-ui/react';
-import { createSafeContext } from '@mantine/utils';
-import { MantineNumberSize, MantineShadow, ClassNames, Styles } from '@mantine/styles';
+import { createSafeContext } from '@worldprint/wdesign-utils';
+import { MantineNumberSize, MantineShadow, ClassNames, Styles } from '@worldprint/wdesign-styles';
 import { FloatingPosition, ArrowPosition } from '../Floating';
 import { TransitionOverride } from '../Transition';
 import { PortalProps } from '../Portal';

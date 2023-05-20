@@ -5,7 +5,7 @@ import {
   TypographyStylesProvider,
   Selectors,
   useComponentDefaultProps,
-} from '@mantine/core';
+} from '@worldprint/wdesign-core';
 import { EditorContent } from '@tiptap/react';
 import { useRichTextEditorContext } from '../RichTextEditor.context';
 import useStyles from './Content.styles';
@@ -51,4 +51,4 @@ export const Content = forwardRef<HTMLDivElement, RichTextEditorContentProps>((p
   );
 });
 
-Content.displayName = '@mantine/tiptap/Content';
+Content.displayName = '@worldprint/wdesign-tiptap/Content';

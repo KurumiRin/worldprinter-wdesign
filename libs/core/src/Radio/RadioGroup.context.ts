@@ -1,4 +1,4 @@
-import { MantineSize } from '@mantine/styles';
+import { MantineSize } from '@worldprint/wdesign-styles';
 import { createContext, useContext } from 'react';
 
 interface RadioGroupContextValue {

@@ -4,7 +4,7 @@ import {
   CSSObject,
   useComponentDefaultProps,
   MantineTheme,
-} from '@mantine/styles';
+} from '@worldprint/wdesign-styles';
 import useStyles from './MediaQuery.styles';
 
 export interface MediaQueryProps {
@@ -27,11 +27,8 @@ export interface MediaQueryProps {
 }
 
 export function MediaQuery(props: MediaQueryProps) {
-  const { children, smallerThan, largerThan, query, styles, className } = useComponentDefaultProps(
-    'MediaQuery',
-    {},
-    props
-  );
+  const { children, smallerThan, largerThan, query, styles, className } =
+    useComponentDefaultProps('MediaQuery', {}, props);
 
   const { classes, cx } = useStyles(
     { smallerThan, largerThan, query, styles },
@@ -49,4 +46,4 @@ export function MediaQuery(props: MediaQueryProps) {
   return child;
 }
 
-MediaQuery.displayName = '@mantine/core/MediaQuery';
+MediaQuery.displayName = '@worldprint/wdesign-core/MediaQuery';

@@ -15,4 +15,4 @@ export function StarIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   );
 }
 
-StarIcon.displayName = '@mantine/core/StarIcon';
+StarIcon.displayName = '@worldprint/wdesign-core/StarIcon';

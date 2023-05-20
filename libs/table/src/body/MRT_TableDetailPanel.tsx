@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Collapse } from '@mantine/core';
+import { Box, Collapse } from '@worldprint/wdesign-core';
 import type { MRT_Row, MRT_TableInstance, MRT_VirtualItem } from '..';
 
 interface Props {
@@ -31,7 +31,12 @@ export const MRT_TableDetailPanel = ({
 
   const tableRowProps =
     mantineTableBodyRowProps instanceof Function
-      ? mantineTableBodyRowProps({ isDetailPanel: true, row, staticRowIndex: rowIndex, table })
+      ? mantineTableBodyRowProps({
+          isDetailPanel: true,
+          row,
+          staticRowIndex: rowIndex,
+          table,
+        })
       : mantineTableBodyRowProps;
 
   const tableCellProps =

@@ -1,4 +1,4 @@
-import { MantineColor, useMantineTheme } from '@mantine/core';
+import { MantineColor, useMantineTheme } from '@worldprint/wdesign-core';
 
 export type MantineLogoVariant = 'mantine.dev' | 'ui.mantine.dev';
 
@@ -18,13 +18,20 @@ export function useMantineLogoColors(
 
   if (variant === 'mantine.dev') {
     return {
-      background: inverted ? theme.white : theme.fn.themeColor(color || theme.primaryColor, 5),
-      color: inverted ? theme.fn.themeColor(color || theme.primaryColor, 5) : theme.white,
+      background: inverted
+        ? theme.white
+        : theme.fn.themeColor(color || theme.primaryColor, 5),
+      color: inverted
+        ? theme.fn.themeColor(color || theme.primaryColor, 5)
+        : theme.white,
     };
   }
 
   return {
-    background: theme.colorScheme === 'dark' ? theme.colors.yellow[4] : theme.colors.cyan[6],
+    background:
+      theme.colorScheme === 'dark'
+        ? theme.colors.yellow[4]
+        : theme.colors.cyan[6],
     color: theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.white,
   };
 }

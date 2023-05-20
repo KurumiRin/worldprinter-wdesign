@@ -1,13 +1,16 @@
 import React from 'react';
-import { EmotionCache, useEmotionCache } from '@mantine/core';
-import { useIsomorphicEffect } from '@mantine/hooks';
+import { EmotionCache, useEmotionCache } from '@worldprint/wdesign-core';
+import { useIsomorphicEffect } from '@worldprint/wdesign-hooks';
 
 interface ClientProviderProps {
   children: React.ReactNode;
   emotionCache?: EmotionCache;
 }
 
-export function ClientProvider({ children, emotionCache }: ClientProviderProps) {
+export function ClientProvider({
+  children,
+  emotionCache,
+}: ClientProviderProps) {
   const defaultCache = useEmotionCache();
   const cache = emotionCache || defaultCache;
 

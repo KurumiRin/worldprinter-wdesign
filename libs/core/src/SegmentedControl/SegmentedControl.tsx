@@ -6,7 +6,7 @@ import {
   useId,
   useMergedRef,
   useIsomorphicEffect,
-} from '@mantine/hooks';
+} from '@worldprint/wdesign-hooks';
 import {
   DefaultProps,
   MantineNumberSize,
@@ -15,7 +15,7 @@ import {
   Selectors,
   useComponentDefaultProps,
   useMantineTheme,
-} from '@mantine/styles';
+} from '@worldprint/wdesign-styles';
 import { Box } from '../Box';
 import useStyles, {
   WRAPPER_PADDING,
@@ -31,7 +31,10 @@ export interface SegmentedControlItem {
 export type SegmentedControlStylesNames = Selectors<typeof useStyles>;
 
 export interface SegmentedControlProps
-  extends DefaultProps<SegmentedControlStylesNames, SegmentedControlStylesParams>,
+  extends DefaultProps<
+      SegmentedControlStylesNames,
+      SegmentedControlStylesParams
+    >,
     Omit<React.ComponentPropsWithoutRef<'div'>, 'value' | 'onChange'> {
   variant?: string;
 
@@ -84,7 +87,10 @@ const defaultProps = {
   transitionDuration: 200,
 };
 
-export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps>((props, ref) => {
+export const SegmentedControl = forwardRef<
+  HTMLDivElement,
+  SegmentedControlProps
+>((props, ref) => {
   const {
     className,
     disabled,
@@ -167,7 +173,10 @@ export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps
       const height = elementRect.height * scaledValue || 0;
 
       const offsetRight =
-        containerRect.width - element.parentElement.offsetLeft + WRAPPER_PADDING - width;
+        containerRect.width -
+        element.parentElement.offsetLeft +
+        WRAPPER_PADDING -
+        width;
       const offsetLeft = element.parentElement.offsetLeft - WRAPPER_PADDING;
 
       setActivePosition({
@@ -183,7 +192,9 @@ export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps
 
   const controls = data.map((item) => (
     <div
-      className={cx(classes.control, { [classes.controlActive]: _value === item.value })}
+      className={cx(classes.control, {
+        [classes.controlActive]: _value === item.value,
+      })}
       key={item.value}
     >
       <input
@@ -199,7 +210,9 @@ export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps
 
       <label
         className={classes.label}
-        data-active={(_value === item.value && !(disabled || item.disabled)) || undefined}
+        data-active={
+          (_value === item.value && !(disabled || item.disabled)) || undefined
+        }
         data-disabled={disabled || item.disabled || undefined}
         htmlFor={`${uuid}-${item.value}`}
         ref={(node) => {
@@ -236,4 +249,4 @@ export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps
   );
 });
 
-SegmentedControl.displayName = '@mantine/core/SegmentedControl';
+SegmentedControl.displayName = '@worldprint/wdesign-core/SegmentedControl';

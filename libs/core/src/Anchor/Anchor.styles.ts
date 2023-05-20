@@ -1,4 +1,4 @@
-import { createStyles, MantineColor, MantineTheme } from '@mantine/styles';
+import { createStyles, MantineColor, MantineTheme } from '@worldprint/wdesign-styles';
 
 export interface AnchorStylesParams {
   color: MantineColor;

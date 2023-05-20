@@ -1,4 +1,4 @@
-import { createStyles, MantineNumberSize, MantineColor, rem, getSize } from '@mantine/styles';
+import { createStyles, MantineNumberSize, MantineColor, rem, getSize } from '@worldprint/wdesign-styles';
 
 export interface PaginationStylesParams {
   radius: MantineNumberSize;

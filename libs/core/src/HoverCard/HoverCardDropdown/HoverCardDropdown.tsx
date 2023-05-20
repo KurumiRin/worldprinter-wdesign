@@ -1,6 +1,6 @@
 import React from 'react';
-import { createEventHandler } from '@mantine/utils';
-import { useComponentDefaultProps } from '@mantine/styles';
+import { createEventHandler } from '@worldprint/wdesign-utils';
+import { useComponentDefaultProps } from '@worldprint/wdesign-styles';
 import { Popover, PopoverDropdownProps } from '../../Popover';
 import { useHoverCardContext } from '../HoverCard.context';
 
@@ -30,4 +30,4 @@ export function HoverCardDropdown(props: HoverCardDropdownProps) {
   );
 }
 
-HoverCardDropdown.displayName = '@mantine/core/HoverCardDropdown';
+HoverCardDropdown.displayName = '@worldprint/wdesign-core/HoverCardDropdown';

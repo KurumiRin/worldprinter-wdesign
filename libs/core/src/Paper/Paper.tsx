@@ -4,8 +4,8 @@ import {
   MantineNumberSize,
   MantineShadow,
   useComponentDefaultProps,
-} from '@mantine/styles';
-import { createPolymorphicComponent } from '@mantine/utils';
+} from '@worldprint/wdesign-styles';
+import { createPolymorphicComponent } from '@worldprint/wdesign-utils';
 import { Box } from '../Box';
 import useStyles, { PaperStylesParams } from './Paper.styles';
 
@@ -45,6 +45,6 @@ export const _Paper = forwardRef<HTMLDivElement, PaperProps>((props, ref) => {
   );
 });
 
-_Paper.displayName = '@mantine/core/Paper';
+_Paper.displayName = '@worldprint/wdesign-core/Paper';
 
 export const Paper = createPolymorphicComponent<'div', PaperProps>(_Paper);

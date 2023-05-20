@@ -86,4 +86,4 @@ export function Transition({
   );
 }
 
-Transition.displayName = '@mantine/core/Transition';
+Transition.displayName = '@worldprint/wdesign-core/Transition';

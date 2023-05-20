@@ -1,5 +1,10 @@
 import React, { forwardRef } from 'react';
-import { DefaultProps, MantineSize, Selectors, useComponentDefaultProps } from '@mantine/styles';
+import {
+  DefaultProps,
+  MantineSize,
+  Selectors,
+  useComponentDefaultProps,
+} from '@worldprint/wdesign-styles';
 import { Text } from '../../Text';
 import useStyles from './InputDescription.styles';
 
@@ -23,7 +28,10 @@ const defaultProps: Partial<InputDescriptionProps> = {
   size: 'sm',
 };
 
-export const InputDescription = forwardRef<HTMLDivElement, InputDescriptionProps>((props, ref) => {
+export const InputDescription = forwardRef<
+  HTMLDivElement,
+  InputDescriptionProps
+>((props, ref) => {
   const {
     children,
     className,
@@ -58,4 +66,4 @@ export const InputDescription = forwardRef<HTMLDivElement, InputDescriptionProps
   );
 });
 
-InputDescription.displayName = '@mantine/core/InputDescription';
+InputDescription.displayName = '@worldprint/wdesign-core/InputDescription';

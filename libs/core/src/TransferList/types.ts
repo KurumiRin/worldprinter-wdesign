@@ -1,4 +1,4 @@
-import { MantineNumberSize } from '@mantine/styles';
+import { MantineNumberSize } from '@worldprint/wdesign-styles';
 
 export interface TransferListItem {
   value: string;

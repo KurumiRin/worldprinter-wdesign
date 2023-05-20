@@ -1,5 +1,5 @@
-import { MantineNumberSize, Styles, ClassNames } from '@mantine/core';
-import { createSafeContext } from '@mantine/utils';
+import { MantineNumberSize, Styles, ClassNames } from '@worldprint/wdesign-core';
+import { createSafeContext } from '@worldprint/wdesign-utils';
 import { CAROUSEL_ERRORS } from './Carousel.errors';
 import { CarouselOrientation, Embla, CarouselBreakpoint } from './types';
 import type { CarouselStylesNames } from './Carousel';

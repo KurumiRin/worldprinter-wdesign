@@ -1,6 +1,11 @@
 import React, { useState, useEffect, forwardRef } from 'react';
-import { DefaultProps, Selectors, useComponentDefaultProps, rem } from '@mantine/styles';
-import { useElementSize } from '@mantine/hooks';
+import {
+  DefaultProps,
+  Selectors,
+  useComponentDefaultProps,
+  rem,
+} from '@worldprint/wdesign-styles';
+import { useElementSize } from '@worldprint/wdesign-hooks';
 import { Anchor } from '../Anchor';
 import { Box } from '../Box';
 import useStyles, { SpoilerStylesParams } from './Spoiler.styles';
@@ -37,61 +42,67 @@ const defaultProps: Partial<SpoilerProps> = {
   initialState: false,
 };
 
-export const Spoiler = forwardRef<HTMLDivElement, SpoilerProps>((props, ref) => {
-  const {
-    className,
-    children,
-    maxHeight,
-    hideLabel,
-    showLabel,
-    transitionDuration,
-    controlRef,
-    initialState,
-    classNames,
-    styles,
-    unstyled,
-    variant,
-    ...others
-  } = useComponentDefaultProps('Spoiler', defaultProps, props);
+export const Spoiler = forwardRef<HTMLDivElement, SpoilerProps>(
+  (props, ref) => {
+    const {
+      className,
+      children,
+      maxHeight,
+      hideLabel,
+      showLabel,
+      transitionDuration,
+      controlRef,
+      initialState,
+      classNames,
+      styles,
+      unstyled,
+      variant,
+      ...others
+    } = useComponentDefaultProps('Spoiler', defaultProps, props);
 
-  const { classes, cx } = useStyles(
-    { transitionDuration },
-    { name: 'Spoiler', classNames, styles, unstyled, variant }
-  );
+    const { classes, cx } = useStyles(
+      { transitionDuration },
+      { name: 'Spoiler', classNames, styles, unstyled, variant }
+    );
 
-  const [show, setShowState] = useState(initialState);
-  const [spoiler, setSpoilerState] = useState(initialState);
-  const { ref: contentRef, height } = useElementSize();
+    const [show, setShowState] = useState(initialState);
+    const [spoiler, setSpoilerState] = useState(initialState);
+    const { ref: contentRef, height } = useElementSize();
 
-  const spoilerMoreContent = show ? hideLabel : showLabel;
+    const spoilerMoreContent = show ? hideLabel : showLabel;
 
-  useEffect(() => {
-    setSpoilerState(maxHeight < height);
-  }, [height, maxHeight, children]);
+    useEffect(() => {
+      setSpoilerState(maxHeight < height);
+    }, [height, maxHeight, children]);
 
-  return (
-    <Box className={cx(classes.root, className)} ref={ref} {...others}>
-      <div
-        className={classes.content}
-        style={{
-          maxHeight: !show ? rem(maxHeight) : height ? rem(height) : undefined,
-        }}
-      >
-        <div ref={contentRef}>{children}</div>
-      </div>
-
-      {spoiler && (
-        <Anchor
-          component="button"
-          ref={controlRef}
-          onClick={() => setShowState((opened) => !opened)}
-          className={classes.control}
+    return (
+      <Box className={cx(classes.root, className)} ref={ref} {...others}>
+        <div
+          className={classes.content}
+          style={{
+            maxHeight: !show
+              ? rem(maxHeight)
+              : height
+              ? rem(height)
+              : undefined,
+          }}
         >
-          {spoilerMoreContent}
-        </Anchor>
-      )}
-    </Box>
-  );
-});
+          <div ref={contentRef}>{children}</div>
+        </div>
 
-Spoiler.displayName = '@mantine/core/Spoiler';
+        {spoiler && (
+          <Anchor
+            component="button"
+            ref={controlRef}
+            onClick={() => setShowState((opened) => !opened)}
+            className={classes.control}
+          >
+            {spoilerMoreContent}
+          </Anchor>
+        )}
+      </Box>
+    );
+  }
+);
+
+Spoiler.displayName = '@worldprint/wdesign-core/Spoiler';

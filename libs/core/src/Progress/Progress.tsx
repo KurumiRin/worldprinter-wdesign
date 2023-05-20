@@ -5,7 +5,7 @@ import {
   MantineColor,
   Selectors,
   useComponentDefaultProps,
-} from '@mantine/styles';
+} from '@worldprint/wdesign-styles';
 import { Box } from '../Box';
 import { Text } from '../Text';
 import { Tooltip } from '../Tooltip';
@@ -71,85 +71,89 @@ const defaultProps: Partial<ProgressProps> = {
   label: '',
 };
 
-export const Progress = forwardRef<HTMLDivElement, ProgressProps>((props, ref) => {
-  const {
-    className,
-    value,
-    color,
-    size,
-    radius,
-    striped,
-    animate,
-    label,
-    'aria-label': ariaLabel,
-    classNames,
-    styles,
-    sections,
-    unstyled,
-    variant,
-    ...others
-  } = useComponentDefaultProps('Progress', defaultProps, props);
+export const Progress = forwardRef<HTMLDivElement, ProgressProps>(
+  (props, ref) => {
+    const {
+      className,
+      value,
+      color,
+      size,
+      radius,
+      striped,
+      animate,
+      label,
+      'aria-label': ariaLabel,
+      classNames,
+      styles,
+      sections,
+      unstyled,
+      variant,
+      ...others
+    } = useComponentDefaultProps('Progress', defaultProps, props);
 
-  const { classes, cx, theme } = useStyles(
-    { color, radius },
-    { name: 'Progress', classNames, styles, unstyled, variant, size }
-  );
+    const { classes, cx, theme } = useStyles(
+      { color, radius },
+      { name: 'Progress', classNames, styles, unstyled, variant, size }
+    );
 
-  const segments = Array.isArray(sections)
-    ? getCumulativeSections(sections).map(
-        (
-          {
-            tooltip,
-            accumulated,
-            value: sectionValue,
-            label: sectionLabel,
-            color: sectionColor,
-            ...sectionProps
-          },
-          index
-        ) => (
-          <Tooltip.Floating label={tooltip} disabled={!tooltip} key={index}>
-            <Box
-              {...sectionProps}
-              className={cx(classes.bar, sectionProps.className)}
-              data-striped={striped || animate || undefined}
-              data-animate={animate || undefined}
-              sx={{
-                width: `${sectionValue}%`,
-                left: `${accumulated}%`,
-                backgroundColor: theme.fn.variant({
-                  variant: 'filled',
-                  primaryFallback: false,
-                  color: sectionColor || theme.primaryColor,
-                }).background,
-              }}
-            >
-              {sectionLabel && <Text className={classes.label}>{sectionLabel}</Text>}
-            </Box>
-          </Tooltip.Floating>
+    const segments = Array.isArray(sections)
+      ? getCumulativeSections(sections).map(
+          (
+            {
+              tooltip,
+              accumulated,
+              value: sectionValue,
+              label: sectionLabel,
+              color: sectionColor,
+              ...sectionProps
+            },
+            index
+          ) => (
+            <Tooltip.Floating label={tooltip} disabled={!tooltip} key={index}>
+              <Box
+                {...sectionProps}
+                className={cx(classes.bar, sectionProps.className)}
+                data-striped={striped || animate || undefined}
+                data-animate={animate || undefined}
+                sx={{
+                  width: `${sectionValue}%`,
+                  left: `${accumulated}%`,
+                  backgroundColor: theme.fn.variant({
+                    variant: 'filled',
+                    primaryFallback: false,
+                    color: sectionColor || theme.primaryColor,
+                  }).background,
+                }}
+              >
+                {sectionLabel && (
+                  <Text className={classes.label}>{sectionLabel}</Text>
+                )}
+              </Box>
+            </Tooltip.Floating>
+          )
         )
-      )
-    : null;
+      : null;
 
-  return (
-    <Box className={cx(classes.root, className)} ref={ref} {...others}>
-      {segments || (
-        <div
-          role="progressbar"
-          aria-valuemax={100}
-          aria-valuemin={0}
-          aria-valuenow={value}
-          aria-label={ariaLabel}
-          className={classes.bar}
-          style={{ width: `${value}%` }}
-          data-striped={striped || animate || undefined}
-          data-animate={animate || undefined}
-        >
-          {label ? <Text className={classes.label}>{label}</Text> : ''}
-        </div>
-      )}
-    </Box>
-  );
-});
+    return (
+      <Box className={cx(classes.root, className)} ref={ref} {...others}>
+        {segments || (
+          <div
+            role="progressbar"
+            aria-valuemax={100}
+            aria-valuemin={0}
+            aria-valuenow={value}
+            aria-label={ariaLabel}
+            className={classes.bar}
+            style={{ width: `${value}%` }}
+            data-striped={striped || animate || undefined}
+            data-animate={animate || undefined}
+          >
+            {label ? <Text className={classes.label}>{label}</Text> : ''}
+          </div>
+        )}
+      </Box>
+    );
+  }
+);
 
-Progress.displayName = '@mantine/core/Progress';
+Progress.displayName = '@worldprint/wdesign-core/Progress';

@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { DefaultProps, useComponentDefaultProps } from '@mantine/styles';
+import { DefaultProps, useComponentDefaultProps } from '@worldprint/wdesign-styles';
 import { Box } from '../Box';
 import useStyles from './TypographyStylesProvider.styles';
 
@@ -12,22 +12,24 @@ export interface TypographyStylesProviderProps
   children: React.ReactNode;
 }
 
-export const TypographyStylesProvider = forwardRef<HTMLDivElement, TypographyStylesProviderProps>(
-  (props, ref) => {
-    const { className, unstyled, variant, ...others } = useComponentDefaultProps(
-      'TypographyStylesProvider',
-      {},
-      props
-    );
+export const TypographyStylesProvider = forwardRef<
+  HTMLDivElement,
+  TypographyStylesProviderProps
+>((props, ref) => {
+  const { className, unstyled, variant, ...others } = useComponentDefaultProps(
+    'TypographyStylesProvider',
+    {},
+    props
+  );
 
-    const { classes, cx } = useStyles(null, {
-      name: 'TypographyStylesProvider',
-      unstyled,
-      variant,
-    });
+  const { classes, cx } = useStyles(null, {
+    name: 'TypographyStylesProvider',
+    unstyled,
+    variant,
+  });
 
-    return <Box className={cx(classes.root, className)} ref={ref} {...others} />;
-  }
-);
+  return <Box className={cx(classes.root, className)} ref={ref} {...others} />;
+});
 
-TypographyStylesProvider.displayName = '@mantine/core/TypographyStylesProvider';
+TypographyStylesProvider.displayName =
+  '@worldprint/wdesign-core/TypographyStylesProvider';

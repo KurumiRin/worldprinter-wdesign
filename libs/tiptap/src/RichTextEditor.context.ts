@@ -1,5 +1,5 @@
-import { Styles, ClassNames } from '@mantine/core';
-import { createSafeContext } from '@mantine/utils';
+import { Styles, ClassNames } from '@worldprint/wdesign-core';
+import { createSafeContext } from '@worldprint/wdesign-utils';
 import { Editor } from '@tiptap/react';
 import { RichTextEditorLabels } from './labels';
 import type { RichTextEditorStylesNames } from './RichTextEditor';
@@ -16,4 +16,6 @@ interface RichTextEditorContext {
 }
 
 export const [RichTextEditorProvider, useRichTextEditorContext] =
-  createSafeContext<RichTextEditorContext>('RichTextEditor was not found in tree');
+  createSafeContext<RichTextEditorContext>(
+    'RichTextEditor was not found in tree'
+  );

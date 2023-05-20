@@ -1,4 +1,4 @@
-import { createStyles, MantineNumberSize, MantineShadow, rem } from '@mantine/styles';
+import { createStyles, MantineNumberSize, MantineShadow, rem } from '@worldprint/wdesign-styles';
 
 export interface PaperStylesParams {
   radius: MantineNumberSize;

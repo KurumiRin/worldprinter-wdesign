@@ -1,4 +1,4 @@
-import { ImageStylesNames } from '@mantine/core';
+import { ImageStylesNames } from '@worldprint/wdesign-core';
 
 export const Image: Record<ImageStylesNames, string> = {
   root: 'Root element',

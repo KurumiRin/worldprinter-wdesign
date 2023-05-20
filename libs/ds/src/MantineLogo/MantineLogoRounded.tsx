@@ -1,8 +1,14 @@
 import React from 'react';
-import { rem } from '@mantine/core';
+import { rem } from '@worldprint/wdesign-core';
 import { useMantineLogoColors, LogoProps } from './use-mantine-logo-colors';
 
-export function MantineLogoRounded({ size, color, variant, inverted, ...others }: LogoProps) {
+export function MantineLogoRounded({
+  size,
+  color,
+  variant,
+  inverted,
+  ...others
+}: LogoProps) {
   const colors = useMantineLogoColors(color, variant, inverted);
 
   return (

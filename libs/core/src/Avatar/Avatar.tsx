@@ -7,8 +7,8 @@ import {
   useComponentDefaultProps,
   MantineGradient,
   Variants,
-} from '@mantine/styles';
-import { createPolymorphicComponent } from '@mantine/utils';
+} from '@worldprint/wdesign-styles';
+import { createPolymorphicComponent } from '@worldprint/wdesign-utils';
 import { Box } from '../Box';
 import { AvatarPlaceholderIcon } from './AvatarPlaceholderIcon';
 import { AvatarGroup } from './AvatarGroup/AvatarGroup';
@@ -17,7 +17,8 @@ import useStyles, { AvatarStylesParams } from './Avatar.styles';
 
 export type AvatarStylesNames = Selectors<typeof useStyles>;
 
-export interface AvatarProps extends DefaultProps<AvatarStylesNames, AvatarStylesParams> {
+export interface AvatarProps
+  extends DefaultProps<AvatarStylesNames, AvatarStylesParams> {
   /** Image url */
   src?: string | null;
 
@@ -74,7 +75,13 @@ export const _Avatar = forwardRef<HTMLDivElement, AvatarProps>((props, ref) => {
   const [error, setError] = useState(!src);
 
   const { classes, cx } = useStyles(
-    { color, radius, withinGroup: ctx.withinGroup, spacing: ctx.spacing, gradient },
+    {
+      color,
+      radius,
+      withinGroup: ctx.withinGroup,
+      spacing: ctx.spacing,
+      gradient,
+    },
     { classNames, styles, unstyled, name: 'Avatar', variant, size }
   );
 
@@ -83,10 +90,17 @@ export const _Avatar = forwardRef<HTMLDivElement, AvatarProps>((props, ref) => {
   }, [src]);
 
   return (
-    <Box component="div" className={cx(classes.root, className)} ref={ref} {...others}>
+    <Box
+      component="div"
+      className={cx(classes.root, className)}
+      ref={ref}
+      {...others}
+    >
       {error ? (
         <div className={classes.placeholder} title={alt}>
-          {children || <AvatarPlaceholderIcon className={classes.placeholderIcon} />}
+          {children || (
+            <AvatarPlaceholderIcon className={classes.placeholderIcon} />
+          )}
         </div>
       ) : (
         <img
@@ -101,9 +115,11 @@ export const _Avatar = forwardRef<HTMLDivElement, AvatarProps>((props, ref) => {
   );
 }) as any;
 
-_Avatar.displayName = '@mantine/core/Avatar';
+_Avatar.displayName = '@worldprint/wdesign-core/Avatar';
 _Avatar.Group = AvatarGroup;
 
-export const Avatar = createPolymorphicComponent<'div', AvatarProps, { Group: typeof AvatarGroup }>(
-  _Avatar
-);
+export const Avatar = createPolymorphicComponent<
+  'div',
+  AvatarProps,
+  { Group: typeof AvatarGroup }
+>(_Avatar);

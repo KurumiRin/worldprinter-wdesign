@@ -1,4 +1,4 @@
-import { DefaultProps, Selectors, MantineNumberSize, MantineColor } from '@mantine/styles';
+import { DefaultProps, Selectors, MantineNumberSize, MantineColor } from '@worldprint/wdesign-styles';
 import { FloatingPosition } from '../Floating';
 import { PortalProps } from '../Portal';
 import useStyles, { TooltipStylesParams } from './Tooltip.styles';

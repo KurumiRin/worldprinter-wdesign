@@ -1,10 +1,16 @@
 import React, { forwardRef } from 'react';
-import { DefaultProps, getDefaultZIndex, useComponentDefaultProps } from '@mantine/styles';
-import { packSx } from '@mantine/utils';
+import {
+  DefaultProps,
+  getDefaultZIndex,
+  useComponentDefaultProps,
+} from '@worldprint/wdesign-styles';
+import { packSx } from '@worldprint/wdesign-utils';
 import { Box } from '../Box';
 import { OptionalPortal, PortalProps } from '../Portal';
 
-export interface AffixProps extends DefaultProps, React.ComponentPropsWithoutRef<'div'> {
+export interface AffixProps
+  extends DefaultProps,
+    React.ComponentPropsWithoutRef<'div'> {
   /** Element where portal should be rendered, by default new div element is created and appended to document.body */
   target?: HTMLDivElement;
 
@@ -32,15 +38,32 @@ const defaultProps: Partial<AffixProps> = {
   withinPortal: true,
 };
 
-export const Affix = forwardRef<HTMLDivElement, AffixProps>((props: AffixProps, ref) => {
-  const { target, position, zIndex, sx, withinPortal, portalProps, ...others } =
-    useComponentDefaultProps('Affix', defaultProps, props);
+export const Affix = forwardRef<HTMLDivElement, AffixProps>(
+  (props: AffixProps, ref) => {
+    const {
+      target,
+      position,
+      zIndex,
+      sx,
+      withinPortal,
+      portalProps,
+      ...others
+    } = useComponentDefaultProps('Affix', defaultProps, props);
 
-  return (
-    <OptionalPortal {...portalProps} withinPortal={withinPortal} target={target}>
-      <Box sx={[{ position: 'fixed', zIndex, ...position }, ...packSx(sx)]} ref={ref} {...others} />
-    </OptionalPortal>
-  );
-});
+    return (
+      <OptionalPortal
+        {...portalProps}
+        withinPortal={withinPortal}
+        target={target}
+      >
+        <Box
+          sx={[{ position: 'fixed', zIndex, ...position }, ...packSx(sx)]}
+          ref={ref}
+          {...others}
+        />
+      </OptionalPortal>
+    );
+  }
+);
 
-Affix.displayName = '@mantine/core/Affix';
+Affix.displayName = '@worldprint/wdesign-core/Affix';

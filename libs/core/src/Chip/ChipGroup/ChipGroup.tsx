@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unused-prop-types */
 import React from 'react';
-import { useUncontrolled } from '@mantine/hooks';
-import { useComponentDefaultProps } from '@mantine/styles';
+import { useUncontrolled } from '@worldprint/wdesign-hooks';
+import { useComponentDefaultProps } from '@worldprint/wdesign-styles';
 import { ChipGroupProvider } from '../ChipGroup.context';
 
 export interface ChipGroupProps<T extends boolean = false> {
@@ -24,11 +24,8 @@ export interface ChipGroupProps<T extends boolean = false> {
 const defaultProps: Partial<ChipGroupProps<false>> = {};
 
 export function ChipGroup<T extends boolean>(props: ChipGroupProps<T>) {
-  const { value, defaultValue, onChange, multiple, children } = useComponentDefaultProps(
-    'ChipGroup',
-    defaultProps as any,
-    props
-  );
+  const { value, defaultValue, onChange, multiple, children } =
+    useComponentDefaultProps('ChipGroup', defaultProps as any, props);
 
   const [_value, setValue] = useUncontrolled<string | string[]>({
     value,
@@ -43,17 +40,23 @@ export function ChipGroup<T extends boolean>(props: ChipGroupProps<T>) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const val = event.currentTarget.value;
     if (Array.isArray(_value)) {
-      setValue(_value.includes(val) ? _value.filter((v) => v !== val) : [..._value, val]);
+      setValue(
+        _value.includes(val)
+          ? _value.filter((v) => v !== val)
+          : [..._value, val]
+      );
     } else {
       setValue(val);
     }
   };
 
   return (
-    <ChipGroupProvider value={{ isChipSelected, onChange: handleChange, multiple }}>
+    <ChipGroupProvider
+      value={{ isChipSelected, onChange: handleChange, multiple }}
+    >
       {children}
     </ChipGroupProvider>
   );
 }
 
-ChipGroup.displayName = '@mantine/core/ChipGroup';
+ChipGroup.displayName = '@worldprint/wdesign-core/ChipGroup';

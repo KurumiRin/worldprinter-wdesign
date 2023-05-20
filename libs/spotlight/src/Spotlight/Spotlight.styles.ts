@@ -1,4 +1,4 @@
-import { createStyles, rem } from '@mantine/core';
+import { createStyles, rem } from '@worldprint/wdesign-core';
 
 export default createStyles((theme) => ({
   content: {
@@ -10,11 +10,14 @@ export default createStyles((theme) => ({
     border: 0,
     borderBottomRightRadius: 0,
     borderBottomLeftRadius: 0,
-    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+    backgroundColor:
+      theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
 
     '&, &:focus-within': {
       borderBottom: `${rem(1)} solid ${
-        theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[2]
+        theme.colorScheme === 'dark'
+          ? theme.colors.dark[5]
+          : theme.colors.gray[2]
       }`,
     },
   },

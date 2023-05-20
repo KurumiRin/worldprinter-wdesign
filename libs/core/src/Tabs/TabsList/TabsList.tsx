@@ -1,5 +1,9 @@
 import React, { forwardRef } from 'react';
-import { DefaultProps, Selectors, useComponentDefaultProps } from '@mantine/styles';
+import {
+  DefaultProps,
+  Selectors,
+  useComponentDefaultProps,
+} from '@worldprint/wdesign-styles';
 import { Box } from '../../Box';
 import { TabsPosition } from '../Tabs.types';
 import { useTabsContext } from '../Tabs.context';
@@ -7,7 +11,9 @@ import useStyles from './TabsList.styles';
 
 export type TabsListStylesNames = Selectors<typeof useStyles>;
 
-export interface TabsListProps extends DefaultProps, React.ComponentPropsWithoutRef<'div'> {
+export interface TabsListProps
+  extends DefaultProps,
+    React.ComponentPropsWithoutRef<'div'> {
   /** <Tabs.Tab /> components */
   children: React.ReactNode;
 
@@ -23,31 +29,39 @@ const defaultProps: Partial<TabsListProps> = {
   position: 'left',
 };
 
-export const TabsList = forwardRef<HTMLDivElement, TabsListProps>((props, ref) => {
-  const { children, className, grow, position, ...others } = useComponentDefaultProps(
-    'TabsList',
-    defaultProps,
-    props
-  );
+export const TabsList = forwardRef<HTMLDivElement, TabsListProps>(
+  (props, ref) => {
+    const { children, className, grow, position, ...others } =
+      useComponentDefaultProps('TabsList', defaultProps, props);
 
-  const { orientation, variant, color, radius, inverted, placement, classNames, styles, unstyled } =
-    useTabsContext();
-  const { classes, cx } = useStyles(
-    { orientation, grow, color, position, radius, inverted, placement },
-    { name: 'Tabs', unstyled, classNames, styles, variant }
-  );
+    const {
+      orientation,
+      variant,
+      color,
+      radius,
+      inverted,
+      placement,
+      classNames,
+      styles,
+      unstyled,
+    } = useTabsContext();
+    const { classes, cx } = useStyles(
+      { orientation, grow, color, position, radius, inverted, placement },
+      { name: 'Tabs', unstyled, classNames, styles, variant }
+    );
 
-  return (
-    <Box
-      {...others}
-      className={cx(classes.tabsList, className)}
-      ref={ref}
-      role="tablist"
-      aria-orientation={orientation}
-    >
-      {children}
-    </Box>
-  );
-});
+    return (
+      <Box
+        {...others}
+        className={cx(classes.tabsList, className)}
+        ref={ref}
+        role="tablist"
+        aria-orientation={orientation}
+      >
+        {children}
+      </Box>
+    );
+  }
+);
 
-TabsList.displayName = '@mantine/core/TabsList';
+TabsList.displayName = '@worldprint/wdesign-core/TabsList';

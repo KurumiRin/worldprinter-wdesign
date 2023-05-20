@@ -6,9 +6,9 @@ import {
   useComponentDefaultProps,
   ClassNames,
   Styles,
-} from '@mantine/styles';
-import { usePagination } from '@mantine/hooks';
-import { createEventHandler } from '@mantine/utils';
+} from '@worldprint/wdesign-styles';
+import { usePagination } from '@worldprint/wdesign-hooks';
+import { createEventHandler } from '@worldprint/wdesign-utils';
 import { PaginationProvider } from '../Pagination.context';
 import type { PaginationControlStylesNames } from '../PaginationControl/PaginationControl';
 import type { PaginationDotsStylesNames } from '../PaginationDots/PaginationDots';

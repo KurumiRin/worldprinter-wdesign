@@ -1,11 +1,14 @@
-import { createStyles, MantineTheme, rem } from '@mantine/core';
+import { createStyles, MantineTheme, rem } from '@worldprint/wdesign-core';
 
 interface ContentStylesParams {
   withCodeHighlightStyles: boolean;
   withTypographyStyles: boolean;
 }
 
-function getCodeHighlight(withCodeHighlightStyles: boolean, theme: MantineTheme) {
+function getCodeHighlight(
+  withCodeHighlightStyles: boolean,
+  theme: MantineTheme
+) {
   if (!withCodeHighlightStyles) {
     return null;
   }
@@ -19,7 +22,10 @@ function getCodeHighlight(withCodeHighlightStyles: boolean, theme: MantineTheme)
           ? theme.colors.dark[8]
           : theme.fn.rgba(theme.colors.gray[0], 0.65),
       borderRadius: theme.fn.radius(),
-      color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[9],
+      color:
+        theme.colorScheme === 'dark'
+          ? theme.colors.dark[0]
+          : theme.colors.gray[9],
       fontFamily: theme.fontFamilyMonospace,
       padding: `${theme.spacing.md} ${theme.spacing.xl}`,
 
@@ -31,7 +37,10 @@ function getCodeHighlight(withCodeHighlightStyles: boolean, theme: MantineTheme)
       },
 
       ' & .hljs-comment, & .hljs-quote': {
-        color: theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[5],
+        color:
+          theme.colorScheme === 'dark'
+            ? theme.colors.dark[2]
+            : theme.colors.gray[5],
       },
 
       '& .hljs-variable, & .hljs-template-variable, & .hljs-attribute, & .hljs-tag, & .hljs-name, & .hljs-regexp, & .hljs-link, & .hljs-name, & .hljs-selector-id, & .hljs-selector-class':
@@ -41,7 +50,10 @@ function getCodeHighlight(withCodeHighlightStyles: boolean, theme: MantineTheme)
 
       '& .hljs-number, & .hljs-meta, & .hljs-built_in, & .hljs-builtin-name, & .hljs-literal, & .hljs-type, & .hljs-params':
         {
-          color: theme.colors[theme.colorScheme === 'dark' ? 'cyan' : 'blue'][highlightIndex],
+          color:
+            theme.colors[theme.colorScheme === 'dark' ? 'cyan' : 'blue'][
+              highlightIndex
+            ],
         },
 
       '& .hljs-string, & .hljs-symbol, & .hljs-bullet': {
@@ -49,7 +61,10 @@ function getCodeHighlight(withCodeHighlightStyles: boolean, theme: MantineTheme)
       },
 
       '& .hljs-title, & .hljs-section': {
-        color: theme.colors[theme.colorScheme === 'dark' ? 'yellow' : 'pink'][highlightIndex],
+        color:
+          theme.colors[theme.colorScheme === 'dark' ? 'yellow' : 'pink'][
+            highlightIndex
+          ],
       },
 
       '& .hljs-keyword, & .hljs-selector-tag': {
@@ -97,13 +112,17 @@ function getTypographyStyles(withTypographyStyles: boolean) {
 }
 
 export default createStyles(
-  (theme, { withCodeHighlightStyles, withTypographyStyles }: ContentStylesParams) => ({
+  (
+    theme,
+    { withCodeHighlightStyles, withTypographyStyles }: ContentStylesParams
+  ) => ({
     typographyStylesProvider: {
       ...getTypographyStyles(withTypographyStyles),
     },
 
     content: {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+      backgroundColor:
+        theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
       borderRadius: theme.fn.radius(),
 
       '& .ProseMirror': {

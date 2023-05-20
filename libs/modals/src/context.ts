@@ -1,5 +1,5 @@
 import { createContext, ReactNode } from 'react';
-import { ModalProps } from '@mantine/core';
+import { ModalProps } from '@worldprint/wdesign-core';
 import type { ConfirmModalProps } from './ConfirmModal';
 
 export type ModalSettings = Partial<Omit<ModalProps, 'opened'>> & { modalId?: string };
@@ -51,4 +51,4 @@ export type MantineModals = MantineModalsOverwritten['modals'];
 export type MantineModal = keyof MantineModals;
 
 export const ModalsContext = createContext<ModalsContextProps>(null);
-ModalsContext.displayName = '@mantine/modals/ModalsContext';
+ModalsContext.displayName = '@worldprint/wdesign-modals/ModalsContext';

@@ -1,4 +1,4 @@
-import { CarouselStylesNames } from '@mantine/carousel';
+import { CarouselStylesNames } from '@worldprint/wdesign-carousel';
 
 export const Carousel: Record<CarouselStylesNames, string> = {
   root: 'Root element',

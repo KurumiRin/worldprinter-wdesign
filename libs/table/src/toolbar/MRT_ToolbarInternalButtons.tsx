@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex } from '@mantine/core';
+import { Flex } from '@worldprint/wdesign-core';
 import { MRT_ToggleFullScreenButton } from '../buttons/MRT_ToggleFullScreenButton';
 import { MRT_ShowHideColumnsButton } from '../buttons/MRT_ShowHideColumnsButton';
 import { MRT_ToggleDensePaddingButton } from '../buttons/MRT_ToggleDensePaddingButton';
@@ -12,7 +12,7 @@ interface Props<TData extends Record<string, any> = {}> {
 }
 
 export const MRT_ToolbarInternalButtons = <
-  TData extends Record<string, any> = {},
+  TData extends Record<string, any> = {}
 >({
   table,
 }: Props<TData>) => {

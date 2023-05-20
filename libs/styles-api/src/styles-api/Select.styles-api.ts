@@ -1,4 +1,4 @@
-import type { SelectStylesNames } from '@mantine/core';
+import type { SelectStylesNames } from '@worldprint/wdesign-core';
 import { Input } from './Input.styles-api';
 import { InputWrapper } from './InputWrapper.styles-api';
 

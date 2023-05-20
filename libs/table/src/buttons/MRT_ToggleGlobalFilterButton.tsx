@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActionIcon, ActionIconProps, Tooltip } from '@mantine/core';
+import { ActionIcon, ActionIconProps, Tooltip } from '@worldprint/wdesign-core';
 import type { HTMLPropsRef, MRT_TableInstance } from '..';
 
 interface Props<TData extends Record<string, any> = {}>
@@ -9,7 +9,7 @@ interface Props<TData extends Record<string, any> = {}>
 }
 
 export const MRT_ToggleGlobalFilterButton = <
-  TData extends Record<string, any> = {},
+  TData extends Record<string, any> = {}
 >({
   table,
   ...rest

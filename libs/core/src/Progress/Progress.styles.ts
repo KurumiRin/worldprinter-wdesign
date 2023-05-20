@@ -5,7 +5,7 @@ import {
   keyframes,
   rem,
   getSize,
-} from '@mantine/styles';
+} from '@worldprint/wdesign-styles';
 
 const sizes = {
   xs: rem(3),

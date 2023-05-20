@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
-import { DefaultProps } from '@mantine/styles';
-import { createPolymorphicComponent, packSx } from '@mantine/utils';
+import { DefaultProps } from '@worldprint/wdesign-styles';
+import { createPolymorphicComponent, packSx } from '@worldprint/wdesign-utils';
 import { Box } from '../../../Box';
 
 export interface SectionProps extends DefaultProps {
@@ -23,6 +23,8 @@ export const _Section = forwardRef<HTMLDivElement, SectionProps>(
   )
 );
 
-_Section.displayName = '@mantine/core/Section';
+_Section.displayName = '@worldprint/wdesign-core/Section';
 
-export const Section = createPolymorphicComponent<'div', SectionProps>(_Section);
+export const Section = createPolymorphicComponent<'div', SectionProps>(
+  _Section
+);

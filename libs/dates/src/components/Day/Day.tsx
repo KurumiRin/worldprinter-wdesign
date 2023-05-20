@@ -6,7 +6,7 @@ import {
   MantineNumberSize,
   Selectors,
   MantineSize,
-} from '@mantine/core';
+} from '@worldprint/wdesign-core';
 import dayjs from 'dayjs';
 import useStyles, { DayStylesParams } from './Day.styles';
 
@@ -86,7 +86,14 @@ export const Day = forwardRef<HTMLButtonElement, DayProps>((props, ref) => {
 
   const { classes, cx } = useStyles(
     { radius, isStatic },
-    { name: ['Day', __staticSelector], classNames, styles, unstyled, variant, size }
+    {
+      name: ['Day', __staticSelector],
+      classNames,
+      styles,
+      unstyled,
+      variant,
+      size,
+    }
   );
 
   return (
@@ -112,4 +119,4 @@ export const Day = forwardRef<HTMLButtonElement, DayProps>((props, ref) => {
   );
 });
 
-Day.displayName = '@mantine/dates/Day';
+Day.displayName = '@worldprint/wdesign-dates/Day';

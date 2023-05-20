@@ -1,4 +1,4 @@
-import { JsonInputStylesNames } from '@mantine/core';
+import { JsonInputStylesNames } from '@worldprint/wdesign-core';
 import { Input } from './Input.styles-api';
 import { InputWrapper } from './InputWrapper.styles-api';
 

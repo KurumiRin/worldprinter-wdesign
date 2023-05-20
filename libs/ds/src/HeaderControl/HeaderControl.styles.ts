@@ -1,4 +1,4 @@
-import { createStyles, rem } from '@mantine/core';
+import { createStyles, rem } from '@worldprint/wdesign-core';
 
 export default createStyles((theme) => ({
   control: {
@@ -13,10 +13,14 @@ export default createStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     color: theme.colorScheme === 'dark' ? theme.white : theme.colors.gray[7],
-    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.white,
+    backgroundColor:
+      theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.white,
 
     '&:hover': {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[0],
+      backgroundColor:
+        theme.colorScheme === 'dark'
+          ? theme.colors.dark[5]
+          : theme.colors.gray[0],
     },
   },
 }));

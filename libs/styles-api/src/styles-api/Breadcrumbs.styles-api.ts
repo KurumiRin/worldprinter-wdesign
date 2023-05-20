@@ -1,4 +1,4 @@
-import { BreadcrumbsStylesNames } from '@mantine/core';
+import { BreadcrumbsStylesNames } from '@worldprint/wdesign-core';
 
 export const Breadcrumbs: Record<BreadcrumbsStylesNames, string> = {
   root: 'Root element',

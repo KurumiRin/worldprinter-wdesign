@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { useId, useUncontrolled } from '@mantine/hooks';
+import { useId, useUncontrolled } from '@worldprint/wdesign-hooks';
 import {
   DefaultProps,
   MantineNumberSize,
@@ -7,8 +7,8 @@ import {
   Selectors,
   useComponentDefaultProps,
   Variants,
-} from '@mantine/styles';
-import { ForwardRefWithStaticComponents } from '@mantine/utils';
+} from '@worldprint/wdesign-styles';
+import { ForwardRefWithStaticComponents } from '@worldprint/wdesign-utils';
 import { Box, extractSystemStyles } from '../Box';
 import { CheckIcon } from '../Checkbox';
 import { ChipGroup } from './ChipGroup/ChipGroup';
@@ -61,93 +61,98 @@ const defaultProps: Partial<ChipProps> = {
   variant: 'outline',
 };
 
-type ChipComponent = ForwardRefWithStaticComponents<ChipProps, { Group: typeof ChipGroup }>;
+type ChipComponent = ForwardRefWithStaticComponents<
+  ChipProps,
+  { Group: typeof ChipGroup }
+>;
 
-export const Chip: ChipComponent = forwardRef<HTMLInputElement, ChipProps>((props, ref) => {
-  const {
-    radius,
-    type,
-    size,
-    variant,
-    disabled,
-    id,
-    color,
-    children,
-    className,
-    classNames,
-    style,
-    styles,
-    checked,
-    defaultChecked,
-    onChange,
-    sx,
-    wrapperProps,
-    value,
-    unstyled,
-    ...others
-  } = useComponentDefaultProps('Chip', defaultProps, props);
+export const Chip: ChipComponent = forwardRef<HTMLInputElement, ChipProps>(
+  (props, ref) => {
+    const {
+      radius,
+      type,
+      size,
+      variant,
+      disabled,
+      id,
+      color,
+      children,
+      className,
+      classNames,
+      style,
+      styles,
+      checked,
+      defaultChecked,
+      onChange,
+      sx,
+      wrapperProps,
+      value,
+      unstyled,
+      ...others
+    } = useComponentDefaultProps('Chip', defaultProps, props);
 
-  const ctx = useChipGroup();
-  const uuid = useId(id);
-  const { systemStyles, rest } = extractSystemStyles(others);
-  const { classes, cx } = useStyles(
-    { radius, color },
-    { classNames, styles, unstyled, name: 'Chip', variant, size }
-  );
+    const ctx = useChipGroup();
+    const uuid = useId(id);
+    const { systemStyles, rest } = extractSystemStyles(others);
+    const { classes, cx } = useStyles(
+      { radius, color },
+      { classNames, styles, unstyled, name: 'Chip', variant, size }
+    );
 
-  const [_value, setValue] = useUncontrolled({
-    value: checked,
-    defaultValue: defaultChecked,
-    finalValue: false,
-    onChange,
-  });
+    const [_value, setValue] = useUncontrolled({
+      value: checked,
+      defaultValue: defaultChecked,
+      finalValue: false,
+      onChange,
+    });
 
-  const contextProps = ctx
-    ? {
-        checked: ctx.isChipSelected(value as string),
-        onChange: ctx.onChange,
-        type: ctx.multiple ? 'checkbox' : 'radio',
-      }
-    : {};
+    const contextProps = ctx
+      ? {
+          checked: ctx.isChipSelected(value as string),
+          onChange: ctx.onChange,
+          type: ctx.multiple ? 'checkbox' : 'radio',
+        }
+      : {};
 
-  const _checked = contextProps.checked || _value;
+    const _checked = contextProps.checked || _value;
 
-  return (
-    <Box
-      className={cx(classes.root, className)}
-      style={style}
-      sx={sx}
-      {...systemStyles}
-      {...wrapperProps}
-    >
-      <input
-        type={type}
-        className={classes.input}
-        checked={_checked}
-        onChange={(event) => setValue(event.currentTarget.checked)}
-        id={uuid}
-        disabled={disabled}
-        ref={ref}
-        value={value}
-        {...contextProps}
-        {...rest}
-      />
-      <label
-        htmlFor={uuid}
-        data-checked={_checked || undefined}
-        data-disabled={disabled || undefined}
-        className={classes.label}
+    return (
+      <Box
+        className={cx(classes.root, className)}
+        style={style}
+        sx={sx}
+        {...systemStyles}
+        {...wrapperProps}
       >
-        {_checked && (
-          <span className={classes.iconWrapper}>
-            <CheckIcon className={classes.checkIcon} />
-          </span>
-        )}
-        {children}
-      </label>
-    </Box>
-  );
-}) as any;
+        <input
+          type={type}
+          className={classes.input}
+          checked={_checked}
+          onChange={(event) => setValue(event.currentTarget.checked)}
+          id={uuid}
+          disabled={disabled}
+          ref={ref}
+          value={value}
+          {...contextProps}
+          {...rest}
+        />
+        <label
+          htmlFor={uuid}
+          data-checked={_checked || undefined}
+          data-disabled={disabled || undefined}
+          className={classes.label}
+        >
+          {_checked && (
+            <span className={classes.iconWrapper}>
+              <CheckIcon className={classes.checkIcon} />
+            </span>
+          )}
+          {children}
+        </label>
+      </Box>
+    );
+  }
+) as any;
 
-Chip.displayName = '@mantine/core/Chip';
+Chip.displayName = '@worldprint/wdesign-core/Chip';
 Chip.Group = ChipGroup;

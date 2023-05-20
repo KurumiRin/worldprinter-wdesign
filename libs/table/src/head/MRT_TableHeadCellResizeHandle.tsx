@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Divider } from '@mantine/core';
+import { Box, Divider } from '@worldprint/wdesign-core';
 import { MRT_Header, MRT_TableInstance } from '..';
 import { getPrimaryColor } from '../column.utils';
 

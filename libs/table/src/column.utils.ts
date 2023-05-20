@@ -2,7 +2,7 @@ import type { Row } from '@tanstack/react-table';
 import { MRT_AggregationFns } from './aggregationFns';
 import { MRT_FilterFns } from './filterFns';
 import { MRT_SortingFns } from './sortingFns';
-import { BoxProps, MantineTheme } from '@mantine/core';
+import { BoxProps, MantineTheme } from '@worldprint/wdesign-core';
 import type {
   MantineReactTableProps,
   MantineShade,
@@ -19,12 +19,12 @@ import type {
 } from '.';
 
 export const getColumnId = <TData extends Record<string, any> = {}>(
-  columnDef: MRT_ColumnDef<TData>,
+  columnDef: MRT_ColumnDef<TData>
 ): string =>
   columnDef.id ?? columnDef.accessorKey?.toString?.() ?? columnDef.header;
 
 export const getAllLeafColumnDefs = <TData extends Record<string, any> = {}>(
-  columns: MRT_ColumnDef<TData>[],
+  columns: MRT_ColumnDef<TData>[]
 ) => {
   const allLeafColumnDefs: MRT_ColumnDef<TData>[] = [];
   const getLeafColumns = (cols: MRT_ColumnDef<TData>[]) => {
@@ -62,7 +62,7 @@ export const prepareColumns = <TData extends Record<string, any> = {}>({
     if (!columnDef.id) columnDef.id = getColumnId(columnDef);
     if (process.env.NODE_ENV !== 'production' && !columnDef.id) {
       console.error(
-        'Column definitions must have a valid `accessorKey` or `id` property',
+        'Column definitions must have a valid `accessorKey` or `id` property'
       );
     }
 
@@ -86,10 +86,10 @@ export const prepareColumns = <TData extends Record<string, any> = {}>({
         columnDef.aggregationFn = (
           columnId: string,
           leafRows: Row<TData>[],
-          childRows: Row<TData>[],
+          childRows: Row<TData>[]
         ) =>
           aggFns.map((fn) =>
-            aggregationFns[fn]?.(columnId, leafRows, childRows),
+            aggregationFns[fn]?.(columnId, leafRows, childRows)
           );
       }
 
@@ -118,7 +118,7 @@ export const prepareColumns = <TData extends Record<string, any> = {}>({
 export const reorderColumn = <TData extends Record<string, any> = {}>(
   draggedColumn: MRT_Column<TData>,
   targetColumn: MRT_Column<TData>,
-  columnOrder: MRT_ColumnOrderState,
+  columnOrder: MRT_ColumnOrderState
 ): MRT_ColumnOrderState => {
   if (draggedColumn.getCanPin()) {
     draggedColumn.pin(targetColumn.getIsPinned());
@@ -126,14 +126,14 @@ export const reorderColumn = <TData extends Record<string, any> = {}>(
   columnOrder.splice(
     columnOrder.indexOf(targetColumn.id),
     0,
-    columnOrder.splice(columnOrder.indexOf(draggedColumn.id), 1)[0],
+    columnOrder.splice(columnOrder.indexOf(draggedColumn.id), 1)[0]
   );
   return [...columnOrder];
 };
 
 export const showExpandColumn = <TData extends Record<string, any> = {}>(
   props: MantineReactTableProps<TData>,
-  grouping?: MRT_GroupingState,
+  grouping?: MRT_GroupingState
 ) =>
   !!(
     props.enableExpanding ||
@@ -142,9 +142,9 @@ export const showExpandColumn = <TData extends Record<string, any> = {}>(
   );
 
 export const getLeadingDisplayColumnIds = <
-  TData extends Record<string, any> = {},
+  TData extends Record<string, any> = {}
 >(
-  props: MantineReactTableProps<TData>,
+  props: MantineReactTableProps<TData>
 ) =>
   [
     (props.enableRowDragging || props.enableRowOrdering) && 'mrt-row-drag',
@@ -161,9 +161,9 @@ export const getLeadingDisplayColumnIds = <
   ].filter(Boolean) as MRT_DisplayColumnIds[];
 
 export const getTrailingDisplayColumnIds = <
-  TData extends Record<string, any> = {},
+  TData extends Record<string, any> = {}
 >(
-  props: MantineReactTableProps<TData>,
+  props: MantineReactTableProps<TData>
 ) =>
   [
     props.positionActionsColumn === 'last' &&
@@ -177,9 +177,9 @@ export const getTrailingDisplayColumnIds = <
   ].filter(Boolean) as MRT_DisplayColumnIds[];
 
 export const getDefaultColumnOrderIds = <
-  TData extends Record<string, any> = {},
+  TData extends Record<string, any> = {}
 >(
-  props: MantineReactTableProps<TData>,
+  props: MantineReactTableProps<TData>
 ) => {
   const leadingDisplayCols: string[] = getLeadingDisplayColumnIds(props);
   const trailingDisplayCols: string[] = getTrailingDisplayColumnIds(props);
@@ -188,15 +188,15 @@ export const getDefaultColumnOrderIds = <
     .filter(
       (columnId) =>
         !leadingDisplayCols.includes(columnId) &&
-        !trailingDisplayCols.includes(columnId),
+        !trailingDisplayCols.includes(columnId)
     );
   return [...leadingDisplayCols, ...allLeafColumnDefs, ...trailingDisplayCols];
 };
 
 export const getDefaultColumnFilterFn = <
-  TData extends Record<string, any> = {},
+  TData extends Record<string, any> = {}
 >(
-  columnDef: MRT_ColumnDef<TData>,
+  columnDef: MRT_ColumnDef<TData>
 ): MRT_FilterOption => {
   if (columnDef.filterVariant === 'multi-select') return 'arrIncludesSome';
   if (columnDef.filterVariant === 'range') return 'betweenInclusive';
@@ -210,14 +210,14 @@ export const getDefaultColumnFilterFn = <
 
 export const getIsFirstColumn = (
   column: MRT_Column,
-  table: MRT_TableInstance,
+  table: MRT_TableInstance
 ) => {
   return table.getVisibleLeafColumns()[0].id === column.id;
 };
 
 export const getIsLastColumn = (
   column: MRT_Column,
-  table: MRT_TableInstance,
+  table: MRT_TableInstance
 ) => {
   const columns = table.getVisibleLeafColumns();
   return columns[columns.length - 1].id === column.id;
@@ -225,7 +225,7 @@ export const getIsLastColumn = (
 
 export const getIsLastLeftPinnedColumn = (
   table: MRT_TableInstance,
-  column: MRT_Column,
+  column: MRT_Column
 ) => {
   return (
     column.getIsPinned() === 'left' &&
@@ -262,10 +262,10 @@ export const getCommonCellStyles = ({
 }) => {
   const widthStyles = {
     minWidth: `max(calc(var(--${header ? 'header' : 'col'}-${parseCSSVarId(
-      header?.id ?? column.id,
+      header?.id ?? column.id
     )}-size) * 1px), ${column.columnDef.minSize ?? 30}px)`,
     width: `calc(var(--${header ? 'header' : 'col'}-${parseCSSVarId(
-      header?.id ?? column.id,
+      header?.id ?? column.id
     )}-size) * 1px)`,
   };
 
@@ -278,7 +278,7 @@ export const getCommonCellStyles = ({
             theme.colorScheme === 'dark'
               ? theme.fn.darken(theme.colors.dark[7], 0.02)
               : theme.white,
-            0.97,
+            0.97
           )
         : isStriped
         ? 'inherit'
@@ -296,7 +296,7 @@ export const getCommonCellStyles = ({
     flex:
       table.options.layoutMode === 'grid'
         ? `var(--${header ? 'header' : 'col'}-${parseCSSVarId(
-            header?.id ?? column.id,
+            header?.id ?? column.id
           )}-size) 0 auto`
         : undefined,
     left:
@@ -377,7 +377,7 @@ export const getPrimaryShade = (theme: MantineTheme): number =>
 
 export const getPrimaryColor = (
   theme: MantineTheme,
-  shade?: MantineShade,
+  shade?: MantineShade
 ): string => theme.colors[theme.primaryColor][shade ?? getPrimaryShade(theme)];
 
 export const parseCSSVarId = (id: string) => id.replace(/[^a-zA-Z0-9]/g, '_');

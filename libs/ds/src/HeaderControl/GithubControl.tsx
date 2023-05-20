@@ -1,5 +1,5 @@
 import React from 'react';
-import { rem } from '@mantine/core';
+import { rem } from '@worldprint/wdesign-core';
 import { HeaderControl } from './HeaderControl';
 import { GithubIcon } from '../Icons';
 

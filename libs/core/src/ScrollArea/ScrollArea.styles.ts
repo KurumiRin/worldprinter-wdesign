@@ -1,4 +1,4 @@
-import { createStyles, getStylesRef, rem } from '@mantine/styles';
+import { createStyles, getStylesRef, rem } from '@worldprint/wdesign-styles';
 
 export interface ScrollAreaStylesParams {
   scrollbarSize: number | string;

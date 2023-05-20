@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronIcon, useMantineTheme } from '@mantine/core';
+import { ChevronIcon, useMantineTheme } from '@worldprint/wdesign-core';
 
 interface ChevronProps extends React.ComponentPropsWithoutRef<'svg'> {
   direction: 'next' | 'previous';
@@ -22,4 +22,4 @@ export function Chevron({ direction, style, ...others }: ChevronProps) {
   );
 }
 
-Chevron.displayName = '@mantine/dates/Chevron';
+Chevron.displayName = '@worldprint/wdesign-dates/Chevron';

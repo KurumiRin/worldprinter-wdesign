@@ -1,5 +1,5 @@
 import React from 'react';
-import { DefaultProps, Group, Tooltip } from '@mantine/core';
+import { DefaultProps, Group, Tooltip } from '@worldprint/wdesign-core';
 import { ColorSchemeControl } from './ColorSchemeControl';
 import { DirectionControl } from './DirectionControl';
 import { GithubControl } from './GithubControl';
@@ -26,7 +26,10 @@ export function HeaderControls({
         <SearchControl onClick={onSearch} />
         <DiscordControl />
         <GithubControl link={githubLink} />
-        <DirectionControl direction={direction} toggleDirection={toggleDirection} />
+        <DirectionControl
+          direction={direction}
+          toggleDirection={toggleDirection}
+        />
         <ColorSchemeControl />
       </Group>
     </Tooltip.Group>

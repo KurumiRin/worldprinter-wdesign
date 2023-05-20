@@ -12,8 +12,8 @@ import {
   MantineColor,
   MantineNumberSize,
   MantineTheme,
-} from '@mantine/core';
-import { useClipboard } from '@mantine/hooks';
+} from '@worldprint/wdesign-core';
+import { useClipboard } from '@worldprint/wdesign-hooks';
 import { CopyIcon } from './CopyIcon';
 import { getPrismTheme as defaultGetPrismTheme } from './prism-theme';
 import useStyles from './Prism.styles';
@@ -222,4 +222,4 @@ export const Prism = forwardRef<HTMLDivElement, PrismProps>((props: PrismProps, 
   );
 });
 
-Prism.displayName = '@mantine/prism/Prism';
+Prism.displayName = '@worldprint/wdesign-prism/Prism';

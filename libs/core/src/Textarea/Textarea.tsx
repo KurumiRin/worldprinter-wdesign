@@ -1,7 +1,11 @@
 import React, { forwardRef } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
-import { useId } from '@mantine/hooks';
-import { DefaultProps, MantineSize, useComponentDefaultProps } from '@mantine/styles';
+import { useId } from '@worldprint/wdesign-hooks';
+import {
+  DefaultProps,
+  MantineSize,
+  useComponentDefaultProps,
+} from '@worldprint/wdesign-styles';
 import { extractSystemStyles } from '../Box';
 import { InputWrapperBaseProps, Input, InputSharedProps } from '../Input';
 import { TextInputStylesNames } from '../TextInput/TextInput';
@@ -40,90 +44,99 @@ const defaultProps: Partial<TextareaProps> = {
   __staticSelector: 'Textarea',
 };
 
-export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, ref) => {
-  const {
-    autosize,
-    maxRows,
-    minRows,
-    label,
-    error,
-    description,
-    id,
-    className,
-    required,
-    style,
-    wrapperProps,
-    classNames,
-    styles,
-    size,
-    __staticSelector,
-    sx,
-    errorProps,
-    descriptionProps,
-    labelProps,
-    inputWrapperOrder,
-    inputContainer,
-    unstyled,
-    withAsterisk,
-    variant,
-    ...others
-  } = useComponentDefaultProps('Textarea', defaultProps, props);
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+  (props, ref) => {
+    const {
+      autosize,
+      maxRows,
+      minRows,
+      label,
+      error,
+      description,
+      id,
+      className,
+      required,
+      style,
+      wrapperProps,
+      classNames,
+      styles,
+      size,
+      __staticSelector,
+      sx,
+      errorProps,
+      descriptionProps,
+      labelProps,
+      inputWrapperOrder,
+      inputContainer,
+      unstyled,
+      withAsterisk,
+      variant,
+      ...others
+    } = useComponentDefaultProps('Textarea', defaultProps, props);
 
-  const uuid = useId(id);
-  const { classes, cx } = useStyles();
-  const { systemStyles, rest } = extractSystemStyles(others);
-  const sharedProps = {
-    required,
-    ref,
-    error,
-    id: uuid,
-    classNames: { ...classNames, input: cx(classes.input, classNames?.input) },
-    styles,
-    __staticSelector,
-    size,
-    multiline: true,
-    unstyled,
-    variant,
-    ...rest,
-  };
+    const uuid = useId(id);
+    const { classes, cx } = useStyles();
+    const { systemStyles, rest } = extractSystemStyles(others);
+    const sharedProps = {
+      required,
+      ref,
+      error,
+      id: uuid,
+      classNames: {
+        ...classNames,
+        input: cx(classes.input, classNames?.input),
+      },
+      styles,
+      __staticSelector,
+      size,
+      multiline: true,
+      unstyled,
+      variant,
+      ...rest,
+    };
 
-  return (
-    <Input.Wrapper
-      label={label}
-      error={error}
-      id={uuid}
-      description={description}
-      required={required}
-      style={style}
-      className={className}
-      classNames={classNames}
-      styles={styles}
-      size={size}
-      __staticSelector={__staticSelector}
-      sx={sx}
-      errorProps={errorProps}
-      labelProps={labelProps}
-      descriptionProps={descriptionProps}
-      inputContainer={inputContainer}
-      inputWrapperOrder={inputWrapperOrder}
-      unstyled={unstyled}
-      withAsterisk={withAsterisk}
-      variant={variant}
-      {...systemStyles}
-      {...wrapperProps}
-    >
-      {autosize ? (
-        <Input<typeof TextareaAutosize>
-          {...sharedProps}
-          component={TextareaAutosize}
-          maxRows={maxRows}
-          minRows={minRows}
-        />
-      ) : (
-        <Input<'textarea'> {...sharedProps} component="textarea" rows={minRows} />
-      )}
-    </Input.Wrapper>
-  );
-});
+    return (
+      <Input.Wrapper
+        label={label}
+        error={error}
+        id={uuid}
+        description={description}
+        required={required}
+        style={style}
+        className={className}
+        classNames={classNames}
+        styles={styles}
+        size={size}
+        __staticSelector={__staticSelector}
+        sx={sx}
+        errorProps={errorProps}
+        labelProps={labelProps}
+        descriptionProps={descriptionProps}
+        inputContainer={inputContainer}
+        inputWrapperOrder={inputWrapperOrder}
+        unstyled={unstyled}
+        withAsterisk={withAsterisk}
+        variant={variant}
+        {...systemStyles}
+        {...wrapperProps}
+      >
+        {autosize ? (
+          <Input<typeof TextareaAutosize>
+            {...sharedProps}
+            component={TextareaAutosize}
+            maxRows={maxRows}
+            minRows={minRows}
+          />
+        ) : (
+          <Input<'textarea'>
+            {...sharedProps}
+            component="textarea"
+            rows={minRows}
+          />
+        )}
+      </Input.Wrapper>
+    );
+  }
+);
 
-Textarea.displayName = '@mantine/core/Textarea';
+Textarea.displayName = '@worldprint/wdesign-core/Textarea';

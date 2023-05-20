@@ -1,5 +1,10 @@
 import React, { useState, forwardRef } from 'react';
-import { DefaultProps, MantineNumberSize, MantineColor, Selectors } from '@mantine/styles';
+import {
+  DefaultProps,
+  MantineNumberSize,
+  MantineColor,
+  Selectors,
+} from '@worldprint/wdesign-styles';
 import { Box } from '../../Box';
 import { Transition, MantineTransition } from '../../Transition';
 import useStyles from './Thumb.styles';
@@ -16,7 +21,9 @@ export interface ThumbProps extends DefaultProps<ThumbStylesNames> {
   size: MantineNumberSize;
   label: React.ReactNode;
   onKeyDownCapture?(event: React.KeyboardEvent<HTMLDivElement>): void;
-  onMouseDown?(event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>): void;
+  onMouseDown?(
+    event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>
+  ): void;
   labelTransition?: MantineTransition;
   labelTransitionDuration?: number;
   labelTransitionTimingFunction?: string;
@@ -70,7 +77,8 @@ export const Thumb = forwardRef<HTMLDivElement, ThumbProps>(
     );
     const [focused, setFocused] = useState(false);
 
-    const isVisible = labelAlwaysOn || dragging || focused || (showLabelOnHover && isHovered);
+    const isVisible =
+      labelAlwaysOn || dragging || focused || (showLabelOnHover && isHovered);
 
     return (
       <Box<'div'>
@@ -101,7 +109,9 @@ export const Thumb = forwardRef<HTMLDivElement, ThumbProps>(
           mounted={label != null && isVisible}
           duration={labelTransitionDuration}
           transition={labelTransition}
-          timingFunction={labelTransitionTimingFunction || theme.transitionTimingFunction}
+          timingFunction={
+            labelTransitionTimingFunction || theme.transitionTimingFunction
+          }
         >
           {(transitionStyles) => (
             <div style={transitionStyles} className={classes.label}>
@@ -114,4 +124,4 @@ export const Thumb = forwardRef<HTMLDivElement, ThumbProps>(
   }
 );
 
-Thumb.displayName = '@mantine/core/SliderThumb';
+Thumb.displayName = '@worldprint/wdesign-core/SliderThumb';

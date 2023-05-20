@@ -5,11 +5,13 @@ import {
   useComponentDefaultProps,
   MantineSize,
   rem,
-} from '@mantine/styles';
+} from '@worldprint/wdesign-styles';
 import { Box } from '../Box';
 import useStyles from './Container.styles';
 
-export interface ContainerProps extends DefaultProps, React.ComponentPropsWithoutRef<'div'> {
+export interface ContainerProps
+  extends DefaultProps,
+    React.ComponentPropsWithoutRef<'div'> {
   variant?: string;
 
   /** Predefined container max-width or number for max-width */
@@ -42,8 +44,10 @@ export const Container = forwardRef<HTMLDivElement, ContainerProps>(
       { unstyled, name: 'Container', variant, size }
     );
 
-    return <Box className={cx(classes.root, className)} ref={ref} {...others} />;
+    return (
+      <Box className={cx(classes.root, className)} ref={ref} {...others} />
+    );
   }
 );
 
-Container.displayName = '@mantine/core/Container';
+Container.displayName = '@worldprint/wdesign-core/Container';

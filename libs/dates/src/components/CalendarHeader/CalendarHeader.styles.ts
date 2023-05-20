@@ -1,4 +1,4 @@
-import { createStyles, getSize, rem } from '@mantine/core';
+import { createStyles, getSize, rem } from '@worldprint/wdesign-core';
 import { sizes } from '../Day/Day.styles';
 
 export default createStyles((theme, _, { size }) => {
@@ -21,7 +21,10 @@ export default createStyles((theme, _, { size }) => {
       userSelect: 'none',
 
       ...theme.fn.hover({
-        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[0],
+        backgroundColor:
+          theme.colorScheme === 'dark'
+            ? theme.colors.dark[5]
+            : theme.colors.gray[0],
       }),
 
       '&:active': theme.activeStyles,
@@ -50,7 +53,10 @@ export default createStyles((theme, _, { size }) => {
       textTransform: 'capitalize',
 
       ...theme.fn.hover({
-        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[0],
+        backgroundColor:
+          theme.colorScheme === 'dark'
+            ? theme.colors.dark[5]
+            : theme.colors.gray[0],
       }),
 
       '&:active': theme.activeStyles,

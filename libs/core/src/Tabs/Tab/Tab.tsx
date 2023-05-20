@@ -1,13 +1,20 @@
 import React, { forwardRef } from 'react';
-import { DefaultProps, Selectors, MantineColor, useComponentDefaultProps } from '@mantine/styles';
-import { createScopedKeydownHandler } from '@mantine/utils';
+import {
+  DefaultProps,
+  Selectors,
+  MantineColor,
+  useComponentDefaultProps,
+} from '@worldprint/wdesign-styles';
+import { createScopedKeydownHandler } from '@worldprint/wdesign-utils';
 import { UnstyledButton } from '../../UnstyledButton';
 import { useTabsContext } from '../Tabs.context';
 import useStyles from './Tab.styles';
 
 export type TabStylesNames = Selectors<typeof useStyles>;
 
-export interface TabProps extends DefaultProps, React.ComponentPropsWithoutRef<'button'> {
+export interface TabProps
+  extends DefaultProps,
+    React.ComponentPropsWithoutRef<'button'> {
   /** Value that is used to connect Tab with associated panel */
   value: string;
 
@@ -27,8 +34,17 @@ export interface TabProps extends DefaultProps, React.ComponentPropsWithoutRef<'
 const defaultProps: Partial<TabProps> = {};
 
 export const Tab = forwardRef<HTMLButtonElement, TabProps>((props, ref) => {
-  const { value, children, onKeyDown, onClick, className, icon, rightSection, color, ...others } =
-    useComponentDefaultProps('TabsTab', defaultProps, props);
+  const {
+    value,
+    children,
+    onKeyDown,
+    onClick,
+    className,
+    icon,
+    rightSection,
+    color,
+    ...others
+  } = useComponentDefaultProps('TabsTab', defaultProps, props);
   const ctx = useTabsContext();
 
   const hasIcon = !!icon;
@@ -55,9 +71,15 @@ export const Tab = forwardRef<HTMLButtonElement, TabProps>((props, ref) => {
 
   const isActive = value === ctx.value;
   const panelId = ctx.getPanelId(value);
-  const ariaControls = ctx.mountedPanelIds.includes(value) ? panelId : undefined;
-  const activateTab = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    ctx.onTabChange(ctx.allowTabDeactivation ? (value === ctx.value ? null : value) : value);
+  const ariaControls = ctx.mountedPanelIds.includes(value)
+    ? panelId
+    : undefined;
+  const activateTab = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    ctx.onTabChange(
+      ctx.allowTabDeactivation ? (value === ctx.value ? null : value) : value
+    );
     onClick?.(event);
   };
 
@@ -87,9 +109,11 @@ export const Tab = forwardRef<HTMLButtonElement, TabProps>((props, ref) => {
     >
       {icon && <span className={classes.tabIcon}>{icon}</span>}
       {children && <span className={classes.tabLabel}>{children}</span>}
-      {rightSection && <span className={classes.tabRightSection}>{rightSection}</span>}
+      {rightSection && (
+        <span className={classes.tabRightSection}>{rightSection}</span>
+      )}
     </UnstyledButton>
   );
 });
 
-Tab.displayName = '@mantine/core/Tab';
+Tab.displayName = '@worldprint/wdesign-core/Tab';

@@ -1,11 +1,22 @@
 import React, { forwardRef, useRef } from 'react';
-import { DefaultProps, Box, Selectors, useComponentDefaultProps } from '@mantine/core';
+import {
+  DefaultProps,
+  Box,
+  Selectors,
+  useComponentDefaultProps,
+} from '@worldprint/wdesign-core';
 import dayjs from 'dayjs';
-import { DecadeLevel, DecadeLevelStylesNames, DecadeLevelSettings } from '../DecadeLevel';
+import {
+  DecadeLevel,
+  DecadeLevelStylesNames,
+  DecadeLevelSettings,
+} from '../DecadeLevel';
 import { handleControlKeyDown } from '../../utils';
 import useStyles from './DecadeLevelGroup.styles';
 
-export type DecadeLevelGroupStylesNames = Selectors<typeof useStyles> | DecadeLevelStylesNames;
+export type DecadeLevelGroupStylesNames =
+  | Selectors<typeof useStyles>
+  | DecadeLevelStylesNames;
 
 export interface DecadeLevelGroupProps
   extends DefaultProps<DecadeLevelGroupStylesNames>,
@@ -31,7 +42,10 @@ const defaultProps: Partial<DecadeLevelGroupProps> = {
   numberOfColumns: 1,
 };
 
-export const DecadeLevelGroup = forwardRef<HTMLDivElement, DecadeLevelGroupProps>((props, ref) => {
+export const DecadeLevelGroup = forwardRef<
+  HTMLDivElement,
+  DecadeLevelGroupProps
+>((props, ref) => {
   const {
     // DecadeLevel settings
     decade,
@@ -149,10 +163,14 @@ export const DecadeLevelGroup = forwardRef<HTMLDivElement, DecadeLevelGroupProps
     });
 
   return (
-    <Box className={cx(classes.decadeLevelGroup, className)} ref={ref} {...others}>
+    <Box
+      className={cx(classes.decadeLevelGroup, className)}
+      ref={ref}
+      {...others}
+    >
       {decades}
     </Box>
   );
 });
 
-DecadeLevelGroup.displayName = '@mantine/dates/DecadeLevelGroup';
+DecadeLevelGroup.displayName = '@worldprint/wdesign-dates/DecadeLevelGroup';

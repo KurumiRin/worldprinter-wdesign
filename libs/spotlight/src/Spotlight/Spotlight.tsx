@@ -12,11 +12,17 @@ import {
   useComponentDefaultProps,
   ScrollArea,
   ScrollAreaAutosizeProps,
-} from '@mantine/core';
-import { getGroupedOptions } from '@mantine/utils';
-import { useDidUpdate } from '@mantine/hooks';
-import { DefaultAction, DefaultActionProps } from '../DefaultAction/DefaultAction';
-import { ActionsList, ActionsListStylesNames } from '../ActionsList/ActionsList';
+} from '@worldprint/wdesign-core';
+import { getGroupedOptions } from '@worldprint/wdesign-utils';
+import { useDidUpdate } from '@worldprint/wdesign-hooks';
+import {
+  DefaultAction,
+  DefaultActionProps,
+} from '../DefaultAction/DefaultAction';
+import {
+  ActionsList,
+  ActionsListStylesNames,
+} from '../ActionsList/ActionsList';
 import type { SpotlightAction } from '../types';
 import { filterActions } from './filter-actions/filter-actions';
 import useStyles from './Spotlight.styles';
@@ -33,7 +39,12 @@ export type SpotlightStylesNames =
 export interface InnerSpotlightProps
   extends Omit<
       ModalProps,
-      'styles' | 'classNames' | 'title' | 'withCloseButton' | 'opened' | 'onClose'
+      | 'styles'
+      | 'classNames'
+      | 'title'
+      | 'withCloseButton'
+      | 'opened'
+      | 'onClose'
     >,
     DefaultProps<SpotlightStylesNames>,
     React.ComponentPropsWithoutRef<'div'> {
@@ -128,7 +139,12 @@ export function Spotlight(props: SpotlightProps) {
 
   const [hovered, setHovered] = useState(-1);
   const [IMEOpen, setIMEOpen] = useState(false);
-  const { classes, cx } = useStyles(null, { name: 'Spotlight', classNames, styles, variant });
+  const { classes, cx } = useStyles(null, {
+    name: 'Spotlight',
+    classNames,
+    styles,
+    variant,
+  });
 
   const resetHovered = () => setHovered(-1);
   const handleClose = () => {
@@ -156,13 +172,17 @@ export function Spotlight(props: SpotlightProps) {
     switch (event.key) {
       case 'ArrowDown': {
         event.preventDefault();
-        setHovered((current) => (current < groupedActions.length - 1 ? current + 1 : 0));
+        setHovered((current) =>
+          current < groupedActions.length - 1 ? current + 1 : 0
+        );
         break;
       }
 
       case 'ArrowUp': {
         event.preventDefault();
-        setHovered((current) => (current > 0 ? current - 1 : groupedActions.length - 1));
+        setHovered((current) =>
+          current > 0 ? current - 1 : groupedActions.length - 1
+        );
         break;
       }
 
@@ -170,7 +190,10 @@ export function Spotlight(props: SpotlightProps) {
         event.preventDefault();
         const action = groupedActions[hovered];
         action?.onTrigger?.(action);
-        if ((action?.closeOnTrigger ?? closeOnActionTrigger) && action?.onTrigger) {
+        if (
+          (action?.closeOnTrigger ?? closeOnActionTrigger) &&
+          action?.onTrigger
+        ) {
           handleClose();
         }
         break;
@@ -242,4 +265,4 @@ export function Spotlight(props: SpotlightProps) {
   );
 }
 
-Spotlight.displayName = '@mantine/spotlight/Spotlight';
+Spotlight.displayName = '@worldprint/wdesign-spotlight/Spotlight';

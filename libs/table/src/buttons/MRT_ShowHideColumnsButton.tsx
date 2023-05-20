@@ -1,5 +1,10 @@
 import React from 'react';
-import { ActionIcon, ActionIconProps, Menu, Tooltip } from '@mantine/core';
+import {
+  ActionIcon,
+  ActionIconProps,
+  Menu,
+  Tooltip,
+} from '@worldprint/wdesign-core';
 import { MRT_ShowHideColumnsMenu } from '../menus/MRT_ShowHideColumnsMenu';
 import type { HTMLPropsRef, MRT_TableInstance } from '..';
 
@@ -10,7 +15,7 @@ interface Props<TData extends Record<string, any> = {}>
 }
 
 export const MRT_ShowHideColumnsButton = <
-  TData extends Record<string, any> = {},
+  TData extends Record<string, any> = {}
 >({
   table,
   ...rest

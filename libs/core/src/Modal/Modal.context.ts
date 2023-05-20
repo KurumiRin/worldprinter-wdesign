@@ -1,5 +1,5 @@
-import { MantineNumberSize } from '@mantine/styles';
-import { createSafeContext } from '@mantine/utils';
+import { MantineNumberSize } from '@worldprint/wdesign-styles';
+import { createSafeContext } from '@worldprint/wdesign-utils';
 
 export type ScrollAreaComponent = React.FC<any>;
 

@@ -1,5 +1,5 @@
 import React, { useState, useRef, forwardRef } from 'react';
-import { useDidUpdate, useUncontrolled } from '@mantine/hooks';
+import { useDidUpdate, useUncontrolled } from '@worldprint/wdesign-hooks';
 import {
   DefaultProps,
   MantineSize,
@@ -7,7 +7,7 @@ import {
   useComponentDefaultProps,
   getSize,
   rem,
-} from '@mantine/styles';
+} from '@worldprint/wdesign-styles';
 import { Box } from '../Box';
 import { ColorSwatch } from '../ColorSwatch/ColorSwatch';
 import { convertHsvaTo, isColorValid, parseColor } from './converters';
@@ -59,7 +59,10 @@ export interface ColorPickerBaseProps {
 export interface ColorPickerProps
   extends DefaultProps<ColorPickerStylesNames>,
     ColorPickerBaseProps,
-    Omit<React.ComponentPropsWithoutRef<'div'>, 'onChange' | 'value' | 'defaultValue'> {
+    Omit<
+      React.ComponentPropsWithoutRef<'div'>,
+      'onChange' | 'value' | 'defaultValue'
+    > {
   variant?: string;
 
   /** Force picker to take 100% width of its container */
@@ -134,7 +137,8 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(
     const formatRef = useRef(format);
     const valueRef = useRef<string>(null);
     const updateRef = useRef(true);
-    const withAlpha = format === 'hexa' || format === 'rgba' || format === 'hsla';
+    const withAlpha =
+      format === 'hexa' || format === 'rgba' || format === 'hsla';
 
     const [_value, setValue, controlled] = useUncontrolled({
       value,
@@ -181,7 +185,9 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(
               value={parsed}
               onChange={handleChange}
               onChangeEnd={({ s, v }) =>
-                onChangeEnd?.(convertHsvaTo(formatRef.current, { ...parsed, s, v }))
+                onChangeEnd?.(
+                  convertHsvaTo(formatRef.current, { ...parsed, s, v })
+                )
               }
               color={_value}
               styles={styles}
@@ -198,7 +204,9 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(
                   value={parsed.h}
                   onChange={(h) => handleChange({ h })}
                   onChangeEnd={(h) =>
-                    onChangeEnd?.(convertHsvaTo(formatRef.current, { ...parsed, h }))
+                    onChangeEnd?.(
+                      convertHsvaTo(formatRef.current, { ...parsed, h })
+                    )
                   }
                   size={size}
                   styles={styles}
@@ -213,7 +221,9 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(
                     value={parsed.a}
                     onChange={(a) => handleChange({ a })}
                     onChangeEnd={(a) => {
-                      onChangeEnd?.(convertHsvaTo(formatRef.current, { ...parsed, a }));
+                      onChangeEnd?.(
+                        convertHsvaTo(formatRef.current, { ...parsed, a })
+                      );
                     }}
                     size={size}
                     color={convertHsvaTo('hex', parsed)}
@@ -264,4 +274,4 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(
   }
 );
 
-ColorPicker.displayName = '@mantine/core/ColorPicker';
+ColorPicker.displayName = '@worldprint/wdesign-core/ColorPicker';

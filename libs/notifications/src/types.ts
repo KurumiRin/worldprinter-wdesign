@@ -1,6 +1,7 @@
-import type { NotificationProps as NotificationComponentProps } from '@mantine/core';
+import type { NotificationProps as NotificationComponentProps } from '@worldprint/wdesign-core';
 
-export interface NotificationProps extends Omit<NotificationComponentProps, 'onClose'> {
+export interface NotificationProps
+  extends Omit<NotificationComponentProps, 'onClose'> {
   id?: string;
   message: React.ReactNode;
   autoClose?: boolean | number;
@@ -13,4 +14,7 @@ export interface NotificationsContextProps {
   queue: NotificationProps[];
 }
 
-export type NotificationsPositioning = ['top' | 'bottom', 'left' | 'right' | 'center'];
+export type NotificationsPositioning = [
+  'top' | 'bottom',
+  'left' | 'right' | 'center'
+];

@@ -1,6 +1,6 @@
 import React from 'react';
-import { TextInput } from '@mantine/core';
-import { upperFirst } from '@mantine/hooks';
+import { TextInput } from '@worldprint/wdesign-core';
+import { upperFirst } from '@worldprint/wdesign-hooks';
 
 interface StringControlProps {
   value: string;

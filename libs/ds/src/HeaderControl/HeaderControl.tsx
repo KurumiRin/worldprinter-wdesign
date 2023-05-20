@@ -1,6 +1,10 @@
 import React from 'react';
-import { UnstyledButton, Tooltip, DefaultProps } from '@mantine/core';
-import { createPolymorphicComponent } from '@mantine/utils';
+import {
+  UnstyledButton,
+  Tooltip,
+  DefaultProps,
+} from '@worldprint/wdesign-core';
+import { createPolymorphicComponent } from '@worldprint/wdesign-utils';
 import useStyles from './HeaderControl.styles';
 
 export interface HeaderControlProps extends DefaultProps {
@@ -17,6 +21,7 @@ function _HeaderControl({ tooltip, className, ...others }: HeaderControlProps) {
   );
 }
 
-export const HeaderControl = createPolymorphicComponent<'button', HeaderControlProps>(
-  _HeaderControl
-);
+export const HeaderControl = createPolymorphicComponent<
+  'button',
+  HeaderControlProps
+>(_HeaderControl);

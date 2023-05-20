@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Button, Divider, Flex, Menu } from '@mantine/core';
+import { Button, Divider, Flex, Menu } from '@worldprint/wdesign-core';
 import { MRT_ShowHideColumnsMenuItems } from './MRT_ShowHideColumnsMenuItems';
 import { getDefaultColumnOrderIds } from '../column.utils';
 import type { MRT_Column, MRT_TableInstance } from '..';
@@ -10,7 +10,7 @@ interface Props<TData extends Record<string, any> = {}> {
 }
 
 export const MRT_ShowHideColumnsMenu = <
-  TData extends Record<string, any> = {},
+  TData extends Record<string, any> = {}
 >({
   isSubMenu,
   table,
@@ -50,7 +50,7 @@ export const MRT_ShowHideColumnsMenu = <
       return [
         ...getLeftLeafColumns(),
         ...Array.from(new Set(columnOrder)).map((colId) =>
-          getCenterLeafColumns().find((col) => col?.id === colId),
+          getCenterLeafColumns().find((col) => col?.id === colId)
         ),
         ...getRightLeafColumns(),
       ].filter(Boolean);
@@ -66,7 +66,7 @@ export const MRT_ShowHideColumnsMenu = <
   ]) as MRT_Column<TData>[];
 
   const [hoveredColumn, setHoveredColumn] = useState<MRT_Column<TData> | null>(
-    null,
+    null
   );
 
   return (
@@ -96,7 +96,7 @@ export const MRT_ShowHideColumnsMenu = <
           <Button
             onClick={() =>
               table.setColumnOrder(
-                getDefaultColumnOrderIds(table.options as any),
+                getDefaultColumnOrderIds(table.options as any)
               )
             }
             variant="subtle"

@@ -1,5 +1,11 @@
 import React, { forwardRef } from 'react';
-import { DefaultProps, getDefaultZIndex, Global, rem, em } from '@mantine/styles';
+import {
+  DefaultProps,
+  getDefaultZIndex,
+  Global,
+  rem,
+  em,
+} from '@worldprint/wdesign-styles';
 import { Box } from '../../Box';
 import { useAppShellContext } from '../AppShell.context';
 import useStyles, {
@@ -65,21 +71,31 @@ export const VerticalSection = forwardRef<HTMLElement, VerticalSectionProps>(
         height,
         fixed: ctx.fixed || fixed,
         position,
-        zIndex: typeof _zIndex === 'number' && ctx.layout === 'default' ? _zIndex + 1 : _zIndex,
+        zIndex:
+          typeof _zIndex === 'number' && ctx.layout === 'default'
+            ? _zIndex + 1
+            : _zIndex,
         layout: ctx.layout,
-        borderPosition: withBorder ? (section === 'header' ? 'bottom' : 'top') : 'none',
+        borderPosition: withBorder
+          ? section === 'header'
+            ? 'bottom'
+            : 'top'
+          : 'none',
       },
       { name: __staticSelector, classNames, styles, unstyled, variant }
     );
     const breakpoints =
       typeof height === 'object' && height !== null
-        ? getSortedBreakpoints(height, theme).reduce((acc, [breakpoint, breakpointSize]) => {
-            acc[`@media (min-width: ${em(breakpoint)})`] = {
-              [`--mantine-${section}-height`]: rem(breakpointSize),
-            };
+        ? getSortedBreakpoints(height, theme).reduce(
+            (acc, [breakpoint, breakpointSize]) => {
+              acc[`@media (min-width: ${em(breakpoint)})`] = {
+                [`--mantine-${section}-height`]: rem(breakpointSize),
+              };
 
-            return acc;
-          }, {})
+              return acc;
+            },
+            {}
+          )
         : null;
 
     return (
@@ -94,7 +110,9 @@ export const VerticalSection = forwardRef<HTMLElement, VerticalSectionProps>(
           styles={() => ({
             ':root': {
               [`--mantine-${section}-height`]:
-                typeof height === 'object' ? rem(height?.base) || '100%' : rem(height),
+                typeof height === 'object'
+                  ? rem(height?.base) || '100%'
+                  : rem(height),
               ...breakpoints,
             },
           })}
@@ -104,4 +122,4 @@ export const VerticalSection = forwardRef<HTMLElement, VerticalSectionProps>(
   }
 );
 
-VerticalSection.displayName = '@mantine/core/VerticalSection';
+VerticalSection.displayName = '@worldprint/wdesign-core/VerticalSection';

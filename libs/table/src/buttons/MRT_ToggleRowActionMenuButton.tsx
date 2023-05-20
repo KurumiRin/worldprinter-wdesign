@@ -1,5 +1,5 @@
 import React, { MouseEvent } from 'react';
-import { ActionIcon, Tooltip } from '@mantine/core';
+import { ActionIcon, Tooltip } from '@worldprint/wdesign-core';
 import { MRT_RowActionMenu } from '../menus/MRT_RowActionMenu';
 import { MRT_EditActionButtons } from './MRT_EditActionButtons';
 import type { MRT_Cell, MRT_Row, MRT_TableInstance } from '..';
@@ -11,7 +11,7 @@ interface Props<TData extends Record<string, any> = {}> {
 }
 
 export const MRT_ToggleRowActionMenuButton = <
-  TData extends Record<string, any> = {},
+  TData extends Record<string, any> = {}
 >({
   cell,
   row,

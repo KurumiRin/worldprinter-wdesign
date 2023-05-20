@@ -13,4 +13,4 @@ export const ControlBase = forwardRef<HTMLButtonElement, RichTextEditorControlBa
   )
 );
 
-ControlBase.displayName = '@mantine/tiptap/ControlBase';
+ControlBase.displayName = '@worldprint/wdesign-tiptap/ControlBase';

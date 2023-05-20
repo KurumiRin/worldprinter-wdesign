@@ -1,8 +1,13 @@
 import React, { forwardRef } from 'react';
-import { useComponentDefaultProps } from '@mantine/core';
+import { useComponentDefaultProps } from '@worldprint/wdesign-core';
 import { useDatesState } from '../../hooks';
 import { PickerBaseProps, DatePickerType, CalendarLevel } from '../../types';
-import { Calendar, CalendarBaseProps, CalendarSettings, CalendarSystemProps } from '../Calendar';
+import {
+  Calendar,
+  CalendarBaseProps,
+  CalendarSettings,
+  CalendarSystemProps,
+} from '../Calendar';
 import { DecadeLevelBaseSettings } from '../DecadeLevel';
 import { YearLevelBaseSettings } from '../YearLevel';
 import { MonthLevelBaseSettings } from '../MonthLevel';
@@ -60,17 +65,21 @@ export const DatePicker: DatePickerComponent = forwardRef(
       ...others
     } = useComponentDefaultProps('DatePicker', defaultProps, props as any);
 
-    const { onDateChange, onRootMouseLeave, onHoveredDateChange, getControlProps } =
-      useDatesState<Type>({
-        type,
-        level: 'day',
-        allowDeselect,
-        allowSingleDateInRange,
-        value,
-        defaultValue,
-        onChange,
-        onMouseLeave,
-      });
+    const {
+      onDateChange,
+      onRootMouseLeave,
+      onHoveredDateChange,
+      getControlProps,
+    } = useDatesState<Type>({
+      type,
+      level: 'day',
+      allowDeselect,
+      allowSingleDateInRange,
+      value,
+      defaultValue,
+      onChange,
+      onMouseLeave,
+    });
 
     return (
       <Calendar
@@ -92,4 +101,4 @@ export const DatePicker: DatePickerComponent = forwardRef(
   }
 );
 
-DatePicker.displayName = '@mantine/dates/DatePicker';
+DatePicker.displayName = '@worldprint/wdesign-dates/DatePicker';

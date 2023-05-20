@@ -1,5 +1,10 @@
 import React from 'react';
-import { MantineSize, Selectors, DefaultProps, MantineColor } from '@mantine/styles';
+import {
+  MantineSize,
+  Selectors,
+  DefaultProps,
+  MantineColor,
+} from '@worldprint/wdesign-styles';
 import { Box } from '../../Box';
 import { StarSymbol } from '../StarSymbol/StarSymbol';
 import useStyles from './RatingItem.styles';
@@ -51,7 +56,8 @@ export function RatingItem({
     variant,
   });
   const _fullIcon = typeof fullIcon === 'function' ? fullIcon(value) : fullIcon;
-  const _emptyIcon = typeof emptyIcon === 'function' ? emptyIcon(value) : emptyIcon;
+  const _emptyIcon =
+    typeof emptyIcon === 'function' ? emptyIcon(value) : emptyIcon;
 
   return (
     <>
@@ -82,16 +88,22 @@ export function RatingItem({
           sx={
             fractionValue === 1
               ? undefined
-              : { clipPath: `inset(0 ${active ? 100 - fractionValue * 100 : 100}% 0 0)` }
+              : {
+                  clipPath: `inset(0 ${
+                    active ? 100 - fractionValue * 100 : 100
+                  }% 0 0)`,
+                }
           }
         >
           {full
             ? _fullIcon || <StarSymbol color={color} size={size} type="full" />
-            : _emptyIcon || <StarSymbol color={color} size={size} type="empty" />}
+            : _emptyIcon || (
+                <StarSymbol color={color} size={size} type="empty" />
+              )}
         </Box>
       </Box>
     </>
   );
 }
 
-RatingItem.displayName = '@mantine/core/RatingItem';
+RatingItem.displayName = '@worldprint/wdesign-core/RatingItem';

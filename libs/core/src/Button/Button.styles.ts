@@ -7,7 +7,7 @@ import {
   CSSObject,
   getSize,
   rem,
-} from '@mantine/styles';
+} from '@worldprint/wdesign-styles';
 import { INPUT_SIZES } from '../Input';
 
 export const BUTTON_VARIANTS = [

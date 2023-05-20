@@ -1,9 +1,11 @@
 import React, { forwardRef } from 'react';
-import { DefaultProps, useComponentDefaultProps } from '@mantine/styles';
+import { DefaultProps, useComponentDefaultProps } from '@worldprint/wdesign-styles';
 import { Box } from '../Box/Box';
 import useStyles from './AspectRatio.styles';
 
-export interface AspectRatioProps extends DefaultProps, React.ComponentPropsWithoutRef<'div'> {
+export interface AspectRatioProps
+  extends DefaultProps,
+    React.ComponentPropsWithoutRef<'div'> {
   variant?: string;
 
   /** Aspect ratio, e.g. 16 / 9, 4 / 3, 1920 / 1080 */
@@ -12,13 +14,13 @@ export interface AspectRatioProps extends DefaultProps, React.ComponentPropsWith
 
 export const AspectRatio = forwardRef<HTMLDivElement, AspectRatioProps>(
   (props: AspectRatioProps, ref) => {
-    const { className, ratio, children, unstyled, variant, ...others } = useComponentDefaultProps(
-      'AspectRatio',
-      {},
-      props
-    );
+    const { className, ratio, children, unstyled, variant, ...others } =
+      useComponentDefaultProps('AspectRatio', {}, props);
 
-    const { classes, cx } = useStyles({ ratio }, { name: 'AspectRatio', unstyled, variant });
+    const { classes, cx } = useStyles(
+      { ratio },
+      { name: 'AspectRatio', unstyled, variant }
+    );
 
     return (
       <Box ref={ref} className={cx(classes.root, className)} {...others}>
@@ -28,4 +30,4 @@ export const AspectRatio = forwardRef<HTMLDivElement, AspectRatioProps>(
   }
 );
 
-AspectRatio.displayName = '@mantine/core/AspectRatio';
+AspectRatio.displayName = '@worldprint/wdesign-core/AspectRatio';

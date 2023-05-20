@@ -1,5 +1,10 @@
 import React, { forwardRef, Fragment } from 'react';
-import { DefaultProps, MantineSize, Selectors, useComponentDefaultProps } from '@mantine/styles';
+import {
+  DefaultProps,
+  MantineSize,
+  Selectors,
+  useComponentDefaultProps,
+} from '@worldprint/wdesign-styles';
 import { Box } from '../../Box';
 import { InputLabel, InputLabelStylesNames } from '../InputLabel/InputLabel';
 import { InputError, InputErrorStylesNames } from '../InputError/InputError';
@@ -78,126 +83,132 @@ const defaultProps: Partial<InputWrapperProps> = {
   inputWrapperOrder: ['label', 'description', 'input', 'error'],
 };
 
-export const InputWrapper = forwardRef<HTMLDivElement, InputWrapperProps>((props, ref) => {
-  const {
-    className,
-    label,
-    children,
-    required,
-    id,
-    error,
-    description,
-    labelElement,
-    labelProps,
-    descriptionProps,
-    errorProps,
-    classNames,
-    styles,
-    size,
-    inputContainer,
-    __staticSelector,
-    unstyled,
-    inputWrapperOrder,
-    withAsterisk,
-    variant,
-    ...others
-  } = useComponentDefaultProps('InputWrapper', defaultProps, props);
+export const InputWrapper = forwardRef<HTMLDivElement, InputWrapperProps>(
+  (props, ref) => {
+    const {
+      className,
+      label,
+      children,
+      required,
+      id,
+      error,
+      description,
+      labelElement,
+      labelProps,
+      descriptionProps,
+      errorProps,
+      classNames,
+      styles,
+      size,
+      inputContainer,
+      __staticSelector,
+      unstyled,
+      inputWrapperOrder,
+      withAsterisk,
+      variant,
+      ...others
+    } = useComponentDefaultProps('InputWrapper', defaultProps, props);
 
-  const { classes, cx } = useStyles(null, {
-    classNames,
-    styles,
-    name: ['InputWrapper', __staticSelector],
-    unstyled,
-    variant,
-    size,
-  });
+    const { classes, cx } = useStyles(null, {
+      classNames,
+      styles,
+      name: ['InputWrapper', __staticSelector],
+      unstyled,
+      variant,
+      size,
+    });
 
-  const sharedProps = {
-    classNames,
-    styles,
-    unstyled,
-    size,
-    variant,
-    __staticSelector,
-  };
+    const sharedProps = {
+      classNames,
+      styles,
+      unstyled,
+      size,
+      variant,
+      __staticSelector,
+    };
 
-  const isRequired = typeof withAsterisk === 'boolean' ? withAsterisk : required;
-  const errorId = id ? `${id}-error` : errorProps?.id;
-  const descriptionId = id ? `${id}-description` : descriptionProps?.id;
-  const hasError = !!error && typeof error !== 'boolean';
-  const _describedBy = `${hasError ? errorId : ''} ${description ? descriptionId : ''}`;
-  const describedBy = _describedBy.trim().length > 0 ? _describedBy.trim() : undefined;
+    const isRequired =
+      typeof withAsterisk === 'boolean' ? withAsterisk : required;
+    const errorId = id ? `${id}-error` : errorProps?.id;
+    const descriptionId = id ? `${id}-description` : descriptionProps?.id;
+    const hasError = !!error && typeof error !== 'boolean';
+    const _describedBy = `${hasError ? errorId : ''} ${
+      description ? descriptionId : ''
+    }`;
+    const describedBy =
+      _describedBy.trim().length > 0 ? _describedBy.trim() : undefined;
 
-  const _label = label && (
-    <InputLabel
-      key="label"
-      labelElement={labelElement}
-      id={id ? `${id}-label` : undefined}
-      htmlFor={id}
-      required={isRequired}
-      {...sharedProps}
-      {...labelProps}
-    >
-      {label}
-    </InputLabel>
-  );
+    const _label = label && (
+      <InputLabel
+        key="label"
+        labelElement={labelElement}
+        id={id ? `${id}-label` : undefined}
+        htmlFor={id}
+        required={isRequired}
+        {...sharedProps}
+        {...labelProps}
+      >
+        {label}
+      </InputLabel>
+    );
 
-  const _description = description && (
-    <InputDescription
-      key="description"
-      {...descriptionProps}
-      {...sharedProps}
-      size={descriptionProps?.size || sharedProps.size}
-      id={descriptionProps?.id || descriptionId}
-    >
-      {description}
-    </InputDescription>
-  );
+    const _description = description && (
+      <InputDescription
+        key="description"
+        {...descriptionProps}
+        {...sharedProps}
+        size={descriptionProps?.size || sharedProps.size}
+        id={descriptionProps?.id || descriptionId}
+      >
+        {description}
+      </InputDescription>
+    );
 
-  const _input = <Fragment key="input">{inputContainer(children)}</Fragment>;
+    const _input = <Fragment key="input">{inputContainer(children)}</Fragment>;
 
-  const _error = typeof error !== 'boolean' && error && (
-    <InputError
-      {...errorProps}
-      {...sharedProps}
-      size={errorProps?.size || sharedProps.size}
-      key="error"
-      id={errorProps?.id || errorId}
-    >
-      {error}
-    </InputError>
-  );
+    const _error = typeof error !== 'boolean' && error && (
+      <InputError
+        {...errorProps}
+        {...sharedProps}
+        size={errorProps?.size || sharedProps.size}
+        key="error"
+        id={errorProps?.id || errorId}
+      >
+        {error}
+      </InputError>
+    );
 
-  const content = inputWrapperOrder.map((part) => {
-    switch (part) {
-      case 'label':
-        return _label;
-      case 'input':
-        return _input;
-      case 'description':
-        return _description;
-      case 'error':
-        return _error;
-      default:
-        return null;
-    }
-  });
+    const content = inputWrapperOrder.map((part) => {
+      switch (part) {
+        case 'label':
+          return _label;
+        case 'input':
+          return _input;
+        case 'description':
+          return _description;
+        case 'error':
+          return _error;
+        default:
+          return null;
+      }
+    });
 
-  return (
-    <InputWrapperProvider
-      value={{
-        describedBy,
-        ...getInputOffsets(inputWrapperOrder, {
-          hasDescription: !!_description,
-          hasError: !!_error,
-        }),
-      }}
-    >
-      <Box className={cx(classes.root, className)} ref={ref} {...others}>
-        {content}
-      </Box>
-    </InputWrapperProvider>
-  );
-});
+    return (
+      <InputWrapperProvider
+        value={{
+          describedBy,
+          ...getInputOffsets(inputWrapperOrder, {
+            hasDescription: !!_description,
+            hasError: !!_error,
+          }),
+        }}
+      >
+        <Box className={cx(classes.root, className)} ref={ref} {...others}>
+          {content}
+        </Box>
+      </InputWrapperProvider>
+    );
+  }
+);
 
-InputWrapper.displayName = '@mantine/core/InputWrapper';
+InputWrapper.displayName = '@worldprint/wdesign-core/InputWrapper';

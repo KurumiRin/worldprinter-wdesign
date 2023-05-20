@@ -6,8 +6,8 @@ import {
   MantineSize,
   Selectors,
   useComponentDefaultProps,
-} from '@mantine/styles';
-import { ForwardRefWithStaticComponents } from '@mantine/utils';
+} from '@worldprint/wdesign-styles';
+import { ForwardRefWithStaticComponents } from '@worldprint/wdesign-utils';
 import { Box } from '../Box';
 import { Step, StepStylesNames, StepFragmentComponent } from './Step/Step';
 import { StepCompleted } from './StepCompleted/StepCompleted';
@@ -83,7 +83,10 @@ const defaultProps: Partial<StepperProps> = {
   allowNextStepsSelect: true,
 };
 
-export const Stepper: StepperComponent = forwardRef<HTMLDivElement, StepperProps>((props, ref) => {
+export const Stepper: StepperComponent = forwardRef<
+  HTMLDivElement,
+  StepperProps
+>((props, ref) => {
   const {
     className,
     children,
@@ -114,12 +117,20 @@ export const Stepper: StepperComponent = forwardRef<HTMLDivElement, StepperProps
   );
 
   const convertedChildren = Children.toArray(children) as React.ReactElement[];
-  const _children = convertedChildren.filter((child) => child.type !== StepCompleted);
-  const completedStep = convertedChildren.find((item) => item.type === StepCompleted);
+  const _children = convertedChildren.filter(
+    (child) => child.type !== StepCompleted
+  );
+  const completedStep = convertedChildren.find(
+    (item) => item.type === StepCompleted
+  );
 
   const items = _children.reduce<React.ReactElement[]>((acc, item, index) => {
     const state =
-      active === index ? 'stepProgress' : active > index ? 'stepCompleted' : 'stepInactive';
+      active === index
+        ? 'stepProgress'
+        : active > index
+        ? 'stepCompleted'
+        : 'stepInactive';
 
     const shouldAllowSelect = () => {
       if (typeof onStepClick !== 'function') {
@@ -162,7 +173,9 @@ export const Stepper: StepperComponent = forwardRef<HTMLDivElement, StepperProps
     if (orientation === 'horizontal' && index !== _children.length - 1) {
       acc.push(
         <div
-          className={cx(classes.separator, { [classes.separatorActive]: index < active })}
+          className={cx(classes.separator, {
+            [classes.separatorActive]: index < active,
+          })}
           key={`separator-${index}`}
         />
       );
@@ -173,7 +186,8 @@ export const Stepper: StepperComponent = forwardRef<HTMLDivElement, StepperProps
 
   const stepContent = _children[active]?.props?.children;
   const completedContent = completedStep?.props?.children;
-  const content = active > _children.length - 1 ? completedContent : stepContent;
+  const content =
+    active > _children.length - 1 ? completedContent : stepContent;
 
   return (
     <Box className={cx(classes.root, className)} ref={ref} {...others}>
@@ -185,4 +199,4 @@ export const Stepper: StepperComponent = forwardRef<HTMLDivElement, StepperProps
 
 Stepper.Step = Step;
 Stepper.Completed = StepCompleted;
-Stepper.displayName = '@mantine/core/Stepper';
+Stepper.displayName = '@worldprint/wdesign-core/Stepper';

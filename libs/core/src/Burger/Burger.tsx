@@ -4,7 +4,7 @@ import {
   MantineNumberSize,
   Selectors,
   useComponentDefaultProps,
-} from '@mantine/styles';
+} from '@worldprint/wdesign-styles';
 import { UnstyledButton } from '../UnstyledButton';
 import useStyles, { BurgerStylesParams } from './Burger.styles';
 
@@ -33,29 +33,35 @@ const defaultProps: Partial<BurgerProps> = {
   transitionDuration: 300,
 };
 
-export const Burger = forwardRef<HTMLButtonElement, BurgerProps>((props: BurgerProps, ref) => {
-  const {
-    className,
-    opened,
-    color,
-    size,
-    classNames,
-    styles,
-    transitionDuration,
-    variant,
-    ...others
-  } = useComponentDefaultProps('Burger', defaultProps, props);
+export const Burger = forwardRef<HTMLButtonElement, BurgerProps>(
+  (props: BurgerProps, ref) => {
+    const {
+      className,
+      opened,
+      color,
+      size,
+      classNames,
+      styles,
+      transitionDuration,
+      variant,
+      ...others
+    } = useComponentDefaultProps('Burger', defaultProps, props);
 
-  const { classes, cx } = useStyles(
-    { color, transitionDuration },
-    { classNames, styles, name: 'Burger', variant, size }
-  );
+    const { classes, cx } = useStyles(
+      { color, transitionDuration },
+      { classNames, styles, name: 'Burger', variant, size }
+    );
 
-  return (
-    <UnstyledButton className={cx(classes.root, className)} ref={ref} {...others}>
-      <div data-opened={opened || undefined} className={classes.burger} />
-    </UnstyledButton>
-  );
-});
+    return (
+      <UnstyledButton
+        className={cx(classes.root, className)}
+        ref={ref}
+        {...others}
+      >
+        <div data-opened={opened || undefined} className={classes.burger} />
+      </UnstyledButton>
+    );
+  }
+);
 
-Burger.displayName = '@mantine/core/Burger';
+Burger.displayName = '@worldprint/wdesign-core/Burger';

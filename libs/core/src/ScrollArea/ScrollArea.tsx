@@ -5,8 +5,8 @@ import {
   Selectors,
   useMantineTheme,
   useComponentDefaultProps,
-} from '@mantine/styles';
-import { ForwardRefWithStaticComponents, packSx } from '@mantine/utils';
+} from '@worldprint/wdesign-styles';
+import { ForwardRefWithStaticComponents, packSx } from '@worldprint/wdesign-utils';
 import { Box } from '../Box';
 import useStyles, { ScrollAreaStylesParams } from './ScrollArea.styles';
 
@@ -49,127 +49,140 @@ const defaultProps: Partial<ScrollAreaProps> = {
   offsetScrollbars: false,
 };
 
-export const _ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>((props, ref) => {
-  const {
-    children,
-    className,
-    classNames,
-    styles,
-    scrollbarSize,
-    scrollHideDelay,
-    type,
-    dir,
-    offsetScrollbars,
-    viewportRef,
-    onScrollPositionChange,
-    unstyled,
-    variant,
-    viewportProps,
-    ...others
-  } = useComponentDefaultProps('ScrollArea', defaultProps, props);
+export const _ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(
+  (props, ref) => {
+    const {
+      children,
+      className,
+      classNames,
+      styles,
+      scrollbarSize,
+      scrollHideDelay,
+      type,
+      dir,
+      offsetScrollbars,
+      viewportRef,
+      onScrollPositionChange,
+      unstyled,
+      variant,
+      viewportProps,
+      ...others
+    } = useComponentDefaultProps('ScrollArea', defaultProps, props);
 
-  const [scrollbarHovered, setScrollbarHovered] = useState(false);
-  const theme = useMantineTheme();
-  const { classes, cx } = useStyles(
-    { scrollbarSize, offsetScrollbars, scrollbarHovered, hidden: type === 'never' },
-    { name: 'ScrollArea', classNames, styles, unstyled, variant }
-  );
+    const [scrollbarHovered, setScrollbarHovered] = useState(false);
+    const theme = useMantineTheme();
+    const { classes, cx } = useStyles(
+      {
+        scrollbarSize,
+        offsetScrollbars,
+        scrollbarHovered,
+        hidden: type === 'never',
+      },
+      { name: 'ScrollArea', classNames, styles, unstyled, variant }
+    );
 
-  return (
-    <RadixScrollArea.Root
-      type={type === 'never' ? 'always' : type}
-      scrollHideDelay={scrollHideDelay}
-      dir={dir || theme.dir}
-      ref={ref}
-      asChild
-    >
-      <Box className={cx(classes.root, className)} {...others}>
-        <RadixScrollArea.Viewport
-          {...viewportProps}
-          className={classes.viewport}
-          ref={viewportRef}
-          onScroll={
-            typeof onScrollPositionChange === 'function'
-              ? ({ currentTarget }) =>
-                  onScrollPositionChange({
-                    x: currentTarget.scrollLeft,
-                    y: currentTarget.scrollTop,
-                  })
-              : undefined
-          }
-        >
-          {children}
-        </RadixScrollArea.Viewport>
-        <RadixScrollArea.Scrollbar
-          orientation="horizontal"
-          className={classes.scrollbar}
-          forceMount
-          onMouseEnter={() => setScrollbarHovered(true)}
-          onMouseLeave={() => setScrollbarHovered(false)}
-        >
-          <RadixScrollArea.Thumb className={classes.thumb} />
-        </RadixScrollArea.Scrollbar>
-        <RadixScrollArea.Scrollbar
-          orientation="vertical"
-          className={classes.scrollbar}
-          forceMount
-          onMouseEnter={() => setScrollbarHovered(true)}
-          onMouseLeave={() => setScrollbarHovered(false)}
-        >
-          <RadixScrollArea.Thumb className={classes.thumb} />
-        </RadixScrollArea.Scrollbar>
-        <RadixScrollArea.Corner className={classes.corner} />
-      </Box>
-    </RadixScrollArea.Root>
-  );
-}) as any;
+    return (
+      <RadixScrollArea.Root
+        type={type === 'never' ? 'always' : type}
+        scrollHideDelay={scrollHideDelay}
+        dir={dir || theme.dir}
+        ref={ref}
+        asChild
+      >
+        <Box className={cx(classes.root, className)} {...others}>
+          <RadixScrollArea.Viewport
+            {...viewportProps}
+            className={classes.viewport}
+            ref={viewportRef}
+            onScroll={
+              typeof onScrollPositionChange === 'function'
+                ? ({ currentTarget }) =>
+                    onScrollPositionChange({
+                      x: currentTarget.scrollLeft,
+                      y: currentTarget.scrollTop,
+                    })
+                : undefined
+            }
+          >
+            {children}
+          </RadixScrollArea.Viewport>
+          <RadixScrollArea.Scrollbar
+            orientation="horizontal"
+            className={classes.scrollbar}
+            forceMount
+            onMouseEnter={() => setScrollbarHovered(true)}
+            onMouseLeave={() => setScrollbarHovered(false)}
+          >
+            <RadixScrollArea.Thumb className={classes.thumb} />
+          </RadixScrollArea.Scrollbar>
+          <RadixScrollArea.Scrollbar
+            orientation="vertical"
+            className={classes.scrollbar}
+            forceMount
+            onMouseEnter={() => setScrollbarHovered(true)}
+            onMouseLeave={() => setScrollbarHovered(false)}
+          >
+            <RadixScrollArea.Thumb className={classes.thumb} />
+          </RadixScrollArea.Scrollbar>
+          <RadixScrollArea.Corner className={classes.corner} />
+        </Box>
+      </RadixScrollArea.Root>
+    );
+  }
+) as any;
 
 export interface ScrollAreaAutosizeProps extends ScrollAreaProps {}
 
-const ScrollAreaAutosize = forwardRef<HTMLDivElement, ScrollAreaAutosizeProps>((props, ref) => {
-  const {
-    children,
-    classNames,
-    styles,
-    scrollbarSize,
-    scrollHideDelay,
-    type,
-    dir,
-    offsetScrollbars,
-    viewportRef,
-    onScrollPositionChange,
-    unstyled,
-    sx,
-    variant,
-    viewportProps,
-    ...others
-  } = useComponentDefaultProps<ScrollAreaAutosizeProps>('ScrollAreaAutosize', defaultProps, props);
-  return (
-    <Box {...others} ref={ref} sx={[{ display: 'flex' }, ...packSx(sx)]}>
-      <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-        <_ScrollArea
-          classNames={classNames}
-          styles={styles}
-          scrollHideDelay={scrollHideDelay}
-          scrollbarSize={scrollbarSize}
-          type={type}
-          dir={dir}
-          offsetScrollbars={offsetScrollbars}
-          viewportRef={viewportRef}
-          onScrollPositionChange={onScrollPositionChange}
-          unstyled={unstyled}
-          variant={variant}
-          viewportProps={viewportProps}
-        >
-          {children}
-        </_ScrollArea>
+const ScrollAreaAutosize = forwardRef<HTMLDivElement, ScrollAreaAutosizeProps>(
+  (props, ref) => {
+    const {
+      children,
+      classNames,
+      styles,
+      scrollbarSize,
+      scrollHideDelay,
+      type,
+      dir,
+      offsetScrollbars,
+      viewportRef,
+      onScrollPositionChange,
+      unstyled,
+      sx,
+      variant,
+      viewportProps,
+      ...others
+    } = useComponentDefaultProps<ScrollAreaAutosizeProps>(
+      'ScrollAreaAutosize',
+      defaultProps,
+      props
+    );
+    return (
+      <Box {...others} ref={ref} sx={[{ display: 'flex' }, ...packSx(sx)]}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+          <_ScrollArea
+            classNames={classNames}
+            styles={styles}
+            scrollHideDelay={scrollHideDelay}
+            scrollbarSize={scrollbarSize}
+            type={type}
+            dir={dir}
+            offsetScrollbars={offsetScrollbars}
+            viewportRef={viewportRef}
+            onScrollPositionChange={onScrollPositionChange}
+            unstyled={unstyled}
+            variant={variant}
+            viewportProps={viewportProps}
+          >
+            {children}
+          </_ScrollArea>
+        </Box>
       </Box>
-    </Box>
-  );
-});
+    );
+  }
+);
 
-ScrollAreaAutosize.displayName = '@mantine/core/ScrollAreaAutosize';
-_ScrollArea.displayName = '@mantine/core/ScrollArea';
+ScrollAreaAutosize.displayName = '@worldprint/wdesign-core/ScrollAreaAutosize';
+_ScrollArea.displayName = '@worldprint/wdesign-core/ScrollArea';
 _ScrollArea.Autosize = ScrollAreaAutosize;
 
 export const ScrollArea: ForwardRefWithStaticComponents<

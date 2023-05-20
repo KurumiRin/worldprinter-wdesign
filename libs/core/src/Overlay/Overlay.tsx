@@ -4,8 +4,8 @@ import {
   getDefaultZIndex,
   MantineNumberSize,
   useComponentDefaultProps,
-} from '@mantine/styles';
-import { createPolymorphicComponent } from '@mantine/utils';
+} from '@worldprint/wdesign-styles';
+import { createPolymorphicComponent } from '@worldprint/wdesign-utils';
 import { Box } from '../Box';
 import useStyles, { OverlayStylesParams } from './Overlay.styles';
 
@@ -83,5 +83,5 @@ const _Overlay = forwardRef<HTMLDivElement, OverlayProps>((props, ref) => {
   );
 });
 
-_Overlay.displayName = '@mantine/core/Overlay';
+_Overlay.displayName = '@worldprint/wdesign-core/Overlay';
 export const Overlay = createPolymorphicComponent<'div', OverlayProps>(_Overlay);

@@ -5,7 +5,7 @@ import {
   rem,
   getBreakpointValue,
   getSize,
-} from '@mantine/core';
+} from '@worldprint/wdesign-core';
 import { CarouselBreakpoint } from './types';
 
 export interface CarouselStylesParams {

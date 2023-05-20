@@ -1,7 +1,7 @@
 import React from 'react';
-import { getSafeId } from '@mantine/utils';
-import { useUncontrolled, useId } from '@mantine/hooks';
-import { MantineNumberSize, ClassNames, Styles } from '@mantine/styles';
+import { getSafeId } from '@worldprint/wdesign-utils';
+import { useUncontrolled, useId } from '@worldprint/wdesign-hooks';
+import { MantineNumberSize, ClassNames, Styles } from '@worldprint/wdesign-styles';
 import { AccordionContextProvider } from './Accordion.context';
 import {
   AccordionValue,

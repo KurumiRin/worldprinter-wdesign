@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@mantine/core';
+import { Box } from '@worldprint/wdesign-core';
 import { MRT_TableHeadRow } from './MRT_TableHeadRow';
 import type { MRT_TableInstance, MRT_VirtualItem } from '..';
 

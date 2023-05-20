@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Box, Menu, Switch, Tooltip, Text } from '@mantine/core';
+import { Box, Menu, Switch, Tooltip, Text } from '@worldprint/wdesign-core';
 import { MRT_ColumnPinningButtons } from '../buttons/MRT_ColumnPinningButtons';
 import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
 import { getPrimaryColor, reorderColumn } from '../column.utils';
@@ -21,7 +21,7 @@ interface Props<TData extends Record<string, any> = {}> {
 }
 
 export const MRT_ShowHideColumnsMenuItems = <
-  TData extends Record<string, any> = {},
+  TData extends Record<string, any> = {}
 >({
   allColumns,
   hoveredColumn,
@@ -114,7 +114,7 @@ export const MRT_ShowHideColumnsMenuItems = <
             columnDefType !== 'group' &&
             enableColumnOrdering &&
             !allColumns.some(
-              (col) => col.columnDef.columnDefType === 'group',
+              (col) => col.columnDef.columnDefType === 'group'
             ) &&
             (columnDef.enableColumnOrdering !== false ? (
               <MRT_GrabHandleButton

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box, Flex, MantineTheme } from '@mantine/core';
-import { useMediaQuery } from '@mantine/hooks';
+import { Box, Flex, MantineTheme } from '@worldprint/wdesign-core';
+import { useMediaQuery } from '@worldprint/wdesign-hooks';
 import { MRT_GlobalFilterTextInput } from '../inputs/MRT_GlobalFilterTextInput';
 import { MRT_ProgressBar } from './MRT_ProgressBar';
 import { MRT_TablePagination } from './MRT_TablePagination';
@@ -124,12 +124,11 @@ export const MRT_TopToolbar = <TData extends Record<string, any> = {}>({
           )
         )}
       </Flex>
-      {enablePagination &&
-        ['top', 'both'].includes(positionPagination ?? '') && (
-          <Flex justify="end">
-            <MRT_TablePagination table={table} position="top" />
-          </Flex>
-        )}
+      {enablePagination && ['top', 'both'].includes(positionPagination ?? '') && (
+        <Flex justify="end">
+          <MRT_TablePagination table={table} position="top" />
+        </Flex>
+      )}
       <MRT_ProgressBar isTopToolbar table={table} />
     </Box>
   );

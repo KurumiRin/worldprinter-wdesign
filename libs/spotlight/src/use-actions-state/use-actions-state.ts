@@ -1,4 +1,4 @@
-import { randomId } from '@mantine/hooks';
+import { randomId } from '@worldprint/wdesign-hooks';
 import type { SpotlightAction } from '../types';
 
 function prepareAction(action: SpotlightAction) {

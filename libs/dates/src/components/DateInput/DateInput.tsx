@@ -11,9 +11,14 @@ import {
   PopoverProps,
   Popover,
   CloseButton,
-} from '@mantine/core';
-import { useUncontrolled, useDidUpdate } from '@mantine/hooks';
-import { Calendar, CalendarBaseProps, CalendarStylesNames, pickCalendarProps } from '../Calendar';
+} from '@worldprint/wdesign-core';
+import { useUncontrolled, useDidUpdate } from '@worldprint/wdesign-hooks';
+import {
+  Calendar,
+  CalendarBaseProps,
+  CalendarStylesNames,
+  pickCalendarProps,
+} from '../Calendar';
 import { DecadeLevelSettings } from '../DecadeLevel';
 import { YearLevelSettings } from '../YearLevel';
 import { MonthLevelSettings } from '../MonthLevel';
@@ -24,7 +29,10 @@ import { useDatesContext } from '../DatesProvider';
 import { isDateValid } from './is-date-valid/is-date-valid';
 import { dateStringParser } from './date-string-parser/date-string-parser';
 
-export type DateInputStylesNames = CalendarStylesNames | InputStylesNames | InputWrapperStylesNames;
+export type DateInputStylesNames =
+  | CalendarStylesNames
+  | InputStylesNames
+  | InputWrapperStylesNames;
 
 export interface DateInputProps
   extends DefaultProps<DateInputStylesNames>,
@@ -34,7 +42,10 @@ export interface DateInputProps
     DecadeLevelSettings,
     YearLevelSettings,
     MonthLevelSettings,
-    Omit<React.ComponentPropsWithoutRef<'input'>, 'size' | 'value' | 'defaultValue' | 'onChange'> {
+    Omit<
+      React.ComponentPropsWithoutRef<'input'>,
+      'size' | 'value' | 'defaultValue' | 'onChange'
+    > {
   /** Parses user input to convert it to Date object */
   dateParser?: (value: string) => Date | null;
 
@@ -88,199 +99,217 @@ const defaultProps: Partial<DateInputProps> = {
   size: 'sm',
 };
 
-export const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
-  const {
-    inputProps,
-    wrapperProps,
-    value,
-    defaultValue,
-    onChange,
-    clearable,
-    clearButtonProps,
-    popoverProps,
-    getDayProps,
-    locale,
-    valueFormat,
-    dateParser,
-    minDate,
-    maxDate,
-    fixOnBlur,
-    onFocus,
-    onBlur,
-    onClick,
-    readOnly,
-    name,
-    form,
-    rightSection,
-    unstyled,
-    classNames,
-    styles,
-    allowDeselect,
-    preserveTime,
-    date,
-    defaultDate,
-    onDateChange,
-    ...rest
-  } = useInputProps('DateInput', defaultProps, props);
-  const { calendarProps, others } = pickCalendarProps(rest);
-  const ctx = useDatesContext();
-  const defaultDateParser = (val: string) => {
-    const parsedDate = dayjs(val, valueFormat, ctx.getLocale(locale)).toDate();
-    return Number.isNaN(parsedDate.getTime()) ? dateStringParser(val) : parsedDate;
-  };
+export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
+  (props, ref) => {
+    const {
+      inputProps,
+      wrapperProps,
+      value,
+      defaultValue,
+      onChange,
+      clearable,
+      clearButtonProps,
+      popoverProps,
+      getDayProps,
+      locale,
+      valueFormat,
+      dateParser,
+      minDate,
+      maxDate,
+      fixOnBlur,
+      onFocus,
+      onBlur,
+      onClick,
+      readOnly,
+      name,
+      form,
+      rightSection,
+      unstyled,
+      classNames,
+      styles,
+      allowDeselect,
+      preserveTime,
+      date,
+      defaultDate,
+      onDateChange,
+      ...rest
+    } = useInputProps('DateInput', defaultProps, props);
+    const { calendarProps, others } = pickCalendarProps(rest);
+    const ctx = useDatesContext();
+    const defaultDateParser = (val: string) => {
+      const parsedDate = dayjs(
+        val,
+        valueFormat,
+        ctx.getLocale(locale)
+      ).toDate();
+      return Number.isNaN(parsedDate.getTime())
+        ? dateStringParser(val)
+        : parsedDate;
+    };
 
-  const _dateParser = dateParser || defaultDateParser;
-  const _allowDeselect = clearable || allowDeselect;
+    const _dateParser = dateParser || defaultDateParser;
+    const _allowDeselect = clearable || allowDeselect;
 
-  const formatValue = (val: Date) =>
-    val ? dayjs(val).locale(ctx.getLocale(locale)).format(valueFormat) : '';
+    const formatValue = (val: Date) =>
+      val ? dayjs(val).locale(ctx.getLocale(locale)).format(valueFormat) : '';
 
-  const [_value, setValue, controlled] = useUncontrolled({
-    value,
-    defaultValue,
-    finalValue: null,
-    onChange,
-  });
+    const [_value, setValue, controlled] = useUncontrolled({
+      value,
+      defaultValue,
+      finalValue: null,
+      onChange,
+    });
 
-  const [_date, setDate] = useUncontrolled({
-    value: date,
-    defaultValue: defaultValue || defaultDate,
-    finalValue: null,
-    onChange: onDateChange,
-  });
+    const [_date, setDate] = useUncontrolled({
+      value: date,
+      defaultValue: defaultValue || defaultDate,
+      finalValue: null,
+      onChange: onDateChange,
+    });
 
-  useEffect(() => {
-    if (controlled) {
-      setDate(value);
-    }
-  }, [controlled, value]);
-
-  const [inputValue, setInputValue] = useState(formatValue(_value));
-
-  useEffect(() => {
-    setInputValue(formatValue(_value));
-  }, [ctx.getLocale(locale)]);
-
-  const [dropdownOpened, setDropdownOpened] = useState(false);
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const val = event.currentTarget.value;
-    setInputValue(val);
-
-    if (val.trim() === '' && _allowDeselect) {
-      setValue(null);
-    } else {
-      const dateValue = _dateParser(val);
-      if (isDateValid({ date: dateValue, minDate, maxDate })) {
-        setValue(dateValue);
-        setDate(dateValue);
+    useEffect(() => {
+      if (controlled) {
+        setDate(value);
       }
-    }
-  };
+    }, [controlled, value]);
 
-  const handleInputBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    onBlur?.(event);
-    setDropdownOpened(false);
-    fixOnBlur && setInputValue(formatValue(_value));
-  };
+    const [inputValue, setInputValue] = useState(formatValue(_value));
 
-  const handleInputFocus = (event: React.FocusEvent<HTMLInputElement>) => {
-    onFocus?.(event);
-    setDropdownOpened(true);
-  };
+    useEffect(() => {
+      setInputValue(formatValue(_value));
+    }, [ctx.getLocale(locale)]);
 
-  const handleInputClick = (event: React.MouseEvent<HTMLInputElement>) => {
-    onClick?.(event);
-    setDropdownOpened(true);
-  };
+    const [dropdownOpened, setDropdownOpened] = useState(false);
 
-  const _getDayProps = (day: Date) => ({
-    ...getDayProps?.(day),
-    selected: dayjs(_value).isSame(day, 'day'),
-    onClick: () => {
-      const valueWithTime = preserveTime ? assignTime(_value, day) : day;
-      const val = _allowDeselect
-        ? dayjs(_value).isSame(day, 'day')
-          ? null
-          : valueWithTime
-        : valueWithTime;
-      setValue(val);
-      !controlled && setInputValue(formatValue(val));
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const val = event.currentTarget.value;
+      setInputValue(val);
+
+      if (val.trim() === '' && _allowDeselect) {
+        setValue(null);
+      } else {
+        const dateValue = _dateParser(val);
+        if (isDateValid({ date: dateValue, minDate, maxDate })) {
+          setValue(dateValue);
+          setDate(dateValue);
+        }
+      }
+    };
+
+    const handleInputBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+      onBlur?.(event);
       setDropdownOpened(false);
-    },
-  });
+      fixOnBlur && setInputValue(formatValue(_value));
+    };
 
-  const _rightSection =
-    rightSection ||
-    (clearable && _value && !readOnly ? (
-      <CloseButton
-        variant="transparent"
-        onMouseDown={(event) => event.preventDefault()}
-        tabIndex={-1}
-        onClick={() => {
-          setValue(null);
-          !controlled && setInputValue('');
-        }}
-        unstyled={unstyled}
-        {...clearButtonProps}
-      />
-    ) : null);
+    const handleInputFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+      onFocus?.(event);
+      setDropdownOpened(true);
+    };
 
-  useDidUpdate(() => {
-    value !== undefined && !dropdownOpened && setInputValue(formatValue(value));
-  }, [value]);
+    const handleInputClick = (event: React.MouseEvent<HTMLInputElement>) => {
+      onClick?.(event);
+      setDropdownOpened(true);
+    };
 
-  return (
-    <>
-      <Input.Wrapper {...wrapperProps} __staticSelector="DateInput">
-        <Popover
-          opened={dropdownOpened}
-          trapFocus={false}
-          position="bottom-start"
-          disabled={readOnly}
-          withRoles={false}
-          {...popoverProps}
-        >
-          <Popover.Target>
-            <Input
-              data-dates-input
-              data-read-only={readOnly || undefined}
-              autoComplete="off"
-              ref={ref}
-              value={inputValue}
-              onChange={handleInputChange}
-              onBlur={handleInputBlur}
-              onFocus={handleInputFocus}
-              onClick={handleInputClick}
-              readOnly={readOnly}
-              rightSection={_rightSection}
-              {...inputProps}
-              {...others}
-              __staticSelector="DateInput"
-            />
-          </Popover.Target>
-          <Popover.Dropdown onMouseDown={(event) => event.preventDefault()} data-dates-dropdown>
-            <Calendar
-              __staticSelector="DateInput"
-              {...calendarProps}
-              classNames={classNames}
-              styles={styles}
-              unstyled={unstyled}
-              __preventFocus
-              minDate={minDate}
-              maxDate={maxDate}
-              locale={locale}
-              getDayProps={_getDayProps}
-              size={inputProps.size}
-              date={_date}
-              onDateChange={setDate}
-            />
-          </Popover.Dropdown>
-        </Popover>
-      </Input.Wrapper>
-      <HiddenDatesInput name={name} form={form} value={_value} type="default" />
-    </>
-  );
-});
+    const _getDayProps = (day: Date) => ({
+      ...getDayProps?.(day),
+      selected: dayjs(_value).isSame(day, 'day'),
+      onClick: () => {
+        const valueWithTime = preserveTime ? assignTime(_value, day) : day;
+        const val = _allowDeselect
+          ? dayjs(_value).isSame(day, 'day')
+            ? null
+            : valueWithTime
+          : valueWithTime;
+        setValue(val);
+        !controlled && setInputValue(formatValue(val));
+        setDropdownOpened(false);
+      },
+    });
 
-DateInput.displayName = '@mantine/dates/DateInput';
+    const _rightSection =
+      rightSection ||
+      (clearable && _value && !readOnly ? (
+        <CloseButton
+          variant="transparent"
+          onMouseDown={(event) => event.preventDefault()}
+          tabIndex={-1}
+          onClick={() => {
+            setValue(null);
+            !controlled && setInputValue('');
+          }}
+          unstyled={unstyled}
+          {...clearButtonProps}
+        />
+      ) : null);
+
+    useDidUpdate(() => {
+      value !== undefined &&
+        !dropdownOpened &&
+        setInputValue(formatValue(value));
+    }, [value]);
+
+    return (
+      <>
+        <Input.Wrapper {...wrapperProps} __staticSelector="DateInput">
+          <Popover
+            opened={dropdownOpened}
+            trapFocus={false}
+            position="bottom-start"
+            disabled={readOnly}
+            withRoles={false}
+            {...popoverProps}
+          >
+            <Popover.Target>
+              <Input
+                data-dates-input
+                data-read-only={readOnly || undefined}
+                autoComplete="off"
+                ref={ref}
+                value={inputValue}
+                onChange={handleInputChange}
+                onBlur={handleInputBlur}
+                onFocus={handleInputFocus}
+                onClick={handleInputClick}
+                readOnly={readOnly}
+                rightSection={_rightSection}
+                {...inputProps}
+                {...others}
+                __staticSelector="DateInput"
+              />
+            </Popover.Target>
+            <Popover.Dropdown
+              onMouseDown={(event) => event.preventDefault()}
+              data-dates-dropdown
+            >
+              <Calendar
+                __staticSelector="DateInput"
+                {...calendarProps}
+                classNames={classNames}
+                styles={styles}
+                unstyled={unstyled}
+                __preventFocus
+                minDate={minDate}
+                maxDate={maxDate}
+                locale={locale}
+                getDayProps={_getDayProps}
+                size={inputProps.size}
+                date={_date}
+                onDateChange={setDate}
+              />
+            </Popover.Dropdown>
+          </Popover>
+        </Input.Wrapper>
+        <HiddenDatesInput
+          name={name}
+          form={form}
+          value={_value}
+          type="default"
+        />
+      </>
+    );
+  }
+);
+
+DateInput.displayName = '@worldprint/wdesign-dates/DateInput';

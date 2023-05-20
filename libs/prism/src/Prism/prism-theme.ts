@@ -1,5 +1,5 @@
 import { PrismTheme } from 'prism-react-renderer';
-import { MantineTheme } from '@mantine/core';
+import { MantineTheme } from '@worldprint/wdesign-core';
 
 export const dark = (theme: MantineTheme): PrismTheme => ({
   plain: {

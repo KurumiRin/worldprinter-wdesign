@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from 'react';
-import { MantineNumberSize } from '@mantine/styles';
+import { MantineNumberSize } from '@worldprint/wdesign-styles';
 
 interface ContextValue {
   spacing: MantineNumberSize;

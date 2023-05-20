@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { MantineNumberSize, DefaultProps, Selectors } from '@mantine/styles';
+import { MantineNumberSize, DefaultProps, Selectors } from '@worldprint/wdesign-styles';
 import { Box } from '../../Box';
 import useStyles from './SliderRoot.styles';
 
@@ -36,8 +36,15 @@ export const SliderRoot = forwardRef<HTMLDivElement, SliderRootProps>(
       variant,
       size,
     });
-    return <Box {...others} tabIndex={-1} className={cx(classes.root, className)} ref={ref} />;
+    return (
+      <Box
+        {...others}
+        tabIndex={-1}
+        className={cx(classes.root, className)}
+        ref={ref}
+      />
+    );
   }
 );
 
-SliderRoot.displayName = '@mantine/core/SliderRoot';
+SliderRoot.displayName = '@worldprint/wdesign-core/SliderRoot';

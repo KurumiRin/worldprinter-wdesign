@@ -7,7 +7,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import { Box, Skeleton, useMantineTheme } from '@mantine/core';
+import { Box, Skeleton, useMantineTheme } from '@worldprint/wdesign-core';
 import { MRT_EditCellTextInput } from '../inputs/MRT_EditCellTextInput';
 import { MRT_CopyButton } from '../buttons/MRT_CopyButton';
 import { MRT_TableBodyRowGrabHandle } from './MRT_TableBodyRowGrabHandle';
@@ -104,11 +104,11 @@ export const MRT_TableBodyCell = ({
             ? column.getSize() / 2
             : Math.round(
                 Math.random() * (column.getSize() - column.getSize() / 3) +
-                  column.getSize() / 3,
+                  column.getSize() / 3
               )
-          : 100,
+          : 100
       ),
-    [],
+    []
   );
 
   const draggingBorders = useMemo(() => {
@@ -185,7 +185,7 @@ export const MRT_TableBodyCell = ({
     }
     if (enableColumnOrdering && draggingColumn) {
       setHoveredColumn(
-        columnDef.enableColumnOrdering !== false ? column : null,
+        columnDef.enableColumnOrdering !== false ? column : null
       );
     }
   };
@@ -280,5 +280,5 @@ export const MRT_TableBodyCell = ({
 
 export const Memo_MRT_TableBodyCell = memo(
   MRT_TableBodyCell,
-  (prev, next) => next.cell === prev.cell,
+  (prev, next) => next.cell === prev.cell
 );

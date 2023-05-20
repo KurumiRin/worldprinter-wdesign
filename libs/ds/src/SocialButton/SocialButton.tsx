@@ -1,6 +1,6 @@
 import React from 'react';
-import { DefaultProps, Button, rem } from '@mantine/core';
-import { packSx } from '@mantine/utils';
+import { DefaultProps, Button, rem } from '@worldprint/wdesign-core';
+import { packSx } from '@worldprint/wdesign-utils';
 import { meta } from '../meta';
 import { DiscordIcon, TwitterIcon } from '../Icons';
 
@@ -39,7 +39,9 @@ export function DiscordButton({ sx, ...others }: SocialButtonProps) {
       sx={[
         (theme) => ({
           backgroundColor: meta.discordColor,
-          ...theme.fn.hover({ backgroundColor: theme.fn.lighten(meta.discordColor, 0.1) }),
+          ...theme.fn.hover({
+            backgroundColor: theme.fn.lighten(meta.discordColor, 0.1),
+          }),
         }),
         ...packSx(sx),
       ]}
@@ -58,7 +60,9 @@ export function TwitterButton({ sx, ...others }: SocialButtonProps) {
       sx={[
         (theme) => ({
           backgroundColor: meta.twitterColor,
-          ...theme.fn.hover({ backgroundColor: theme.fn.lighten(meta.twitterColor, 0.1) }),
+          ...theme.fn.hover({
+            backgroundColor: theme.fn.lighten(meta.twitterColor, 0.1),
+          }),
         }),
         ...packSx(sx),
       ]}

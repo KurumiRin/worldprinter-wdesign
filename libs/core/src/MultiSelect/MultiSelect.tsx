@@ -5,14 +5,14 @@ import {
   useDidUpdate,
   useScrollIntoView,
   useId,
-} from '@mantine/hooks';
+} from '@worldprint/wdesign-hooks';
 import {
   DefaultProps,
   Selectors,
   getDefaultZIndex,
   useComponentDefaultProps,
-} from '@mantine/styles';
-import { groupOptions } from '@mantine/utils';
+} from '@worldprint/wdesign-styles';
+import { groupOptions } from '@worldprint/wdesign-utils';
 import { extractSystemStyles } from '../Box';
 import { Input } from '../Input';
 import { DefaultValue, DefaultValueStylesNames } from './DefaultValue/DefaultValue';
@@ -748,4 +748,4 @@ export const MultiSelect = forwardRef<HTMLInputElement, MultiSelectProps>((props
   );
 });
 
-MultiSelect.displayName = '@mantine/core/MultiSelect';
+MultiSelect.displayName = '@worldprint/wdesign-core/MultiSelect';

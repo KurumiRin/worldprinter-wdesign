@@ -1,5 +1,9 @@
 import React, { forwardRef } from 'react';
-import { DefaultProps, MantineNumberSize, useComponentDefaultProps } from '@mantine/styles';
+import {
+  DefaultProps,
+  MantineNumberSize,
+  useComponentDefaultProps,
+} from '@worldprint/wdesign-styles';
 import { Box } from '../Box';
 import useStyles, { TableStylesParams } from './Table.styles';
 
@@ -62,7 +66,14 @@ export const Table = forwardRef<HTMLTableElement, TableProps>((props, ref) => {
   } = useComponentDefaultProps('Table', defaultProps, props);
 
   const { classes, cx } = useStyles(
-    { captionSide, verticalSpacing, horizontalSpacing, fontSize, withBorder, withColumnBorders },
+    {
+      captionSide,
+      verticalSpacing,
+      horizontalSpacing,
+      fontSize,
+      withBorder,
+      withColumnBorders,
+    },
     { unstyled, name: 'Table', variant }
   );
 
@@ -80,4 +91,4 @@ export const Table = forwardRef<HTMLTableElement, TableProps>((props, ref) => {
   );
 });
 
-Table.displayName = '@mantine/core/Table';
+Table.displayName = '@worldprint/wdesign-core/Table';

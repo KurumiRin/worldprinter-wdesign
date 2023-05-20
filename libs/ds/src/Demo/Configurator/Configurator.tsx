@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { MantineNumberSize, useMantineTheme, rem } from '@mantine/core';
-import { Prism } from '@mantine/prism';
+import { MantineNumberSize, useMantineTheme, rem } from '@worldprint/wdesign-core';
+import { Prism } from '@worldprint/wdesign-prism';
 import controls, { ControlProps } from './controls';
 import { propsToString } from './props-to-string';
 import useStyles from './Configurator.styles';

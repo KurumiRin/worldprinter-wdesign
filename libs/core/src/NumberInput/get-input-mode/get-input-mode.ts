@@ -1,4 +1,4 @@
-import { OS } from '@mantine/hooks';
+import { OS } from '@worldprint/wdesign-hooks';
 
 export const getInputMode = (
   step: number,

@@ -1,7 +1,14 @@
 import React, { forwardRef } from 'react';
-import { DefaultProps, MantineNumberSize, useComponentDefaultProps } from '@mantine/styles';
+import {
+  DefaultProps,
+  MantineNumberSize,
+  useComponentDefaultProps,
+} from '@worldprint/wdesign-styles';
 import { Box } from '../Box';
-import useStyles, { SimpleGridBreakpoint, SimpleGridStylesParams } from './SimpleGrid.styles';
+import useStyles, {
+  SimpleGridBreakpoint,
+  SimpleGridStylesParams,
+} from './SimpleGrid.styles';
 
 export interface SimpleGridProps
   extends DefaultProps<never, SimpleGridStylesParams>,
@@ -27,29 +34,31 @@ const defaultProps: Partial<SimpleGridProps> = {
   spacing: 'md',
 };
 
-export const SimpleGrid = forwardRef<HTMLDivElement, SimpleGridProps>((props, ref) => {
-  const {
-    className,
-    breakpoints,
-    cols,
-    spacing,
-    verticalSpacing,
-    children,
-    unstyled,
-    variant,
-    ...others
-  } = useComponentDefaultProps('SimpleGrid', defaultProps, props);
+export const SimpleGrid = forwardRef<HTMLDivElement, SimpleGridProps>(
+  (props, ref) => {
+    const {
+      className,
+      breakpoints,
+      cols,
+      spacing,
+      verticalSpacing,
+      children,
+      unstyled,
+      variant,
+      ...others
+    } = useComponentDefaultProps('SimpleGrid', defaultProps, props);
 
-  const { classes, cx } = useStyles(
-    { breakpoints, cols, spacing, verticalSpacing },
-    { name: 'SimpleGrid', unstyled, variant }
-  );
+    const { classes, cx } = useStyles(
+      { breakpoints, cols, spacing, verticalSpacing },
+      { name: 'SimpleGrid', unstyled, variant }
+    );
 
-  return (
-    <Box className={cx(classes.root, className)} ref={ref} {...others}>
-      {children}
-    </Box>
-  );
-});
+    return (
+      <Box className={cx(classes.root, className)} ref={ref} {...others}>
+        {children}
+      </Box>
+    );
+  }
+);
 
-SimpleGrid.displayName = '@mantine/core/SimpleGrid';
+SimpleGrid.displayName = '@worldprint/wdesign-core/SimpleGrid';

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Notification, DefaultProps } from '@mantine/core';
+import { Notification, DefaultProps } from '@worldprint/wdesign-core';
 import getAutoClose from './get-auto-close/get-auto-close';
 import { NotificationProps } from '../types';
 
@@ -17,7 +17,11 @@ export default function NotificationContainer({
   innerRef,
   ...others
 }: NotificationContainerProps) {
-  const { autoClose: notificationAutoClose, message, ...notificationProps } = notification;
+  const {
+    autoClose: notificationAutoClose,
+    message,
+    ...notificationProps
+  } = notification;
   const autoCloseTimeout = getAutoClose(autoClose, notificationAutoClose);
   const hideTimeout = useRef<number>();
 
@@ -61,4 +65,5 @@ export default function NotificationContainer({
   );
 }
 
-NotificationContainer.displayName = '@mantine/notifications/NotificationContainer';
+NotificationContainer.displayName =
+  '@worldprint/wdesign-notifications/NotificationContainer';

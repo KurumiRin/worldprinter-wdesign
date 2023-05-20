@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { useComponentDefaultProps } from '@mantine/core';
+import { useComponentDefaultProps } from '@worldprint/wdesign-core';
 import { useDatesState } from '../../hooks';
 import { DecadeLevelBaseSettings } from '../DecadeLevel';
 import { PickerBaseProps, DatePickerType } from '../../types';
@@ -8,7 +8,10 @@ import { Calendar, CalendarBaseProps, CalendarSystemProps } from '../Calendar';
 export interface YearPickerBaseProps<Type extends DatePickerType = 'default'>
   extends PickerBaseProps<Type>,
     DecadeLevelBaseSettings,
-    Omit<CalendarBaseProps, 'onNextYear' | 'onPreviousYear' | 'onNextMonth' | 'onPreviousMonth'> {}
+    Omit<
+      CalendarBaseProps,
+      'onNextYear' | 'onPreviousYear' | 'onNextMonth' | 'onPreviousMonth'
+    > {}
 
 export interface YearPickerProps<Type extends DatePickerType = 'default'>
   extends YearPickerBaseProps<Type>,
@@ -41,17 +44,21 @@ export const YearPicker: YearPickerComponent = forwardRef(
       ...others
     } = useComponentDefaultProps('YearPicker', defaultProps, props as any);
 
-    const { onDateChange, onRootMouseLeave, onHoveredDateChange, getControlProps } =
-      useDatesState<Type>({
-        type,
-        level: 'year',
-        allowDeselect,
-        allowSingleDateInRange,
-        value,
-        defaultValue,
-        onChange,
-        onMouseLeave,
-      });
+    const {
+      onDateChange,
+      onRootMouseLeave,
+      onHoveredDateChange,
+      getControlProps,
+    } = useDatesState<Type>({
+      type,
+      level: 'year',
+      allowDeselect,
+      allowSingleDateInRange,
+      value,
+      defaultValue,
+      onChange,
+      onMouseLeave,
+    });
 
     return (
       <Calendar
@@ -75,4 +82,4 @@ export const YearPicker: YearPickerComponent = forwardRef(
   }
 );
 
-YearPicker.displayName = '@mantine/dates/YearPicker';
+YearPicker.displayName = '@worldprint/wdesign-dates/YearPicker';

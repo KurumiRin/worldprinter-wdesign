@@ -1,7 +1,12 @@
 import React, { useRef, useState } from 'react';
-import { DefaultProps, Selectors, MantineNumberSize, rem } from '@mantine/styles';
-import { useScrollIntoView } from '@mantine/hooks';
-import { groupOptions } from '@mantine/utils';
+import {
+  DefaultProps,
+  Selectors,
+  MantineNumberSize,
+  rem,
+} from '@worldprint/wdesign-styles';
+import { useScrollIntoView } from '@worldprint/wdesign-hooks';
+import { groupOptions } from '@worldprint/wdesign-utils';
 import { SelectScrollArea } from '../../Select/SelectScrollArea/SelectScrollArea';
 import { UnstyledButton } from '../../UnstyledButton';
 import { ActionIcon } from '../../ActionIcon';
@@ -95,7 +100,9 @@ export function RenderList({
   const unGroupedItems: React.ReactElement<any>[] = [];
   const groupedItems: React.ReactElement<any>[] = [];
   const [hovered, setHovered] = useState(-1);
-  const filteredData = data.filter((item) => filter(query, item)).slice(0, limit);
+  const filteredData = data
+    .filter((item) => filter(query, item))
+    .slice(0, limit);
   const ListComponent = listComponent || 'div';
   const Icons = theme.dir === 'rtl' ? rtlIons : icons;
 
@@ -129,7 +136,11 @@ export function RenderList({
           }
         }}
       >
-        <ItemComponent data={item} selected={selection.includes(item.value)} radius={radius} />
+        <ItemComponent
+          data={item}
+          selected={selection.includes(item.value)}
+          radius={radius}
+        />
       </UnstyledButton>
     );
 
@@ -140,7 +151,10 @@ export function RenderList({
         groupName = item.group;
         groupedItems.push(
           <div className={classes.separator} key={groupName}>
-            <Divider classNames={{ label: classes.separatorLabel }} label={groupName} />
+            <Divider
+              classNames={{ label: classes.separatorLabel }}
+              label={groupName}
+            />
           </div>
         );
       }
@@ -151,12 +165,17 @@ export function RenderList({
   if (groupedItems.length > 0 && unGroupedItems.length > 0) {
     unGroupedItems.unshift(
       <div className={classes.separator}>
-        <Divider unstyled={unstyled} classNames={{ label: classes.separatorLabel }} />
+        <Divider
+          unstyled={unstyled}
+          classNames={{ label: classes.separatorLabel }}
+        />
       </div>
     );
   }
 
-  const handleSearchKeydown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleSearchKeydown = (
+    event: React.KeyboardEvent<HTMLInputElement>
+  ) => {
     switch (event.key) {
       case 'Enter': {
         event.preventDefault();
@@ -169,7 +188,8 @@ export function RenderList({
       case 'ArrowDown': {
         event.preventDefault();
         setHovered((current) => {
-          const nextIndex = current < filteredData.length - 1 ? current + 1 : current;
+          const nextIndex =
+            current < filteredData.length - 1 ? current + 1 : current;
 
           targetRef.current = itemsRefs.current[filteredData[nextIndex]?.value];
 
@@ -199,13 +219,25 @@ export function RenderList({
     }
   };
 
-  const transferIcon = reversed ? <Icons.Prev size="1rem" /> : <Icons.Next size="1rem" />;
-  const transferAllIcon = reversed ? <Icons.First size="1rem" /> : <Icons.Last size="1rem" />;
+  const transferIcon = reversed ? (
+    <Icons.Prev size="1rem" />
+  ) : (
+    <Icons.Next size="1rem" />
+  );
+  const transferAllIcon = reversed ? (
+    <Icons.First size="1rem" />
+  ) : (
+    <Icons.Last size="1rem" />
+  );
 
   return (
     <div className={cx(classes.transferList, className)}>
       {title && (
-        <Text weight={500} unstyled={unstyled} className={classes.transferListTitle}>
+        <Text
+          weight={500}
+          unstyled={unstyled}
+          className={classes.transferListTitle}
+        >
           {title}
         </Text>
       )}
@@ -246,11 +278,19 @@ export function RenderList({
               size={36}
               radius={0}
               className={classes.transferListControl}
-              disabled={transferAllMatchingFilter ? filteredData.length === 0 : data.length === 0}
+              disabled={
+                transferAllMatchingFilter
+                  ? filteredData.length === 0
+                  : data.length === 0
+              }
               onClick={onMoveAll}
               unstyled={unstyled}
             >
-              {TransferAllIcon ? <TransferAllIcon reversed={reversed} /> : transferAllIcon}
+              {TransferAllIcon ? (
+                <TransferAllIcon reversed={reversed} />
+              ) : (
+                transferAllIcon
+              )}
             </ActionIcon>
           )}
         </div>
@@ -259,7 +299,11 @@ export function RenderList({
           ref={scrollableRef}
           onMouseLeave={() => setHovered(-1)}
           className={classes.transferListItems}
-          style={{ height: rem(height), position: 'relative', overflowX: 'hidden' }}
+          style={{
+            height: rem(height),
+            position: 'relative',
+            overflowX: 'hidden',
+          }}
         >
           {groupedItems.length > 0 || unGroupedItems.length > 0 ? (
             <>
@@ -267,7 +311,13 @@ export function RenderList({
               {unGroupedItems}
             </>
           ) : (
-            <Text color="dimmed" unstyled={unstyled} size="sm" align="center" mt="sm">
+            <Text
+              color="dimmed"
+              unstyled={unstyled}
+              size="sm"
+              align="center"
+              mt="sm"
+            >
               {!query && placeholder ? placeholder : nothingFound}
             </Text>
           )}
@@ -277,4 +327,4 @@ export function RenderList({
   );
 }
 
-RenderList.displayName = '@mantine/core/RenderList';
+RenderList.displayName = '@worldprint/wdesign-core/RenderList';

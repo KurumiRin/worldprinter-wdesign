@@ -1,4 +1,4 @@
-import { useQueue, randomId } from '@mantine/hooks';
+import { useQueue, randomId } from '@worldprint/wdesign-hooks';
 import { NotificationProps } from '../../types';
 
 export default function useNotificationsState({ limit }: { limit: number }) {

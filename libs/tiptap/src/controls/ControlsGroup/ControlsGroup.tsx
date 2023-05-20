@@ -1,5 +1,10 @@
 import React, { forwardRef } from 'react';
-import { DefaultProps, Box, useComponentDefaultProps, Selectors } from '@mantine/core';
+import {
+  DefaultProps,
+  Box,
+  useComponentDefaultProps,
+  Selectors,
+} from '@worldprint/wdesign-core';
 import { useRichTextEditorContext } from '../../RichTextEditor.context';
 import useStyles from './ControlsGroup.styles';
 
@@ -11,28 +16,29 @@ export interface RichTextEditorControlsGroupProps
 
 const defaultProps: Partial<RichTextEditorControlsGroupProps> = {};
 
-export const ControlsGroup = forwardRef<HTMLDivElement, RichTextEditorControlsGroupProps>(
-  (props, ref) => {
-    const { className, children, ...others } = useComponentDefaultProps(
-      'RichTextEditorControlsGroup',
-      defaultProps,
-      props
-    );
+export const ControlsGroup = forwardRef<
+  HTMLDivElement,
+  RichTextEditorControlsGroupProps
+>((props, ref) => {
+  const { className, children, ...others } = useComponentDefaultProps(
+    'RichTextEditorControlsGroup',
+    defaultProps,
+    props
+  );
 
-    const { classNames, styles, unstyled } = useRichTextEditorContext();
-    const { classes, cx } = useStyles(null, {
-      name: 'RichTextEditor',
-      classNames,
-      styles,
-      unstyled,
-    });
+  const { classNames, styles, unstyled } = useRichTextEditorContext();
+  const { classes, cx } = useStyles(null, {
+    name: 'RichTextEditor',
+    classNames,
+    styles,
+    unstyled,
+  });
 
-    return (
-      <Box className={cx(classes.controlsGroup, className)} ref={ref} {...others}>
-        {children}
-      </Box>
-    );
-  }
-);
+  return (
+    <Box className={cx(classes.controlsGroup, className)} ref={ref} {...others}>
+      {children}
+    </Box>
+  );
+});
 
-ControlsGroup.displayName = '@mantine/tiptap/ControlsGroup';
+ControlsGroup.displayName = '@worldprint/wdesign-tiptap/ControlsGroup';

@@ -1,4 +1,4 @@
-import type { SpoilerStylesNames } from '@mantine/core';
+import type { SpoilerStylesNames } from '@worldprint/wdesign-core';
 
 export const Spoiler: Record<SpoilerStylesNames, string> = {
   root: 'Root element',

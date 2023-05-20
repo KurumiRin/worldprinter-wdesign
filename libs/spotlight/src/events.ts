@@ -1,4 +1,4 @@
-import { createUseExternalEvents } from '@mantine/utils';
+import { createUseExternalEvents } from '@worldprint/wdesign-utils';
 import type { SpotlightAction } from './types';
 
 export type SpotlightEvents = {

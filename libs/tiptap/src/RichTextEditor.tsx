@@ -1,13 +1,21 @@
 /* eslint-disable react/no-unused-prop-types */
 import React, { useMemo, forwardRef } from 'react';
-import { Box, useComponentDefaultProps, DefaultProps, Selectors } from '@mantine/core';
+import {
+  Box,
+  useComponentDefaultProps,
+  DefaultProps,
+  Selectors,
+} from '@worldprint/wdesign-core';
 import { Editor } from '@tiptap/react';
-import { ForwardRefWithStaticComponents } from '@mantine/utils';
+import { ForwardRefWithStaticComponents } from '@worldprint/wdesign-utils';
 import { RichTextEditorProvider } from './RichTextEditor.context';
 import * as controls from './controls';
 import { Content, ContentStylesNames } from './Content/Content';
 import { Control, ControlStylesNames } from './controls/Control/Control';
-import { ControlsGroup, ControlsGroupStylesNames } from './controls/ControlsGroup/ControlsGroup';
+import {
+  ControlsGroup,
+  ControlsGroupStylesNames,
+} from './controls/ControlsGroup/ControlsGroup';
 import { Toolbar, ToolbarStylesNames } from './Toolbar/Toolbar';
 import { LinkControlStylesNames } from './controls/LinkControl/LinkControl';
 import { DEFAULT_LABELS, RichTextEditorLabels } from './labels';
@@ -112,7 +120,10 @@ export const RichTextEditor: RichTextEditorComponent = forwardRef<
     variant,
   });
 
-  const mergedLabels = useMemo(() => ({ ...DEFAULT_LABELS, ...labels }), [labels]);
+  const mergedLabels = useMemo(
+    () => ({ ...DEFAULT_LABELS, ...labels }),
+    [labels]
+  );
 
   return (
     <RichTextEditorProvider
@@ -171,4 +182,4 @@ RichTextEditor.Highlight = controls.HighlightControl;
 RichTextEditor.Hr = controls.HrControl;
 RichTextEditor.UnsetColor = controls.UnsetColorControl;
 
-RichTextEditor.displayName = '@mantine/tiptap/RichTextEditor';
+RichTextEditor.displayName = '@worldprint/wdesign-tiptap/RichTextEditor';

@@ -1,4 +1,4 @@
-import { createUseExternalEvents } from '@mantine/utils';
+import { createUseExternalEvents } from '@worldprint/wdesign-utils';
 import type { NotificationProps } from './types';
 
 export type NotificationsEvents = {

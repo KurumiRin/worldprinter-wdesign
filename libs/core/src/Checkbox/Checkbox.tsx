@@ -5,9 +5,9 @@ import {
   Selectors,
   MantineNumberSize,
   useComponentDefaultProps,
-} from '@mantine/styles';
-import { ForwardRefWithStaticComponents } from '@mantine/utils';
-import { useId } from '@mantine/hooks';
+} from '@worldprint/wdesign-styles';
+import { ForwardRefWithStaticComponents } from '@worldprint/wdesign-utils';
+import { useId } from '@worldprint/wdesign-hooks';
 import { extractSystemStyles } from '../Box';
 import { InlineInput, InlineInputStylesNames } from '../InlineInput';
 import { useCheckboxGroupContext } from './CheckboxGroup.context';
@@ -15,7 +15,9 @@ import { CheckboxGroup } from './CheckboxGroup/CheckboxGroup';
 import { CheckboxIcon } from './CheckboxIcon';
 import useStyles, { CheckboxStylesParams } from './Checkbox.styles';
 
-export type CheckboxStylesNames = Selectors<typeof useStyles> | InlineInputStylesNames;
+export type CheckboxStylesNames =
+  | Selectors<typeof useStyles>
+  | InlineInputStylesNames;
 
 export interface CheckboxProps
   extends DefaultProps<CheckboxStylesNames, CheckboxStylesParams>,
@@ -68,95 +70,103 @@ type CheckboxComponent = ForwardRefWithStaticComponents<
   { Group: typeof CheckboxGroup }
 >;
 
-export const Checkbox: CheckboxComponent = forwardRef<HTMLInputElement, CheckboxProps>(
-  (props, ref) => {
-    const {
-      className,
-      style,
-      sx,
-      checked,
-      disabled,
-      color,
-      label,
-      indeterminate,
-      id,
-      size,
+export const Checkbox: CheckboxComponent = forwardRef<
+  HTMLInputElement,
+  CheckboxProps
+>((props, ref) => {
+  const {
+    className,
+    style,
+    sx,
+    checked,
+    disabled,
+    color,
+    label,
+    indeterminate,
+    id,
+    size,
+    radius,
+    wrapperProps,
+    children,
+    classNames,
+    styles,
+    transitionDuration,
+    icon: Icon,
+    unstyled,
+    labelPosition,
+    description,
+    error,
+    variant,
+    ...others
+  } = useComponentDefaultProps('Checkbox', defaultProps, props);
+
+  const ctx = useCheckboxGroupContext();
+  const uuid = useId(id);
+  const { systemStyles, rest } = extractSystemStyles(others);
+  const { classes } = useStyles(
+    {
       radius,
-      wrapperProps,
-      children,
+      color,
+      transitionDuration,
+      labelPosition,
+      error: !!error,
+      indeterminate,
+    },
+    {
+      name: 'Checkbox',
       classNames,
       styles,
-      transitionDuration,
-      icon: Icon,
       unstyled,
-      labelPosition,
-      description,
-      error,
       variant,
-      ...others
-    } = useComponentDefaultProps('Checkbox', defaultProps, props);
+      size: ctx?.size || size,
+    }
+  );
 
-    const ctx = useCheckboxGroupContext();
-    const uuid = useId(id);
-    const { systemStyles, rest } = extractSystemStyles(others);
-    const { classes } = useStyles(
-      {
-        radius,
-        color,
-        transitionDuration,
-        labelPosition,
-        error: !!error,
-        indeterminate,
-      },
-      { name: 'Checkbox', classNames, styles, unstyled, variant, size: ctx?.size || size }
-    );
+  const contextProps = ctx
+    ? {
+        checked: ctx.value.includes(rest.value as string),
+        onChange: ctx.onChange,
+      }
+    : {};
 
-    const contextProps = ctx
-      ? {
-          checked: ctx.value.includes(rest.value as string),
-          onChange: ctx.onChange,
-        }
-      : {};
+  return (
+    <InlineInput
+      className={className}
+      sx={sx}
+      style={style}
+      id={uuid}
+      size={ctx?.size || size}
+      labelPosition={labelPosition}
+      label={label}
+      description={description}
+      error={error}
+      disabled={disabled}
+      __staticSelector="Checkbox"
+      classNames={classNames}
+      styles={styles}
+      unstyled={unstyled}
+      data-checked={contextProps.checked || undefined}
+      variant={variant}
+      {...systemStyles}
+      {...wrapperProps}
+    >
+      <div className={classes.inner}>
+        <input
+          id={uuid}
+          ref={ref}
+          type="checkbox"
+          className={classes.input}
+          checked={checked}
+          disabled={disabled}
+          {...rest}
+          {...contextProps}
+        />
 
-    return (
-      <InlineInput
-        className={className}
-        sx={sx}
-        style={style}
-        id={uuid}
-        size={ctx?.size || size}
-        labelPosition={labelPosition}
-        label={label}
-        description={description}
-        error={error}
-        disabled={disabled}
-        __staticSelector="Checkbox"
-        classNames={classNames}
-        styles={styles}
-        unstyled={unstyled}
-        data-checked={contextProps.checked || undefined}
-        variant={variant}
-        {...systemStyles}
-        {...wrapperProps}
-      >
-        <div className={classes.inner}>
-          <input
-            id={uuid}
-            ref={ref}
-            type="checkbox"
-            className={classes.input}
-            checked={checked}
-            disabled={disabled}
-            {...rest}
-            {...contextProps}
-          />
+        <Icon indeterminate={indeterminate} className={classes.icon} />
+      </div>
+    </InlineInput>
+  );
+}) as any;
 
-          <Icon indeterminate={indeterminate} className={classes.icon} />
-        </div>
-      </InlineInput>
-    );
-  }
-) as any;
-
-Checkbox.displayName = '@mantine/core/Checkbox';
+Checkbox.displayName = '@worldprint/wdesign-core/Checkbox';
 Checkbox.Group = CheckboxGroup;

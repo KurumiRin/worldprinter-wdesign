@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { useComponentDefaultProps, rem } from '@mantine/styles';
+import { useComponentDefaultProps, rem } from '@worldprint/wdesign-styles';
 import { ModalBase, ModalBaseContentProps } from '../../ModalBase';
 import { useModalContext, ScrollAreaComponent } from '../Modal.context';
 

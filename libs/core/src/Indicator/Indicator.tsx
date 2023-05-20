@@ -7,7 +7,7 @@ import {
   MantineNumberSize,
   useComponentDefaultProps,
   getDefaultZIndex,
-} from '@mantine/styles';
+} from '@worldprint/wdesign-styles';
 import { Box } from '../Box';
 import { IndicatorPosition } from './Indicator.types';
 import useStyles, { IndicatorStylesParams } from './Indicator.styles';
@@ -108,4 +108,4 @@ export const Indicator = forwardRef<HTMLDivElement, IndicatorProps>((props, ref)
   );
 });
 
-Indicator.displayName = '@mantine/core/Indicator';
+Indicator.displayName = '@worldprint/wdesign-core/Indicator';

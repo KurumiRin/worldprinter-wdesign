@@ -1,5 +1,5 @@
 import React, { DragEvent, memo, useRef } from 'react';
-import { Box } from '@mantine/core';
+import { Box } from '@worldprint/wdesign-core';
 import { Memo_MRT_TableBodyCell, MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
 import { getPrimaryColor } from '../column.utils';
@@ -162,5 +162,5 @@ export const MRT_TableBodyRow = ({
 
 export const Memo_MRT_TableBodyRow = memo(
   MRT_TableBodyRow,
-  (prev, next) => prev.row === next.row && prev.rowIndex === next.rowIndex,
+  (prev, next) => prev.row === next.row && prev.rowIndex === next.rowIndex
 );

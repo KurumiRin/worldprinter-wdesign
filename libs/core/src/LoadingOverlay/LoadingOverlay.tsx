@@ -4,14 +4,16 @@ import {
   MantineNumberSize,
   getDefaultZIndex,
   useComponentDefaultProps,
-} from '@mantine/styles';
+} from '@worldprint/wdesign-styles';
 import { Overlay } from '../Overlay';
 import { Transition } from '../Transition';
 import { Loader, LoaderProps } from '../Loader';
 import { Box } from '../Box';
 import useStyles from './LoadingOverlay.styles';
 
-export interface LoadingOverlayProps extends DefaultProps, React.ComponentPropsWithoutRef<'div'> {
+export interface LoadingOverlayProps
+  extends DefaultProps,
+    React.ComponentPropsWithoutRef<'div'> {
   variant?: string;
 
   /** If set loading overlay will not be unmounted from the DOM when it is hidden, display: none styles will be added instead */
@@ -55,63 +57,72 @@ const defaultProps: Partial<LoadingOverlayProps> = {
   zIndex: getDefaultZIndex('overlay'),
 };
 
-export const LoadingOverlay = forwardRef<HTMLDivElement, LoadingOverlayProps>((props, ref) => {
-  const {
-    className,
-    visible,
-    loaderProps,
-    overlayOpacity,
-    overlayColor,
-    transitionDuration,
-    exitTransitionDuration,
-    zIndex,
-    style,
-    loader,
-    radius,
-    overlayBlur,
-    unstyled,
-    variant,
-    keepMounted,
-    ...others
-  } = useComponentDefaultProps('LoadingOverlay', defaultProps, props);
-  const { classes, cx, theme } = useStyles(null, { name: 'LoadingOverlay', unstyled, variant });
-  const _zIndex = `calc(${zIndex} + 1)` as any;
+export const LoadingOverlay = forwardRef<HTMLDivElement, LoadingOverlayProps>(
+  (props, ref) => {
+    const {
+      className,
+      visible,
+      loaderProps,
+      overlayOpacity,
+      overlayColor,
+      transitionDuration,
+      exitTransitionDuration,
+      zIndex,
+      style,
+      loader,
+      radius,
+      overlayBlur,
+      unstyled,
+      variant,
+      keepMounted,
+      ...others
+    } = useComponentDefaultProps('LoadingOverlay', defaultProps, props);
+    const { classes, cx, theme } = useStyles(null, {
+      name: 'LoadingOverlay',
+      unstyled,
+      variant,
+    });
+    const _zIndex = `calc(${zIndex} + 1)` as any;
 
-  return (
-    <Transition
-      keepMounted={keepMounted}
-      duration={transitionDuration}
-      exitDuration={exitTransitionDuration}
-      mounted={visible}
-      transition="fade"
-    >
-      {(transitionStyles) => (
-        <Box
-          className={cx(classes.root, className)}
-          style={{ ...transitionStyles, ...style, zIndex }}
-          ref={ref}
-          {...others}
-        >
-          {loader ? (
-            <div style={{ zIndex: _zIndex }}>{loader}</div>
-          ) : (
-            <Loader style={{ zIndex: _zIndex }} {...loaderProps} />
-          )}
+    return (
+      <Transition
+        keepMounted={keepMounted}
+        duration={transitionDuration}
+        exitDuration={exitTransitionDuration}
+        mounted={visible}
+        transition="fade"
+      >
+        {(transitionStyles) => (
+          <Box
+            className={cx(classes.root, className)}
+            style={{ ...transitionStyles, ...style, zIndex }}
+            ref={ref}
+            {...others}
+          >
+            {loader ? (
+              <div style={{ zIndex: _zIndex }}>{loader}</div>
+            ) : (
+              <Loader style={{ zIndex: _zIndex }} {...loaderProps} />
+            )}
 
-          <Overlay
-            opacity={overlayOpacity}
-            zIndex={zIndex}
-            radius={radius}
-            blur={overlayBlur}
-            unstyled={unstyled}
-            color={
-              overlayColor || (theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.white)
-            }
-          />
-        </Box>
-      )}
-    </Transition>
-  );
-});
+            <Overlay
+              opacity={overlayOpacity}
+              zIndex={zIndex}
+              radius={radius}
+              blur={overlayBlur}
+              unstyled={unstyled}
+              color={
+                overlayColor ||
+                (theme.colorScheme === 'dark'
+                  ? theme.colors.dark[5]
+                  : theme.white)
+              }
+            />
+          </Box>
+        )}
+      </Transition>
+    );
+  }
+);
 
-LoadingOverlay.displayName = '@mantine/core/LoadingOverlay';
+LoadingOverlay.displayName = '@worldprint/wdesign-core/LoadingOverlay';
